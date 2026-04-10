@@ -1,12 +1,10 @@
 **AprendaGo** é uma plataforma web para aprender a linguagem Go do zero ao avançado, com execução de código diretamente no navegador e uma metodologia estruturada que vai além de tutoriais comuns.
 
-Ele combina conteúdo técnico progressivo com uma metodologia ativa de aprendizado chamada **[MESA](https://www.youtube.com/watch?v=FtdjtUPTHtA&t=2s)**, que organiza cada lição em quatro fases:
-
-[![Assista: MESA — Metodologia de Aprendizado](https://img.youtube.com/vi/FtdjtUPTHtA/maxresdefault.jpg)](https://www.youtube.com/watch?v=FtdjtUPTHtA&t=2s)
+Ele combina conteúdo técnico progressivo com um ciclo de aprendizado ativo chamado **VESA** — sigla criada para esta plataforma que organiza cada lição em quatro fases:
 
 | Fase | O que acontece |
 |------|----------------|
-| **M**odelagem | Explicação do conceito com exemplos de código prontos para executar |
+| **V**isão Geral | Explicação do conceito com exemplos de código prontos para executar |
 | **E**xperimentação | Desafio prático com editor de código interativo no navegador |
 | **S**ocialização | Perguntas para reflexão, sugestão de post de blog e hashtags |
 | **A**plicação | Projeto final da lição com requisitos e critérios de avaliação |
@@ -25,27 +23,6 @@ O aprendizado não é passivo: cada lição exige que você escreva e execute c�
 
 ---
 
-## Conteúdo — 14 módulos, 38+ lições
-
-```
-1.  Introdução à Linguagem      — história, motivações, instalação, VSCode
-2.  Fundamentos                 — tipos, ponteiros, funções, structs, interfaces, generics básico
-3.  Pacotes Importantes         — arquivos, HTTP/JSON, servidores, context
-4.  Concorrência                — goroutines, channels, sync, worker pools
-5.  Desenvolvimento de APIs     — net/http, Chi, JWT, Swagger
-6.  Testes Automatizados        — table-driven tests, mocks, fuzzing, benchmarks
-7.  Bancos de Dados             — database/sql, GORM, SQLC, migrations
-8.  Tratamento de Erros         — error wrapping, errors.Is/As, multi-errors, erros estruturados
-9.  Generics                    — constraints, type parameters, inferência de tipos
-10. SOLID em Go                 — SRP, OCP, LSP, ISP e DIP com exemplos práticos
-11. Clean Architecture          — entities, use cases, adapters e regra de dependência
-12. Implementações Avançadas    — gRPC, GraphQL, Cobra CLI, RabbitMQ, AWS S3, Viper
-13. Golang Internals            — scheduler M:P:G, GC tri-color, pprof, memória
-14. Deploy e Produção           — Docker, CI/CD, monitoramento, graceful shutdown
-```
-
----
-
 ## Como rodar localmente
 
 ### Pré-requisitos
@@ -60,7 +37,7 @@ cd AprendaGo
 docker compose up -d --build
 ```
 
-Acesse: **http://localhost:3000**
+Acesse: **http://localhost:3000**, simples assim. O frontend é servido por nginx, e o backend Go roda em um container separado. O conteúdo do roadmap é carregado do arquivo `src/data/roadmap.ts` no build.
 
 ### Desenvolvimento com hot reload (porta 3001)
 
@@ -83,8 +60,8 @@ docker compose --profile test run --rm runner-test
 ```
 AprendaGo/
 ├── src/                  # Frontend — React 18 + TypeScript + Vite
-│   ├── data/roadmap.ts   # Conteúdo: módulos, lições e fases MESA
-│   ├── components/       # UI: Sidebar, RoadmapTree, MesaPhases, editor
+│   ├── data/roadmap.ts   # Conteúdo: módulos, lições e fases VESA
+│   ├── components/       # UI: Sidebar, RoadmapTree, VesaPhases, editor
 │   └── context/          # Estado global: progresso e acessibilidade
 ├── runner/               # Backend — serviço Go para execução de código
 │   ├── main.go           # HTTP API: POST /run, GET /health
@@ -115,14 +92,3 @@ O código roda no mesmo ambiente que você usaria em produção — Go compilado
 
 **3. Roadmap com desbloqueio progressivo**
 O conteúdo tem dependências explícitas. Generics ficam bloqueados até você passar por fundamentos. O roadmap visual deixa claro onde você está e o que está por vir, sem a ansiedade de um curso com centenas de vídeos desordenados.
-
----
-
-## Tecnologias
-
-| Camada | Tecnologia |
-|--------|-----------|
-| Frontend | React 18 + TypeScript 5 + Vite 5 |
-| Backend | Go 1.22 (serviço HTTP stateless) |
-| Infraestrutura | Docker + Docker Compose + nginx |
-| Testes | `net/http/httptest` (Go), build gate no Dockerfile |

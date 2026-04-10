@@ -1,6 +1,6 @@
 import React from 'react';
 import { Lesson, Module } from '../types';
-import { MesaPhases } from './MesaPhases';
+import { VesaPhases } from './VesaPhases';
 import { useRoadmap } from '../hooks/useRoadmap';
 
 interface LessonViewProps {
@@ -40,7 +40,7 @@ export function LessonView({ lesson, module, onBack, onNavigate }: Readonly<Less
         </div>
       </header>
 
-      <MesaPhases mesa={lesson.mesa} lessonId={lesson.id} />
+      <VesaPhases vesa={lesson.vesa} lessonId={lesson.id} />
 
       <nav className="lesson-pagination" aria-label="Navegação entre aulas">
         {prev ? (

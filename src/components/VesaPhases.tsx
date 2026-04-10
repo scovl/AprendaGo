@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { MesaPhase, MesaContent, MESA_LABELS } from '../types';
+import { VesaPhase, VesaContent, VESA_LABELS } from '../types';
 import { useProgress } from '../context/ProgressContext';
 
-interface MesaPhasesProps {
-  mesa: MesaContent;
+interface VesaPhasesProps {
+  vesa: VesaContent;
   lessonId: string;
 }
 
-const PHASE_ORDER: MesaPhase[] = ['modelagem', 'experimentacao', 'socializacao', 'aplicacao'];
+const PHASE_ORDER: VesaPhase[] = ['visaoGeral', 'experimentacao', 'socializacao', 'aplicacao'];
 
-export function MesaPhases({ mesa, lessonId }: Readonly<MesaPhasesProps>) {
+export function VesaPhases({ vesa, lessonId }: Readonly<VesaPhasesProps>) {
   const { progress, setCurrentPhase } = useProgress();
-  const [activePhase, setActivePhase] = useState<MesaPhase>(progress.currentPhase ?? 'modelagem');
+  const [activePhase, setActivePhase] = useState<VesaPhase>(progress.currentPhase ?? 'visaoGeral');
 
-  const handlePhaseChange = (phase: MesaPhase) => {
+  const handlePhaseChange = (phase: VesaPhase) => {
     setActivePhase(phase);
     setCurrentPhase(phase);
   };
@@ -21,16 +21,16 @@ export function MesaPhases({ mesa, lessonId }: Readonly<MesaPhasesProps>) {
   const currentIndex = PHASE_ORDER.indexOf(activePhase);
 
   return (
-    <div className="mesa-container">
-      <div className="mesa-header">
-        <h3>Metodologia MESA</h3>
-        <p className="mesa-subtitle">Siga as 4 fases para dominar o conteúdo</p>
+    <div className="vesa-container">
+      <div className="vesa-header">
+        <h3>Ciclo de Aprendizado VESA</h3>
+        <p className="vesa-subtitle">Visão Geral → Experimentação → Socialização → Aplicação</p>
       </div>
 
       {/* Phase Navigation Tabs */}
-      <div className="mesa-tabs" role="tablist" aria-label="Fases da metodologia MESA">
+      <div className="vesa-tabs" role="tablist" aria-label="Fases do ciclo de aprendizado VESA">
         {PHASE_ORDER.map((phase, index) => {
-          const info = MESA_LABELS[phase];
+          const info = VESA_LABELS[phase];
           const isActive = activePhase === phase;
           const isPast = index < currentIndex;
 
@@ -39,14 +39,14 @@ export function MesaPhases({ mesa, lessonId }: Readonly<MesaPhasesProps>) {
               key={phase}
               role="tab"
               aria-selected={isActive}
-              aria-controls={`mesa-panel-${phase}`}
-              id={`mesa-tab-${phase}`}
-              className={`mesa-tab ${isActive ? 'active' : ''} ${isPast ? 'past' : ''}`}
+              aria-controls={`vesa-panel-${phase}`}
+              id={`vesa-tab-${phase}`}
+              className={`vesa-tab ${isActive ? 'active' : ''} ${isPast ? 'past' : ''}`}
               onClick={() => handlePhaseChange(phase)}
             >
-              <span className="mesa-tab-icon" aria-hidden="true">{info.icon}</span>
-              <span className="mesa-tab-label">{info.label}</span>
-              <span className="mesa-tab-step" aria-hidden="true">{index + 1}/4</span>
+              <span className="vesa-tab-icon" aria-hidden="true">{info.icon}</span>
+              <span className="vesa-tab-label">{info.label}</span>
+              <span className="vesa-tab-step" aria-hidden="true">{index + 1}/4</span>
             </button>
           );
         })}
@@ -54,46 +54,46 @@ export function MesaPhases({ mesa, lessonId }: Readonly<MesaPhasesProps>) {
 
       {/* Phase Content */}
       <div
-        className="mesa-panel"
+        className="vesa-panel"
         role="tabpanel"
-        id={`mesa-panel-${activePhase}`}
-        aria-labelledby={`mesa-tab-${activePhase}`}
+        id={`vesa-panel-${activePhase}`}
+        aria-labelledby={`vesa-tab-${activePhase}`}
       >
-        <div className="mesa-phase-description">
-          <p>{MESA_LABELS[activePhase].description}</p>
+        <div className="vesa-phase-description">
+          <p>{VESA_LABELS[activePhase].description}</p>
         </div>
 
-        {activePhase === 'modelagem' && (
-          <ModelagemContent content={mesa.modelagem} />
+        {activePhase === 'visaoGeral' && (
+          <VisaoGeralContent content={vesa.visaoGeral} />
         )}
         {activePhase === 'experimentacao' && (
-          <ExperimentacaoContent content={mesa.experimentacao} lessonId={lessonId} />
+          <ExperimentacaoContent content={vesa.experimentacao} lessonId={lessonId} />
         )}
         {activePhase === 'socializacao' && (
-          <SocializacaoContent content={mesa.socializacao} />
+          <SocializacaoContent content={vesa.socializacao} />
         )}
         {activePhase === 'aplicacao' && (
-          <AplicacaoContent content={mesa.aplicacao} lessonId={lessonId} />
+          <AplicacaoContent content={vesa.aplicacao} lessonId={lessonId} />
         )}
       </div>
 
       {/* Phase Navigation */}
-      <div className="mesa-nav">
+      <div className="vesa-nav">
         {currentIndex > 0 && (
           <button
             className="btn btn-secondary"
             onClick={() => handlePhaseChange(PHASE_ORDER[currentIndex - 1])}
           >
-            ← {MESA_LABELS[PHASE_ORDER[currentIndex - 1]].label}
+            ← {VESA_LABELS[PHASE_ORDER[currentIndex - 1]].label}
           </button>
         )}
-        <div className="mesa-nav-spacer" />
+        <div className="vesa-nav-spacer" />
         {currentIndex < PHASE_ORDER.length - 1 && (
           <button
             className="btn btn-primary"
             onClick={() => handlePhaseChange(PHASE_ORDER[currentIndex + 1])}
           >
-            {MESA_LABELS[PHASE_ORDER[currentIndex + 1]].label} →
+            {VESA_LABELS[PHASE_ORDER[currentIndex + 1]].label} →
           </button>
         )}
       </div>
@@ -101,7 +101,7 @@ export function MesaPhases({ mesa, lessonId }: Readonly<MesaPhasesProps>) {
   );
 }
 
-function ModelagemContent({ content }: Readonly<{ content: MesaContent['modelagem'] }>) {
+function VisaoGeralContent({ content }: Readonly<{ content: VesaContent['visaoGeral'] }>) {
   return (
     <div className="phase-content">
       <div className="explanation-block">
@@ -283,7 +283,7 @@ function GoCodeEditor({ referenceCode, referenceLabel, lessonId: _lessonId, down
   );
 }
 
-function ExperimentacaoContent({ content, lessonId }: Readonly<{ content: MesaContent['experimentacao']; lessonId: string }>) {
+function ExperimentacaoContent({ content, lessonId }: Readonly<{ content: VesaContent['experimentacao']; lessonId: string }>) {
   return (
     <div className="phase-content">
       <div className="challenge-block">
@@ -331,7 +331,7 @@ const SOCIAL_PLATFORMS = [
   },
 ];
 
-function SocializacaoContent({ content }: Readonly<{ content: MesaContent['socializacao'] }>) {
+function SocializacaoContent({ content }: Readonly<{ content: VesaContent['socializacao'] }>) {
   const topic = content.sugestaoBlog ?? 'Go';
   const hashtags = `#100DaysOfCode #100DaysOfGo #golang ${content.hashtagsExtras ?? ''}`.trim();
   const postTemplate = `Dia X/100 do #100DaysOfCode #100DaysOfGo\n\n📚 Hoje aprendi: ${topic}\n💻 O que fiz: [descreva brevemente]\n🔗 Repositório: [link do GitHub]\n\n#golang ${content.hashtagsExtras ?? ''}`.trim();
@@ -1237,7 +1237,7 @@ func main() {
 }`,
 };
 
-function AplicacaoContent({ content, lessonId }: Readonly<{ content: MesaContent['aplicacao']; lessonId: string }>) {
+function AplicacaoContent({ content, lessonId }: Readonly<{ content: VesaContent['aplicacao']; lessonId: string }>) {
   const { isLessonCompleted, completeLesson, uncompleteLesson } = useProgress();
   const completed = isLessonCompleted(lessonId);
 

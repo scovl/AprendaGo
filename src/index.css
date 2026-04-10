@@ -672,8 +672,8 @@ body {
   letter-spacing: 0.05em;
 }
 
-/* --- MESA Explainer --- */
-.mesa-explainer {
+/* --- VESA Explainer --- */
+.vesa-explainer {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
@@ -682,23 +682,23 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
-.mesa-explainer h2 {
+.vesa-explainer h2 {
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
 }
 
-.mesa-explainer > p {
+.vesa-explainer > p {
   color: var(--text-secondary);
   margin-bottom: 1rem;
 }
 
-.mesa-phases-overview {
+.vesa-phases-overview {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
 }
 
-.mesa-phase-card {
+.vesa-phase-card {
   background: var(--bg-primary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
@@ -706,18 +706,18 @@ body {
   text-align: center;
 }
 
-.mesa-phase-card .phase-icon {
+.vesa-phase-card .phase-icon {
   font-size: 1.8rem;
   display: block;
   margin-bottom: 0.5rem;
 }
 
-.mesa-phase-card h3 {
+.vesa-phase-card h3 {
   font-size: 0.95rem;
   margin-bottom: 0.3rem;
 }
 
-.mesa-phase-card p {
+.vesa-phase-card p {
   font-size: 0.85rem;
   color: var(--text-muted);
 }
@@ -972,8 +972,8 @@ body {
   color: var(--text-muted);
 }
 
-/* --- MESA Container --- */
-.mesa-container {
+/* --- VESA Container --- */
+.vesa-container {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
@@ -982,29 +982,29 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
-.mesa-header {
+.vesa-header {
   padding: 1.25rem 1.5rem 0.75rem;
 }
 
-.mesa-header h3 {
+.vesa-header h3 {
   font-size: 1.15rem;
   font-weight: 700;
 }
 
-.mesa-subtitle {
+.vesa-subtitle {
   font-size: 0.9rem;
   color: var(--text-muted);
 }
 
-/* --- MESA Tabs --- */
-.mesa-tabs {
+/* --- VESA Tabs --- */
+.vesa-tabs {
   display: flex;
   border-bottom: 2px solid var(--border-color);
   padding: 0 1rem;
   overflow-x: auto;
 }
 
-.mesa-tab {
+.vesa-tab {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1022,39 +1022,39 @@ body {
   min-width: 100px;
 }
 
-.mesa-tab:hover {
+.vesa-tab:hover {
   color: var(--text-secondary);
 }
 
-.mesa-tab.active {
+.vesa-tab.active {
   color: var(--accent);
   border-bottom-color: var(--accent);
   font-weight: 600;
 }
 
-.mesa-tab.past {
+.vesa-tab.past {
   color: var(--success);
 }
 
-.mesa-tab-icon {
+.vesa-tab-icon {
   font-size: 1.3rem;
 }
 
-.mesa-tab-label {
+.vesa-tab-label {
   font-size: 0.82rem;
 }
 
-.mesa-tab-step {
+.vesa-tab-step {
   font-size: 0.7rem;
   opacity: 0.6;
 }
 
-/* --- MESA Panel Content --- */
-.mesa-panel {
+/* --- VESA Panel Content --- */
+.vesa-panel {
   padding: 1.5rem;
 }
 
-.mesa-phase-description {
+.vesa-phase-description {
   background: var(--accent-light);
   padding: 0.75rem 1rem;
   border-radius: var(--radius-sm);
@@ -1062,7 +1062,7 @@ body {
   border-left: 3px solid var(--accent);
 }
 
-.mesa-phase-description p {
+.vesa-phase-description p {
   font-size: 0.9rem;
   color: var(--text-secondary);
 }
@@ -1693,15 +1693,15 @@ body {
   background: #444c56;
 }
 
-/* --- MESA Navigation --- */
-.mesa-nav {
+/* --- VESA Navigation --- */
+.vesa-nav {
   display: flex;
   align-items: center;
   padding: 1rem 1.5rem;
   border-top: 1px solid var(--border-color);
 }
 
-.mesa-nav-spacer {
+.vesa-nav-spacer {
   flex: 1;
 }
 
@@ -1857,17 +1857,17 @@ body {
     grid-template-columns: 1fr 1fr;
   }
 
-  .mesa-tabs {
+  .vesa-tabs {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  .mesa-tab {
+  .vesa-tab {
     min-width: 80px;
     padding: 0.6rem 0.5rem;
   }
 
-  .mesa-tab-label {
+  .vesa-tab-label {
     font-size: 0.75rem;
   }
 
@@ -1883,8 +1883,8 @@ body {
 /* --- Print styles --- */
 @media print {
   .sidebar,
-  .mesa-tabs,
-  .mesa-nav,
+  .vesa-tabs,
+  .vesa-nav,
   .lesson-breadcrumb,
   .skip-link {
     display: none !important;

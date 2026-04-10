@@ -13,8 +13,8 @@ export const roadmapModules: Module[] = [
         title: 'Sobre a Linguagem e seu Histórico',
         description: 'A história do Go, criadores e filosofia da linguagem.',
         estimatedMinutes: 30,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Go (ou Golang) foi criado em 2007 por Robert Griesemer, Rob Pike e Ken Thompson no Google. A linguagem foi lançada publicamente em 2009. Go nasceu da frustração com linguagens existentes para programação de sistemas distribuídos — a compilação lenta do C++, a complexidade do Java e a necessidade de uma linguagem que fosse simples, rápida e segura para concorrência.',
             recursos: [
               'https://go.dev/doc/',
@@ -58,8 +58,8 @@ export const roadmapModules: Module[] = [
         title: 'Motivações para Aprender Go',
         description: 'Entenda por que Go é relevante e quando escolhê-lo.',
         estimatedMinutes: 20,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Go foi projetado para resolver problemas reais de engenharia de software em larga escala: compilação rápida, execução eficiente, facilidade de manutenção, suporte nativo à concorrência e um ecossistema de ferramentas robusto. A linguagem prioriza simplicidade — tem apenas 25 palavras reservadas.',
             recursos: [
               'https://go.dev/solutions/',
@@ -97,8 +97,8 @@ export const roadmapModules: Module[] = [
         title: 'Instalação do Go',
         description: 'Instale o Go no seu sistema operacional.',
         estimatedMinutes: 25,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'A instalação do Go é simples. Acesse go.dev/dl e baixe o instalador para seu SO. Após instalar, o comando `go version` deve retornar a versão instalada. O Go utiliza a variável GOPATH para gerenciar workspaces e GOROOT para o diretório de instalação.',
             codeExample: '# Verificar instalação\ngo version\n\n# Ver variáveis de ambiente\ngo env\n\n# GOPATH padrão: ~/go\n# GOROOT: diretório de instalação',
             recursos: [
@@ -143,8 +143,8 @@ export const roadmapModules: Module[] = [
         title: 'Configuração do Ambiente no VSCode',
         description: 'Configure o Visual Studio Code para desenvolvimento em Go.',
         estimatedMinutes: 20,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'O VS Code com a extensão oficial "Go" da Google é o editor mais popular para Go. A extensão oferece: autocompletar (gopls), formatação automática, debugging, testes integrados, e análise estática. Instale a extensão e use Ctrl+Shift+P > "Go: Install/Update Tools" para instalar as ferramentas auxiliares.',
             recursos: [
               'https://marketplace.visualstudio.com/items?itemName=golang.Go',
@@ -197,8 +197,8 @@ export const roadmapModules: Module[] = [
         title: 'Primeiros Passos',
         description: 'Estrutura de um programa Go, packages, imports e a função main.',
         estimatedMinutes: 35,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Todo programa Go começa com uma declaração de package. O package `main` com a função `main()` é o ponto de entrada. Imports organizam dependências.',
             codeExample: 'package main\n\nimport "fmt"\n\nfunc main() {\n\tfmt.Println("Olá, Go!")\n}',
             recursos: ['https://go.dev/tour/basics/1', 'https://gobyexample.com/hello-world'],
@@ -240,8 +240,8 @@ export const roadmapModules: Module[] = [
         title: 'Trabalhando com Tipagem Forte',
         description: 'Sistema de tipos do Go: var, :=, constantes, zero values e conversão.',
         estimatedMinutes: 40,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Go é estaticamente tipado. Variáveis podem ser declaradas com `var` (explícito) ou `:=` (inferência). Constantes usam `const`. Todo tipo tem um "zero value" (0 para números, "" para strings, false para bool, nil para ponteiros).',
             codeExample: 'package main\n\nimport "fmt"\n\nfunc main() {\n\t// Declaração explícita\n\tvar nome string = "Go"\n\tvar idade int = 15\n\n\t// Inferência de tipo\n\tversao := 1.22\n\tativo := true\n\n\t// Constantes\n\tconst pi = 3.14159\n\n\t// Zero values\n\tvar x int      // 0\n\tvar s string   // ""\n\tvar b bool     // false\n\n\tfmt.Println(nome, idade, versao, ativo, pi, x, s, b)\n}',
             recursos: ['https://go.dev/tour/basics/8', 'https://gobyexample.com/variables'],
@@ -282,8 +282,8 @@ export const roadmapModules: Module[] = [
         title: 'Arrays, Slices e Maps',
         description: 'Estruturas de dados fundamentais do Go.',
         estimatedMinutes: 50,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Arrays têm tamanho fixo. Slices são referências flexíveis a arrays com tamanho dinâmico. Maps são pares chave-valor (hash maps). Slices são muito mais usados que arrays em Go.',
             codeExample: 'package main\n\nimport "fmt"\n\nfunc main() {\n\t// Array (tamanho fixo)\n\tvar nums [3]int = [3]int{1, 2, 3}\n\n\t// Slice (dinâmico)\n\tfrutas := []string{"maçã", "banana", "uva"}\n\tfrutas = append(frutas, "manga")\n\n\t// Slice com make\n\tbuffer := make([]byte, 0, 1024)\n\n\t// Map\n\tidades := map[string]int{\n\t\t"Alice": 30,\n\t\t"Bob":   25,\n\t}\n\tidades["Carol"] = 28\n\n\t// Comma-ok idiom\n\tidade, ok := idades["Dave"]\n\tif !ok {\n\t\tfmt.Println("Dave não encontrado")\n\t}\n\n\tfmt.Println(nums, frutas, buffer, idade)\n}',
             recursos: ['https://go.dev/tour/moretypes/6', 'https://gobyexample.com/slices'],
@@ -326,8 +326,8 @@ export const roadmapModules: Module[] = [
         title: 'Laços de Repetição e Condicionais',
         description: 'if, else, switch, for — o único laço do Go.',
         estimatedMinutes: 35,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Go tem apenas `for` como laço de repetição — mas ele substitui while e do-while. O `if` pode ter uma declaração de inicialização. O `switch` não precisa de break e aceita expressões.',
             codeExample: 'package main\n\nimport "fmt"\n\nfunc main() {\n\t// For clássico\n\tfor i := 0; i < 5; i++ {\n\t\tfmt.Println(i)\n\t}\n\n\t// For como while\n\tn := 10\n\tfor n > 0 {\n\t\tn--\n\t}\n\n\t// For range\n\tnomes := []string{"Ana", "Bia"}\n\tfor i, nome := range nomes {\n\t\tfmt.Printf("%d: %s\\n", i, nome)\n\t}\n\n\t// If com inicialização\n\tif v := 42; v > 40 {\n\t\tfmt.Println("Maior que 40")\n\t}\n\n\t// Switch\n\tdia := "segunda"\n\tswitch dia {\n\tcase "segunda", "terça", "quarta", "quinta", "sexta":\n\t\tfmt.Println("Dia útil")\n\tdefault:\n\t\tfmt.Println("Fim de semana")\n\t}\n}',
             recursos: ['https://go.dev/tour/flowcontrol/1', 'https://gobyexample.com/for'],
@@ -369,8 +369,8 @@ export const roadmapModules: Module[] = [
         title: 'Ponteiros',
         description: 'Entenda ponteiros e referências em Go.',
         estimatedMinutes: 40,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Ponteiros armazenam endereços de memória. Use `&` para obter o endereço e `*` para acessar o valor. Go não tem aritmética de ponteiros (ao contrário de C). Ponteiros são essenciais para modificar valores em funções e evitar cópias de structs grandes.',
             codeExample: 'package main\n\nimport "fmt"\n\nfunc duplicar(n *int) {\n\t*n = *n * 2\n}\n\nfunc main() {\n\tx := 10\n\tfmt.Println("Antes:", x)   // 10\n\n\tduplicar(&x)\n\tfmt.Println("Depois:", x)  // 20\n\n\t// Ponteiro nil\n\tvar p *int\n\tfmt.Println(p) // <nil>\n\n\t// new() aloca e retorna ponteiro\n\ty := new(int)\n\t*y = 42\n\tfmt.Println(*y) // 42\n}',
             recursos: ['https://go.dev/tour/moretypes/1', 'https://gobyexample.com/pointers'],
@@ -411,8 +411,8 @@ export const roadmapModules: Module[] = [
         title: 'Funções, Structs, Métodos, Interfaces e Generics',
         description: 'Os blocos fundamentais da programação em Go.',
         estimatedMinutes: 60,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Go suporta múltiplos retornos, funções anônimas, closures. Structs são os "objetos" do Go. Métodos são funções com receiver. Interfaces são contratos implícitos. Generics (Go 1.18+) permitem código paramétrico.',
             codeExample: 'package main\n\nimport "fmt"\n\n// Struct\ntype Pessoa struct {\n\tNome  string\n\tIdade int\n}\n\n// Método\nfunc (p Pessoa) Saudacao() string {\n\treturn fmt.Sprintf("Olá, sou %s!", p.Nome)\n}\n\n// Interface\ntype Apresentavel interface {\n\tSaudacao() string\n}\n\n// Generics\nfunc Map[T any, U any](slice []T, fn func(T) U) []U {\n\tresult := make([]U, len(slice))\n\tfor i, v := range slice {\n\t\tresult[i] = fn(v)\n\t}\n\treturn result\n}\n\nfunc main() {\n\tp := Pessoa{Nome: "Gopher", Idade: 15}\n\tfmt.Println(p.Saudacao())\n\n\tnums := []int{1, 2, 3}\n\tdobros := Map(nums, func(n int) int { return n * 2 })\n\tfmt.Println(dobros)\n}',
             recursos: [
@@ -457,8 +457,8 @@ export const roadmapModules: Module[] = [
         title: 'Packages, Módulos e Workspaces',
         description: 'Organização de código, go mod, e go work.',
         estimatedMinutes: 40,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Packages organizam código. Módulos (go.mod) gerenciam dependências. Cada diretório é um package. Nomes exportados começam com maiúscula. `go mod init`, `go mod tidy`, `go get` são comandos essenciais. Workspaces (go.work) permitem trabalhar com múltiplos módulos locais.',
             codeExample: '# Criar módulo\ngo mod init github.com/usuario/projeto\n\n# Adicionar dependência\ngo get github.com/gin-gonic/gin\n\n# Limpar dependências\ngo mod tidy\n\n# Workspace (multi-módulo)\ngo work init ./modulo1 ./modulo2',
             recursos: ['https://go.dev/ref/mod', 'https://go.dev/doc/tutorial/workspaces'],
@@ -509,8 +509,8 @@ export const roadmapModules: Module[] = [
         title: 'Manipulação de Arquivos',
         description: 'Leitura, escrita e manipulação de arquivos com os, io e bufio.',
         estimatedMinutes: 40,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Go usa os pacotes `os`, `io` e `bufio` para I/O. `os.Open` abre arquivos, `os.Create` cria. Sempre feche arquivos com `defer file.Close()`. `bufio.Scanner` é ideal para leitura linha a linha.',
             codeExample: 'package main\n\nimport (\n\t"bufio"\n\t"fmt"\n\t"os"\n)\n\nfunc main() {\n\t// Escrever\n\tf, _ := os.Create("teste.txt")\n\tdefer f.Close()\n\tf.WriteString("Olá, arquivo!\\n")\n\n\t// Ler\n\tfile, _ := os.Open("teste.txt")\n\tdefer file.Close()\n\tscanner := bufio.NewScanner(file)\n\tfor scanner.Scan() {\n\t\tfmt.Println(scanner.Text())\n\t}\n}',
             recursos: ['https://gobyexample.com/reading-files', 'https://gobyexample.com/writing-files'],
@@ -539,8 +539,8 @@ export const roadmapModules: Module[] = [
         title: 'HTTP e JSON',
         description: 'Chamadas HTTP e manipulação de JSON.',
         estimatedMinutes: 45,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'O pacote `net/http` faz chamadas HTTP. `encoding/json` serializa/deserializa JSON. Use struct tags para mapear campos JSON.',
             codeExample: 'package main\n\nimport (\n\t"encoding/json"\n\t"fmt"\n\t"net/http"\n\t"io"\n)\n\ntype Post struct {\n\tID    int    `json:"id"`\n\tTitle string `json:"title"`\n\tBody  string `json:"body"`\n}\n\nfunc main() {\n\tresp, _ := http.Get("https://jsonplaceholder.typicode.com/posts/1")\n\tdefer resp.Body.Close()\n\n\tbody, _ := io.ReadAll(resp.Body)\n\n\tvar post Post\n\tjson.Unmarshal(body, &post)\n\n\tfmt.Printf("Título: %s\\n", post.Title)\n}',
             recursos: ['https://gobyexample.com/http-clients', 'https://gobyexample.com/json'],
@@ -569,8 +569,8 @@ export const roadmapModules: Module[] = [
         title: 'Servidores HTTP e Templates',
         description: 'Criando servidores HTTP, multiplexers e templates dinâmicos.',
         estimatedMinutes: 50,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Go tem um servidor HTTP robusto na standard library. `http.HandleFunc` registra rotas. `http.ListenAndServe` inicia o servidor. Templates com `html/template` renderizam HTML seguro.',
             codeExample: 'package main\n\nimport (\n\t"html/template"\n\t"net/http"\n)\n\nfunc main() {\n\thttp.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {\n\t\ttmpl := template.Must(template.New("index").Parse(`\n\t\t\t<h1>Olá, {{.Nome}}!</h1>\n\t\t`))\n\t\ttmpl.Execute(w, map[string]string{"Nome": "Gopher"})\n\t})\n\n\thttp.ListenAndServe(":8080", nil)\n}',
             recursos: ['https://gobyexample.com/http-servers', 'https://pkg.go.dev/html/template'],
@@ -599,8 +599,8 @@ export const roadmapModules: Module[] = [
         title: 'Pacote Context',
         description: 'Context para cancelamento, timeouts, deadlines e propagação de valores.',
         estimatedMinutes: 45,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'O pacote context gerencia ciclo de vida de operações: cancelamento, timeouts e deadlines. É fundamental em servidores HTTP e chamadas entre serviços. context.Background() é a raiz, context.WithTimeout/WithCancel criam derivados.',
             codeExample: 'package main\n\nimport (\n\t"context"\n\t"fmt"\n\t"time"\n)\n\nfunc operacaoLenta(ctx context.Context) error {\n\tselect {\n\tcase <-time.After(5 * time.Second):\n\t\tfmt.Println("Operação concluída")\n\t\treturn nil\n\tcase <-ctx.Done():\n\t\treturn ctx.Err()\n\t}\n}\n\nfunc main() {\n\tctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)\n\tdefer cancel()\n\n\tif err := operacaoLenta(ctx); err != nil {\n\t\tfmt.Println("Timeout:", err)\n\t}\n}',
             recursos: ['https://pkg.go.dev/context', 'https://gobyexample.com/context'],
@@ -638,8 +638,8 @@ export const roadmapModules: Module[] = [
         title: 'Conceitos de Concorrência e Paralelismo',
         description: 'Entenda a diferença entre concorrência e paralelismo e como Go aborda cada um.',
         estimatedMinutes: 35,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Concorrência é sobre lidar com muitas coisas ao mesmo tempo (estrutura). Paralelismo é sobre fazer muitas coisas ao mesmo tempo (execução). Go favorece concorrência com goroutines e channels. O Go scheduler multiplica M goroutines em N threads do OS.',
             recursos: ['https://go.dev/blog/waza-talk', 'https://gobyexample.com/goroutines'],
           },
@@ -667,8 +667,8 @@ export const roadmapModules: Module[] = [
         title: 'Goroutines e Channels',
         description: 'Goroutines, channels, buffers e select.',
         estimatedMinutes: 50,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Goroutines são threads leves gerenciadas pelo runtime Go. Channels são pipes tipados para comunicação entre goroutines. Channels podem ser buffered (assíncronos) ou unbuffered (síncronos). Select permite esperar múltiplos channels.',
             codeExample: 'package main\n\nimport "fmt"\n\nfunc produtor(ch chan<- int) {\n\tfor i := 0; i < 5; i++ {\n\t\tch <- i\n\t}\n\tclose(ch)\n}\n\nfunc main() {\n\tch := make(chan int, 3) // buffered\n\tgo produtor(ch)\n\n\tfor v := range ch {\n\t\tfmt.Println("Recebido:", v)\n\t}\n}',
             recursos: ['https://go.dev/tour/concurrency/1', 'https://gobyexample.com/channels'],
@@ -697,8 +697,8 @@ export const roadmapModules: Module[] = [
         title: 'WaitGroups, Mutex e Race Conditions',
         description: 'Sincronização avançada e prevenção de data races.',
         estimatedMinutes: 45,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'WaitGroups esperam N goroutines. Mutex protege acesso a dados compartilhados. O flag -race detecta data races. Operações atômicas (sync/atomic) são alternativas leves ao mutex.',
             codeExample: 'package main\n\nimport (\n\t"fmt"\n\t"sync"\n)\n\nfunc main() {\n\tvar mu sync.Mutex\n\tvar wg sync.WaitGroup\n\tcontador := 0\n\n\tfor i := 0; i < 1000; i++ {\n\t\twg.Add(1)\n\t\tgo func() {\n\t\t\tdefer wg.Done()\n\t\t\tmu.Lock()\n\t\t\tcontador++\n\t\t\tmu.Unlock()\n\t\t}()\n\t}\n\n\twg.Wait()\n\tfmt.Println("Contador:", contador) // 1000\n}',
             recursos: ['https://gobyexample.com/mutexes', 'https://gobyexample.com/waitgroups'],
@@ -727,8 +727,8 @@ export const roadmapModules: Module[] = [
         title: 'Workers e Load Balancer',
         description: 'Padrões de workers utilizando channels e load balancing.',
         estimatedMinutes: 50,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'O padrão Worker Pool distribui trabalho entre N goroutines fixas. Jobs entram por um channel, resultados saem por outro. Isso controla concorrência máxima e evita sobrecarga.',
             codeExample: 'package main\n\nimport "fmt"\n\nfunc worker(id int, jobs <-chan int, results chan<- int) {\n\tfor j := range jobs {\n\t\tfmt.Printf("Worker %d processando job %d\\n", id, j)\n\t\tresults <- j * 2\n\t}\n}\n\nfunc main() {\n\tjobs := make(chan int, 100)\n\tresults := make(chan int, 100)\n\n\t// Iniciar 3 workers\n\tfor w := 1; w <= 3; w++ {\n\t\tgo worker(w, jobs, results)\n\t}\n\n\t// Enviar 9 jobs\n\tfor j := 1; j <= 9; j++ {\n\t\tjobs <- j\n\t}\n\tclose(jobs)\n\n\t// Coletar resultados\n\tfor r := 1; r <= 9; r++ {\n\t\tfmt.Println(<-results)\n\t}\n}',
             recursos: ['https://gobyexample.com/worker-pools'],
@@ -766,8 +766,8 @@ export const roadmapModules: Module[] = [
         title: 'HTTP Server e Mux',
         description: 'Revisão de servidores HTTP e multiplexers.',
         estimatedMinutes: 35,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'A partir do Go 1.22, o ServeMux padrão suporta padrões de rota avançados como métodos HTTP e parâmetros de path. Para projetos maiores, frameworks como Chi ou Gin adicionam middleware routing.',
             codeExample: 'package main\n\nimport (\n\t"fmt"\n\t"net/http"\n)\n\nfunc main() {\n\tmux := http.NewServeMux()\n\n\t// Go 1.22+: método e path params\n\tmux.HandleFunc("GET /users/{id}", func(w http.ResponseWriter, r *http.Request) {\n\t\tid := r.PathValue("id")\n\t\tfmt.Fprintf(w, "User: %s", id)\n\t})\n\n\thttp.ListenAndServe(":8080", mux)\n}',
             recursos: ['https://pkg.go.dev/net/http'],
@@ -796,8 +796,8 @@ export const roadmapModules: Module[] = [
         title: 'Trabalhando com Chi',
         description: 'Router Chi: middleware, subrouters e padrões avançados.',
         estimatedMinutes: 40,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Chi é um router leve e idiomatico compatível com net/http. Suporta middleware chain, subrouters, route groups e context de URL params.',
             codeExample: 'package main\n\nimport (\n\t"net/http"\n\t"github.com/go-chi/chi/v5"\n\t"github.com/go-chi/chi/v5/middleware"\n)\n\nfunc main() {\n\tr := chi.NewRouter()\n\tr.Use(middleware.Logger)\n\tr.Use(middleware.Recoverer)\n\n\tr.Route("/api/v1", func(r chi.Router) {\n\t\tr.Get("/users", listUsers)\n\t\tr.Post("/users", createUser)\n\t\tr.Route("/users/{id}", func(r chi.Router) {\n\t\t\tr.Get("/", getUser)\n\t\t\tr.Put("/", updateUser)\n\t\t\tr.Delete("/", deleteUser)\n\t\t})\n\t})\n\n\thttp.ListenAndServe(":8080", r)\n}',
             recursos: ['https://github.com/go-chi/chi'],
@@ -826,8 +826,8 @@ export const roadmapModules: Module[] = [
         title: 'Autenticação com JWT',
         description: 'Implementação de autenticação e autorização com JSON Web Tokens.',
         estimatedMinutes: 45,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'JWT (JSON Web Token) é um padrão para autenticação stateless. Token = header.payload.signature. Em Go, use a lib golang-jwt para gerar e validar tokens. Middleware intercepta requests e valida o token no header Authorization.',
             codeExample: 'package main\n\nimport (\n\t"time"\n\t"github.com/golang-jwt/jwt/v5"\n)\n\nvar jwtSecret = []byte("sua-chave-secreta")\n\nfunc gerarToken(userID string) (string, error) {\n\tclaims := jwt.MapClaims{\n\t\t"sub": userID,\n\t\t"exp": time.Now().Add(24 * time.Hour).Unix(),\n\t\t"iat": time.Now().Unix(),\n\t}\n\ttoken := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)\n\treturn token.SignedString(jwtSecret)\n}',
             recursos: ['https://github.com/golang-jwt/jwt', 'https://jwt.io/'],
@@ -856,8 +856,8 @@ export const roadmapModules: Module[] = [
         title: 'Documentação com Swagger',
         description: 'Documentando APIs com Swagger/OpenAPI.',
         estimatedMinutes: 35,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Swagger (OpenAPI) documenta APIs automaticamente a partir de anotações no código. Em Go, a lib swaggo gera documentação a partir de comments. O endpoint /swagger/ serve a interface interativa.',
             recursos: ['https://github.com/swaggo/swag', 'https://swagger.io/specification/'],
           },
@@ -894,8 +894,8 @@ export const roadmapModules: Module[] = [
         title: 'Iniciando com Testes',
         description: 'Framework de testes do Go, asserções e testes em batch.',
         estimatedMinutes: 40,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Go tem teste built-in: arquivos _test.go, funções Test*(t *testing.T). Use t.Error/t.Fatal para falhas. go test ./... executa todos. Table-driven tests são o padrão idiomático.',
             codeExample: 'package math\n\nimport "testing"\n\nfunc Soma(a, b int) int { return a + b }\n\nfunc TestSoma(t *testing.T) {\n\t// Table-driven tests\n\tcases := []struct{\n\t\ta, b, want int\n\t}{\n\t\t{1, 2, 3},\n\t\t{0, 0, 0},\n\t\t{-1, 1, 0},\n\t}\n\n\tfor _, tc := range cases {\n\t\tgot := Soma(tc.a, tc.b)\n\t\tif got != tc.want {\n\t\t\tt.Errorf("Soma(%d, %d) = %d; want %d", tc.a, tc.b, got, tc.want)\n\t\t}\n\t}\n}',
             recursos: ['https://go.dev/doc/tutorial/add-a-test', 'https://gobyexample.com/testing'],
@@ -924,8 +924,8 @@ export const roadmapModules: Module[] = [
         title: 'Mocks, Fuzzing e Benchmarks',
         description: 'Testify, mocks, fuzzing e testes de performance.',
         estimatedMinutes: 50,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Testify adiciona assertions e mocks. Fuzzing (Go 1.18+) gera inputs aleatórios. Benchmarks medem performance com b.N iterações.',
             codeExample: '// Benchmark\nfunc BenchmarkSoma(b *testing.B) {\n\tfor i := 0; i < b.N; i++ {\n\t\tSoma(1, 2)\n\t}\n}\n\n// Fuzz\nfunc FuzzSoma(f *testing.F) {\n\tf.Add(1, 2)\n\tf.Fuzz(func(t *testing.T, a, b int) {\n\t\tresult := Soma(a, b)\n\t\tif result != a+b {\n\t\t\tt.Errorf("Soma(%d, %d) = %d", a, b, result)\n\t\t}\n\t})\n}',
             recursos: ['https://github.com/stretchr/testify', 'https://go.dev/doc/fuzz/'],
@@ -963,8 +963,8 @@ export const roadmapModules: Module[] = [
         title: 'Go e Bancos de Dados',
         description: 'database/sql, conexões, queries e boas práticas de segurança.',
         estimatedMinutes: 45,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'O pacote database/sql fornece interface genérica para SQL. Drivers específicos (pq, mysql) implementam a conexão. Use prepared statements para prevenir SQL injection. Context controla timeouts.',
             codeExample: 'package main\n\nimport (\n\t"database/sql"\n\t"fmt"\n\t_ "github.com/lib/pq"\n)\n\nfunc main() {\n\tdb, err := sql.Open("postgres", "postgres://user:pass@localhost/dbname?sslmode=disable")\n\tif err != nil {\n\t\tpanic(err)\n\t}\n\tdefer db.Close()\n\n\t// Prepared statement (previne SQL injection)\n\tvar nome string\n\terr = db.QueryRow("SELECT nome FROM users WHERE id = $1", 1).Scan(&nome)\n\tif err != nil {\n\t\tfmt.Println("Erro:", err)\n\t\treturn\n\t}\n\tfmt.Println("Nome:", nome)\n}',
             recursos: ['https://go.dev/doc/database/', 'https://gobyexample.com/'],
@@ -993,8 +993,8 @@ export const roadmapModules: Module[] = [
         title: 'GORM, Migrations e SQLC',
         description: 'ORM com GORM, migrations e geração de código com SQLC.',
         estimatedMinutes: 50,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'GORM é o ORM mais popular em Go. Migrations gerenciam schema do banco. SQLC gera código Go type-safe a partir de queries SQL — combina segurança de tipos com controle total das queries.',
             codeExample: '// GORM\ntype Product struct {\n\tgorm.Model\n\tNome  string  `gorm:"size:100;not null"`\n\tPreco float64 `gorm:"not null"`\n}\n\ndb.AutoMigrate(&Product{})\ndb.Create(&Product{Nome: "Go Book", Preco: 49.90})\n\nvar produto Product\ndb.First(&produto, 1)',
             recursos: ['https://gorm.io/', 'https://sqlc.dev/'],
@@ -1032,8 +1032,8 @@ export const roadmapModules: Module[] = [
         title: 'Padrões de Erro em Go',
         description: 'errors.New, fmt.Errorf, wrapping com %w e o idioma comma-ok.',
         estimatedMinutes: 40,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Em Go, erros são valores — qualquer tipo que implementa a interface `error` (com método `Error() string`). O padrão idiomático é retornar `(T, error)` e verificar `if err != nil`. Com Go 1.13+, use `fmt.Errorf("contexto: %w", err)` para encapsular erros preservando a cadeia, e `errors.Is` / `errors.As` para verificar.',
             codeExample: 'package main\n\nimport (\n\t"errors"\n\t"fmt"\n)\n\n// Erro sentinela\nvar ErrNaoEncontrado = errors.New("registro não encontrado")\n\n// Erro customizado\ntype ErrValidacao struct {\n\tCampo   string\n\tMensagem string\n}\n\nfunc (e *ErrValidacao) Error() string {\n\treturn fmt.Sprintf("validação falhou no campo %s: %s", e.Campo, e.Mensagem)\n}\n\nfunc buscarUsuario(id int) error {\n\tif id <= 0 {\n\t\treturn &ErrValidacao{Campo: "id", Mensagem: "deve ser positivo"}\n\t}\n\tif id > 100 {\n\t\treturn fmt.Errorf("buscarUsuario(id=%d): %w", id, ErrNaoEncontrado)\n\t}\n\treturn nil\n}\n\nfunc main() {\n\tif err := buscarUsuario(200); err != nil {\n\t\t// unwrap com errors.Is\n\t\tif errors.Is(err, ErrNaoEncontrado) {\n\t\t\tfmt.Println("Usuário não existe")\n\t\t}\n\t\t// extrair tipo com errors.As\n\t\tvar ve *ErrValidacao\n\t\tif errors.As(err, &ve) {\n\t\t\tfmt.Printf("Campo inválido: %s\\n", ve.Campo)\n\t\t}\n\t}\n}',
             recursos: [
@@ -1086,8 +1086,8 @@ export const roadmapModules: Module[] = [
         title: 'Multi-erros, Erros Estruturados e Bibliotecas',
         description: 'go-multierror, eris, oops — tratamento avançado de erros em Go.',
         estimatedMinutes: 45,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Em operações paralelas ou de batch, é comum querer coletar múltiplos erros. A stdlib oferece `errors.Join` (Go 1.20+). Para erros com stack trace e contexto rico, bibliotecas como `eris` ou `oops` agregam valor. O pacote `multierr` do Uber é muito usado em produção.',
             codeExample: 'package main\n\nimport (\n\t"errors"\n\t"fmt"\n)\n\n// errors.Join (Go 1.20+)\nfunc validarFormulario(nome, email string) error {\n\tvar errs []error\n\tif nome == "" {\n\t\terrs = append(errs, errors.New("nome é obrigatório"))\n\t}\n\tif email == "" {\n\t\terrs = append(errs, errors.New("email é obrigatório"))\n\t}\n\treturn errors.Join(errs...)\n}\n\nfunc main() {\n\terr := validarFormulario("", "")\n\tif err != nil {\n\t\t// Itera sobre múltiplos erros\n\t\tfor _, e := range err.(interface{ Unwrap() []error }).Unwrap() {\n\t\t\tfmt.Println("-", e)\n\t\t}\n\t}\n}',
             recursos: [
@@ -1149,8 +1149,8 @@ export const roadmapModules: Module[] = [
         title: 'Introdução a Generics',
         description: 'Type parameters, constraints básicas e a interface any vs comparable.',
         estimatedMinutes: 45,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Generics (Go 1.18+) permitem escrever código paramétrico: funções e tipos que operam sobre diferentes tipos mantendo segurança em tempo de compilação. A sintaxe usa `[T Constraint]` onde T é o type parameter. A constraint `any` aceita qualquer tipo; `comparable` exige que o tipo suporte `==`.',
             codeExample: 'package main\n\nimport "fmt"\n\n// Função genérica: funciona com int, float64, string...\nfunc Min[T interface{ ~int | ~float64 | ~string }](a, b T) T {\n\tif a < b {\n\t\treturn a\n\t}\n\treturn b\n}\n\n// Tipo genérico: Stack universal\ntype Stack[T any] struct {\n\tItems []T\n}\n\nfunc (s *Stack[T]) Push(item T) {\n\ts.Items = append(s.Items, item)\n}\n\nfunc (s *Stack[T]) Pop() (T, bool) {\n\tvar zero T\n\tif len(s.Items) == 0 {\n\t\treturn zero, false\n\t}\n\tn := len(s.Items) - 1\n\titem := s.Items[n]\n\ts.Items = s.Items[:n]\n\treturn item, true\n}\n\nfunc main() {\n\tfmt.Println(Min(3, 7))       // int\n\tfmt.Println(Min(3.14, 2.71)) // float64\n\n\ts := Stack[string]{}\n\ts.Push("Go")\n\ts.Push("Generics")\n\tv, _ := s.Pop()\n\tfmt.Println(v) // Generics\n}',
             recursos: [
@@ -1203,8 +1203,8 @@ export const roadmapModules: Module[] = [
         title: 'Constraints e Limitações',
         description: 'golang.org/x/exp/constraints, union types, ~T e o status atual da implementação.',
         estimatedMinutes: 40,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Constraints definem quais operações são permitidas sobre um type parameter. A sintaxe `~int` indica "qualquer tipo cujo tipo subjacente é int". Union types `int | float64` restringem a tipos específicos. O pacote `golang.org/x/exp/constraints` oferece constraints prontas: Ordered, Integer, Float, Number.',
             codeExample: 'package main\n\nimport (\n\t"fmt"\n\t"golang.org/x/exp/constraints"\n)\n\n// Ordered: qualquer tipo com operadores <, >, <=, >=\nfunc Max[T constraints.Ordered](a, b T) T {\n\tif a > b {\n\t\treturn a\n\t}\n\treturn b\n}\n\n// Constraint com ~\ntype MyInt int\n\nfunc Soma[T ~int | ~int64](a, b T) T {\n\treturn a + b\n}\n\nfunc main() {\n\tfmt.Println(Max(10, 20))       // int\n\tfmt.Println(Max("abc", "xyz")) // string\n\n\tvar x, y MyInt = 5, 3\n\tfmt.Println(Soma(x, y)) // 8 — MyInt funciona porque ~int\n}',
             recursos: [
@@ -1265,8 +1265,8 @@ export const roadmapModules: Module[] = [
         title: 'Princípios SOLID em Go',
         description: 'SRP, OCP, LSP, ISP e DIP com exemplos práticos em Go.',
         estimatedMinutes: 60,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'SOLID em Go: SRP — cada struct/package deve ter uma responsabilidade. OCP — use interfaces para extensibilidade. LSP — tipos que implementam interface devem ser substituíveis. ISP — interfaces pequenas e específicas. DIP — dependa de abstrações (interfaces), não de implementações concretas.',
             codeExample: '// ISP: interfaces pequenas\ntype Reader interface { Read(p []byte) (n int, err error) }\ntype Writer interface { Write(p []byte) (n int, err error) }\ntype ReadWriter interface { Reader; Writer }\n\n// DIP: dependa da interface\ntype UserService struct {\n\trepo UserRepository // interface, não implementação\n}\n\ntype UserRepository interface {\n\tFindByID(id string) (*User, error)\n\tSave(user *User) error\n}',
             recursos: ['https://dave.cheney.net/2016/08/20/solid-go-design'],
@@ -1304,8 +1304,8 @@ export const roadmapModules: Module[] = [
         title: 'Clean Architecture: Conceitos e Estrutura',
         description: 'Camadas, regras de dependência, entities, use cases e adaptadores.',
         estimatedMinutes: 55,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Clean Architecture separa código em camadas: Entities (domínio), Use Cases (lógica de negócio), Adapters (interfaces com mundo externo), Frameworks (infraestrutura). A regra de ouro: dependências apontam para dentro — frameworks dependem de use cases, não o contrário.',
             recursos: ['https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html'],
           },
@@ -1352,8 +1352,8 @@ export const roadmapModules: Module[] = [
         title: 'gRPC',
         description: 'Comunicação entre serviços com gRPC e Protocol Buffers.',
         estimatedMinutes: 50,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'gRPC usa Protocol Buffers para definir serviços e mensagens. É mais eficiente que REST para comunicação entre microsserviços. Suporta streaming bidirecional.',
             codeExample: '// service.proto\nsyntax = "proto3";\n\nservice UserService {\n\trpc GetUser(GetUserRequest) returns (User);\n}\n\nmessage GetUserRequest {\n\tstring id = 1;\n}\n\nmessage User {\n\tstring id = 1;\n\tstring name = 2;\n}',
             recursos: ['https://grpc.io/docs/languages/go/', 'https://protobuf.dev/'],
@@ -1382,8 +1382,8 @@ export const roadmapModules: Module[] = [
         title: 'GraphQL',
         description: 'API GraphQL com Go usando gqlgen.',
         estimatedMinutes: 45,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'GraphQL permite ao cliente especificar exatamente quais dados precisa. Em Go, gqlgen gera código type-safe a partir do schema GraphQL.',
             recursos: ['https://gqlgen.com/', 'https://graphql.org/'],
           },
@@ -1411,8 +1411,8 @@ export const roadmapModules: Module[] = [
         title: 'CLI, Events e Configuração',
         description: 'Cobra CLI, Event Dispatcher e Viper para configuração.',
         estimatedMinutes: 45,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Cobra é o framework padrão para CLIs em Go (usado por Docker, Kubernetes). Viper gerencia configurações de múltiplas fontes. Event Dispatcher implementa pub/sub patterns.',
             codeExample: '// Cobra CLI\nvar rootCmd = &cobra.Command{\n\tUse:   "app",\n\tShort: "Minha aplicação CLI",\n}\n\nvar serveCmd = &cobra.Command{\n\tUse:   "serve",\n\tShort: "Iniciar servidor",\n\tRun: func(cmd *cobra.Command, args []string) {\n\t\t// iniciar servidor\n\t},\n}',
             recursos: ['https://github.com/spf13/cobra', 'https://github.com/spf13/viper'],
@@ -1450,8 +1450,8 @@ export const roadmapModules: Module[] = [
         title: 'Runtime, Scheduler e Memória',
         description: 'M:P:G model, memory allocation, GC e ferramentas de diagnóstico.',
         estimatedMinutes: 60,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'O Go runtime gerencia goroutines via M:P:G model — M (OS threads), P (processadores lógicos), G (goroutines). O scheduler distribui G em M via P. O GC é concurrent, tri-color mark-and-sweep. Stack das goroutines começa pequena (2KB) e cresce dinamicamente.',
             recursos: [
               'https://go.dev/doc/gc-guide',
@@ -1491,8 +1491,8 @@ export const roadmapModules: Module[] = [
         title: 'Docker e Kubernetes',
         description: 'Imagens otimizadas com multistage build e deploy em Kubernetes.',
         estimatedMinutes: 55,
-        mesa: {
-          modelagem: {
+        vesa: {
+          visaoGeral: {
             explicacao: 'Go compila em binário estático — perfeito para containers Docker. Multistage build: primeiro estágio compila, segundo usa imagem mínima (scratch/distroless). Kubernetes orquestra containers com deployments, services e ingress.',
             codeExample: '# Dockerfile multistage\nFROM golang:1.22 AS builder\nWORKDIR /app\nCOPY . .\nRUN CGO_ENABLED=0 go build -o /app/server ./cmd/server\n\nFROM scratch\nCOPY --from=builder /app/server /server\nEXPOSE 8080\nCMD ["/server"]',
             recursos: ['https://docs.docker.com/build/building/multi-stage/', 'https://kubernetes.io/docs/home/'],

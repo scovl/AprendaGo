@@ -1,12 +1,12 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
-import { UserProgress, MesaPhase } from '../types';
+import { UserProgress, VesaPhase } from '../types';
 
 interface ProgressContextType {
   progress: UserProgress;
   completeLesson: (lessonId: string) => void;
   uncompleteLesson: (lessonId: string) => void;
   setCurrentLesson: (lessonId: string | null) => void;
-  setCurrentPhase: (phase: MesaPhase | null) => void;
+  setCurrentPhase: (phase: VesaPhase | null) => void;
   saveNote: (moduleId: string, note: string) => void;
   getModuleProgress: (moduleId: string, lessonIds: string[]) => number;
   isLessonCompleted: (lessonId: string) => boolean;
@@ -69,12 +69,12 @@ export function ProgressProvider({ children }: Readonly<{ children: React.ReactN
     setProgress(prev => ({
       ...prev,
       currentLesson: lessonId,
-      currentPhase: lessonId ? 'modelagem' : null,
+      currentPhase: lessonId ? 'visaoGeral' : null,
       lastAccessedAt: new Date().toISOString(),
     }));
   }, []);
 
-  const setCurrentPhase = useCallback((phase: MesaPhase | null) => {
+  const setCurrentPhase = useCallback((phase: VesaPhase | null) => {
     setProgress(prev => ({ ...prev, currentPhase: phase }));
   }, []);
 

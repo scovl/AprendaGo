@@ -34,7 +34,7 @@ export function RoadmapView({ onLessonSelect }: Readonly<RoadmapViewProps>) {
           <header className="roadmap-header">
             <h1>Aprenda Go</h1>
             <p className="roadmap-subtitle">
-              Roadmap completo de aprendizado em Golang com metodologia MESA
+              Roadmap completo de aprendizado em Golang com metodologia VESA
             </p>
             <div className="roadmap-stats" aria-live="polite">
               <div className="stat-card">
@@ -57,26 +57,26 @@ export function RoadmapView({ onLessonSelect }: Readonly<RoadmapViewProps>) {
             <ProgressBar />
           </header>
 
-          <section className="mesa-explainer" aria-label="Sobre a metodologia MESA">
-            <h2>Metodologia MESA</h2>
+            <section className="vesa-explainer" aria-label="Sobre o ciclo de aprendizado VESA">
+            <h2>Ciclo de Aprendizado VESA</h2>
             <p>Cada aula segue 4 fases para aprendizado profundo e estruturado:</p>
-            <div className="mesa-phases-overview">
-              <div className="mesa-phase-card">
+            <div className="vesa-phases-overview">
+              <div className="vesa-phase-card">
                 <span className="phase-icon" aria-hidden="true">👁️</span>
-                <h3>Modelagem</h3>
+                <h3>Visão Geral</h3>
                 <p>Observe e compreenda o conceito com explicações e exemplos de código</p>
               </div>
-              <div className="mesa-phase-card">
+              <div className="vesa-phase-card">
                 <span className="phase-icon" aria-hidden="true">🧪</span>
                 <h3>Experimentação</h3>
                 <p>Pratique com desafios guiados e dicas passo a passo</p>
               </div>
-              <div className="mesa-phase-card">
+              <div className="vesa-phase-card">
                 <span className="phase-icon" aria-hidden="true">💬</span>
                 <h3>Socialização</h3>
                 <p>Reflita sobre o que aprendeu e discuta com a comunidade</p>
               </div>
-              <div className="mesa-phase-card">
+              <div className="vesa-phase-card">
                 <span className="phase-icon" aria-hidden="true">🚀</span>
                 <h3>Aplicação</h3>
                 <p>Aplique o conhecimento em um projeto prático real</p>

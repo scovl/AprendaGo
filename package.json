@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Plataforma interativa de aprendizado em Golang usando metodologia MESA",
+  "description": "Plataforma interativa de aprendizado em Golang usando o ciclo VESA",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

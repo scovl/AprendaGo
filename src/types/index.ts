@@ -1,7 +1,7 @@
-export type MesaPhase = 'modelagem' | 'experimentacao' | 'socializacao' | 'aplicacao';
+export type VesaPhase = 'visaoGeral' | 'experimentacao' | 'socializacao' | 'aplicacao';
 
-export interface MesaContent {
-  modelagem: {
+export interface VesaContent {
+  visaoGeral: {
     explicacao: string;
     codeExample?: string;
     recursos: string[];
@@ -30,7 +30,7 @@ export interface Lesson {
   id: string;
   title: string;
   description: string;
-  mesa: MesaContent;
+  vesa: VesaContent;
   estimatedMinutes: number;
 }
 
@@ -46,7 +46,7 @@ export interface Module {
 export interface UserProgress {
   completedLessons: string[];
   currentLesson: string | null;
-  currentPhase: MesaPhase | null;
+  currentPhase: VesaPhase | null;
   moduleNotes: Record<string, string>;
   startedAt: string;
   lastAccessedAt: string;
@@ -62,9 +62,9 @@ export interface AccessibilitySettings {
   sidebarCollapsed: boolean;
 }
 
-export const MESA_LABELS: Record<MesaPhase, { label: string; description: string; icon: string }> = {
-  modelagem: {
-    label: 'Modelagem',
+export const VESA_LABELS: Record<VesaPhase, { label: string; description: string; icon: string }> = {
+  visaoGeral: {
+    label: 'Visão Geral',
     description: 'Observe e compreenda o conceito apresentado com exemplos claros',
     icon: '👁️',
   },
