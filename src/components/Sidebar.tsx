@@ -4,12 +4,11 @@ import { useProgress } from '../context/ProgressContext';
 import { useRoadmap } from '../hooks/useRoadmap';
 
 interface SidebarProps {
-  onNavigate: (view: 'roadmap' | 'accessibility') => void;
-  onOpenIrc: () => void;
+  onNavigate: (view: 'roadmap' | 'accessibility' | 'irc') => void;
   currentView: string;
 }
 
-export function Sidebar({ onNavigate, onOpenIrc, currentView }: Readonly<SidebarProps>) {
+export function Sidebar({ onNavigate, currentView }: Readonly<SidebarProps>) {
   const { settings, updateSetting } = useAccessibility();
   const { progress } = useProgress();
   const { totalLessons } = useRoadmap();
@@ -78,8 +77,9 @@ export function Sidebar({ onNavigate, onOpenIrc, currentView }: Readonly<Sidebar
         </button>
 
         <button
-          className="sidebar-nav-item sidebar-irc-btn"
-          onClick={onOpenIrc}
+          className={`sidebar-nav-item sidebar-irc-btn ${currentView === 'irc' ? 'active' : ''}`}
+          onClick={() => onNavigate('irc')}
+          aria-current={currentView === 'irc' ? 'page' : undefined}
           aria-label="Abrir chat IRC do canal #aprendago na Libera.Chat"
           title="Chat IRC — #aprendago @ Libera.Chat"
         >

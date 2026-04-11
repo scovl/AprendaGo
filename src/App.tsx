@@ -4,16 +4,15 @@ import { RoadmapView } from './components/RoadmapView';
 import { RoadmapTree } from './components/RoadmapTree';
 import { LessonView } from './components/LessonView';
 import { AccessibilityPanel } from './components/AccessibilityPanel';
-import { IrcModal } from './components/IrcModal';
+import { IrcView } from './components/IrcView';
 import { useRoadmap } from './hooks/useRoadmap';
 import { useProgress } from './context/ProgressContext';
 
-type AppView = 'roadmap' | 'lesson' | 'accessibility';
+type AppView = 'roadmap' | 'lesson' | 'accessibility' | 'irc';
 
 export function App() {
   const [currentView, setCurrentView] = useState<AppView>('roadmap');
   const [selectedLessonId, setSelectedLessonId] = useState<string | null>(null);
-  const [ircOpen, setIrcOpen] = useState(false);
   const { findLesson, modules } = useRoadmap();
   const { setCurrentLesson, progress } = useProgress();
 
@@ -34,7 +33,7 @@ export function App() {
     setCurrentLesson(null);
   }, [setCurrentLesson]);
 
-  const handleSidebarNavigate = useCallback((view: 'roadmap' | 'accessibility') => {
+  const handleSidebarNavigate = useCallback((view: 'roadmap' | 'accessibility' | 'irc') => {
     setCurrentView(view);
     if (view === 'roadmap') {
       setSelectedLessonId(null);
@@ -72,11 +71,10 @@ export function App() {
 
       <Sidebar
         onNavigate={handleSidebarNavigate}
-        onOpenIrc={() => setIrcOpen(true)}
         currentView={currentView === 'lesson' ? 'roadmap' : currentView}
       />
 
-      <div className="main-content" id="main-content" tabIndex={-1} data-roadmap-sidebar="true">
+      <div className={`main-content${currentView === 'irc' ? ' main-content--irc' : ''}`} id="main-content" tabIndex={-1} data-roadmap-sidebar="true">
         {currentView === 'roadmap' && (
           <RoadmapView onLessonSelect={handleLessonSelect} />
         )}
@@ -93,13 +91,12 @@ export function App() {
             <AccessibilityPanel />
           </div>
         )}
+        {currentView === 'irc' && <IrcView />}
       </div>
 
       <aside className="roadmap-sidebar" aria-label="Mapa visual do roadmap">
         <RoadmapTree onModuleClick={handleModuleClick} />
       </aside>
-
-      {ircOpen && <IrcModal onClose={() => setIrcOpen(false)} />}
     </div>
   );
 }
