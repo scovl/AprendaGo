@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  go-tests:
+    name: Go Runner Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: runner
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+      - name: Create sandbox dir
+        run: sudo mkdir -p /sandbox && sudo chmod 777 /sandbox
+      - name: Run tests
+        env:
+          SANDBOX_BASE: /sandbox
+        run: go test -v -race -timeout 120s ./...
+
+  typescript-check:
+    name: TypeScript Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+
+  docker-build:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    needs: [go-tests, typescript-check]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build runner image
+        run: docker build -f runner/Dockerfile runner/
+      - name: Build frontend image
+        run: docker build .
