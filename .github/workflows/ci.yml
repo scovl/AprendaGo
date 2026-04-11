@@ -6,9 +6,6 @@ on:
   pull_request:
     branches: [main]
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   go-tests:
     name: Go Runner Tests
@@ -17,8 +14,8 @@ jobs:
       run:
         working-directory: runner
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - uses: actions/checkout@v6
+      - uses: actions/setup-go@v6
         with:
           go-version: '1.23'
           cache: false
@@ -33,8 +30,8 @@ jobs:
     name: TypeScript Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: npm
@@ -46,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [go-tests, typescript-check]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Build runner image
         run: docker build -f runner/Dockerfile runner/
       - name: Build frontend image
