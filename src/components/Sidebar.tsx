@@ -75,6 +75,19 @@ export function Sidebar({ onNavigate, currentView }: Readonly<SidebarProps>) {
           <span aria-hidden="true">♿</span>
           <span>Acessibilidade</span>
         </button>
+
+        <a
+          className="sidebar-nav-item sidebar-irc-btn"
+          href="https://kiwiirc.com/nextclient/irc.libera.chat/#aprendago"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Abrir chat IRC do canal #aprendago na Libera.Chat (abre em nova aba)"
+          title="Chat IRC — #aprendago @ Libera.Chat"
+        >
+          <span aria-hidden="true">💬</span>
+          <span>Chat IRC</span>
+          <span className="sidebar-irc-badge" aria-hidden="true">↗</span>
+        </a>
       </nav>
 
       <div className="sidebar-footer">

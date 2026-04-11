@@ -312,6 +312,31 @@ body {
   font-weight: 600;
 }
 
+.sidebar-irc-btn {
+  text-decoration: none;
+  border: 1px dashed var(--border-color);
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+  position: relative;
+}
+
+.sidebar-irc-btn:hover {
+  background: var(--bg-tertiary);
+  color: var(--accent-primary, #00adb5);
+  border-color: var(--accent-primary, #00adb5);
+  border-style: solid;
+}
+
+.sidebar-irc-badge {
+  margin-left: auto;
+  font-size: 0.75rem;
+  opacity: 0.5;
+}
+
+.sidebar-irc-btn:hover .sidebar-irc-badge {
+  opacity: 1;
+}
+
 .sidebar-footer {
   margin-top: auto;
   padding: 1rem;
