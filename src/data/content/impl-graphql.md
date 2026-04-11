@@ -1,3 +1,37 @@
+---
+title: GraphQL com gqlgen
+description: API GraphQL type-safe com gqlgen - schema-first, resolvers e dataloader.
+estimatedMinutes: 45
+recursos:
+  - https://gqlgen.com/
+  - https://graphql.org/
+experimentacao:
+  desafio: Crie schema GraphQL para livraria com queries (livros, autores) e mutations (criarLivro). Use gqlgen para gerar código.
+  dicas:
+    - gqlgen init gera scaffold completo
+    - Defina schema.graphqls primeiro
+    - Implemente resolvers nos arquivos gerados
+socializacao:
+  discussao: "GraphQL vs REST: complexidade vs flexibilidade?"
+  pontos:
+    - "GraphQL: cliente controla dados, N+1 é risco"
+    - "REST: simples, cacheavel, previsivel"
+    - Use GraphQL quando clientes têm necessidades variadas
+  diasDesafio: Dias 83–90
+  sugestaoBlog: "GraphQL com Go: schema-first com gqlgen e resolvers type-safe"
+  hashtagsExtras: '#golang #graphql #gqlgen'
+aplicacao:
+  projeto: API GraphQL completa com autenticação e dataloader.
+  requisitos:
+    - Queries e Mutations
+    - Middleware de autenticação
+    - Dataloader para evitar N+1
+  criterios:
+    - Schema bem definido
+    - Performance com dataloader
+    - Playground funcional
+---
+
 **GraphQL** permite ao cliente especificar **exatamente** quais dados precisa — resolve over-fetching (dados demais) e under-fetching (dados de menos) comuns em REST.
 
 ## gqlgen

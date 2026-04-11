@@ -1,3 +1,39 @@
+---
+title: Mocks, Fuzzing e Benchmarks
+description: Interfaces para mocking, testify, fuzzing (Go 1.18+), benchmarks e profiling.
+estimatedMinutes: 45
+recursos:
+  - https://github.com/stretchr/testify
+  - https://go.dev/doc/fuzz/
+  - https://pkg.go.dev/testing#hdr-Benchmarks
+experimentacao:
+  desafio: Crie mock para uma interface Repository, escreva testes isolados do banco, adicione benchmark para uma função de sorting e fuzz para um parser.
+  dicas:
+    - "Mock manual: struct que implementa interface"
+    - "Testify: assert.Equal(t, expected, got)"
+    - go test -bench=. -benchmem -count=5
+    - go test -fuzz=FuzzNome -fuzztime=30s
+socializacao:
+  discussao: "Mocks vs integration tests: qual o balanço ideal?"
+  pontos:
+    - "Mocks: rápidos, isolados, testam lógica"
+    - "Integration: lentos, reais, testam conexão"
+    - Fuzzing encontra bugs que testes manuais não acham
+  diasDesafio: Dias 45–52
+  sugestaoBlog: "Mocks, Fuzzing e Benchmarks: testando além do básico em Go"
+  hashtagsExtras: '#golang #testing #fuzzing #benchmark'
+aplicacao:
+  projeto: Adicione testes completos a um projeto com unit (mock), fuzz (parser) e bench (hot path).
+  requisitos:
+    - Mocks para dependências externas
+    - Fuzzing para funções que aceitam input do usuário
+    - Benchmarks para funções críticas
+  criterios:
+    - Suite completa
+    - Mocks isolam deps
+    - Benchmarks documentados
+---
+
 ## Mocking com interfaces
 
 Mocking em Go é feito naturalmente com interfaces: define-se a dependência como interface, e o teste fornece uma implementação fake. **Não é necessário framework especial.**

@@ -1,3 +1,38 @@
+---
+title: Multi-erros e Erros Estruturados
+description: errors.Join, go-multierror, eris e estratégias de produção.
+estimatedMinutes: 40
+recursos:
+  - https://pkg.go.dev/errors#Join
+  - https://github.com/uber-go/multierr
+  - https://github.com/rotisserie/eris
+experimentacao:
+  desafio: Implemente um importador de CSV que processa todas as linhas e coleta todos os erros de validação (com número da linha) sem abortar na primeira falha.
+  dicas:
+    - errors.Join agrupa erros – nil se slice vazio
+    - Inclua número da linha no contexto do erro
+    - Para output JSON dos erros, crie struct ErrorReport
+socializacao:
+  discussao: Quando usar stack traces em erros? Há custo de performance?
+  pontos:
+    - Stack traces úteis em dev, caros em prod
+    - Logging estruturado (slog/zap) como alternativa
+    - OpenTelemetry para rastreamento distribuído
+  diasDesafio: Dias 39–44
+  sugestaoBlog: "Multi-erros em Go: errors.Join e estratégias para batch processing"
+  hashtagsExtras: '#golang #errors #observability'
+aplicacao:
+  projeto: Validador de JSON array que processa todos os itens e retorna relatório completo de erros.
+  requisitos:
+    - Processar todos itens mesmo com erros
+    - "Erros com contexto: índice + campo + mensagem"
+    - Output para humanos (texto) e máquinas (JSON)
+  criterios:
+    - Nenhum erro perdido
+    - Relatório claro
+    - Testes com inputs variados
+---
+
 ## errors.Join (Go 1.20+)
 
 Em operações batch e paralelas, a boa prática é não abortar no primeiro erro — processe tudo e reporte todos os erros no final.

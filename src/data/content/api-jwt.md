@@ -1,3 +1,38 @@
+---
+title: Autenticação JWT
+description: "JWT: geração, validação, middleware de autenticação e refresh tokens."
+estimatedMinutes: 45
+recursos:
+  - https://github.com/golang-jwt/jwt
+  - https://jwt.io/
+experimentacao:
+  desafio: "Crie middleware JWT que proteja rotas: extraia token do header, valide e injete user ID no context da request."
+  dicas:
+    - "Header: Authorization: Bearer <token>"
+    - strings.TrimPrefix para extrair token
+    - context.WithValue para passar claims adiante
+socializacao:
+  discussao: "JWT vs Sessions: quando usar cada abordagem?"
+  pontos:
+    - "JWT: stateless, escalável, mas revogação é difícil"
+    - "Sessions: stateful, fácil revogar, mas precisa de storage"
+    - "Refresh tokens: balance entre segurança e UX"
+  diasDesafio: Dias 53–60
+  sugestaoBlog: "Autenticação JWT em Go: do login ao middleware com segurança"
+  hashtagsExtras: '#golang #jwt #auth #security'
+aplicacao:
+  projeto: "Sistema de autenticação: register, login, refresh token e rotas protegidas."
+  requisitos:
+    - bcrypt para hash de senha
+    - JWT com expiração
+    - Middleware de autenticação
+    - Refresh token
+  criterios:
+    - Senhas hasheadas
+    - Tokens com expiração
+    - Rotas protegidas funcionais
+---
+
 **JWT (JSON Web Token)** é o padrão para autenticação stateless em APIs. Um token JWT tem 3 partes codificadas em base64, separadas por ponto: `header.payload.signature`.
 
 ```

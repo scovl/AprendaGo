@@ -1,3 +1,37 @@
+---
+title: API CRUD com Standard Library
+description: REST API completa com net/http, JSON e middleware básico.
+estimatedMinutes: 40
+recursos:
+  - https://pkg.go.dev/net/http
+experimentacao:
+  desafio: "Crie uma API CRUD para livros com a stdlib: GET (lista e por ID), POST, PUT, DELETE. Use map como banco em memória. Adicione middleware de logging."
+  dicas:
+    - r.PathValue("id") para path params (Go 1.22+)
+    - w.WriteHeader(http.StatusCreated) para POST
+    - json.NewDecoder(r.Body).Decode(&struct) para parse
+socializacao:
+  discussao: Standard library é suficiente para APIs em produção?
+  pontos:
+    - Go 1.22 melhorou muito – path params e métodos nativos
+    - Middleware é manual mas funcional
+    - Frameworks adicionam conveniência, não performance
+  diasDesafio: Dias 53–60
+  sugestaoBlog: "REST API em Go com standard library: CRUD completo sem frameworks"
+  hashtagsExtras: '#golang #api #rest'
+aplicacao:
+  projeto: API CRUD de tarefas (todo) com standard library e testes com httptest.
+  requisitos:
+    - GET/POST/PUT/DELETE
+    - JSON I/O
+    - Status codes corretos
+    - Testes httptest
+  criterios:
+    - RESTful
+    - Tratamento de erros
+    - Testes cobrindo happy path e erros
+---
+
 Com **Go 1.22+**, o `ServeMux` suporta métodos HTTP e path params nativamente:
 
 ```go

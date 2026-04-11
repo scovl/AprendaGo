@@ -1,3 +1,69 @@
+---
+title: I/O e Manipulação de Arquivos
+description: os, io, bufio — leitura, escrita, Scanner e o padrão Reader/Writer.
+estimatedMinutes: 40
+codeExample: |
+  package main
+
+  import (
+  	"bufio"
+  	"fmt"
+  	"io"
+  	"os"
+  	"strings"
+  )
+
+  func main() {
+  	f, err := os.Create("teste.txt")
+  	if err != nil {
+  		fmt.Println("Erro:", err)
+  		return
+  	}
+  	defer f.Close()
+  	w := bufio.NewWriter(f)
+  	w.WriteString("Linha 1\n")
+  	w.Flush()
+  	file, _ := os.Open("teste.txt")
+  	defer file.Close()
+  	scanner := bufio.NewScanner(file)
+  	for scanner.Scan() {
+  		fmt.Println(scanner.Text())
+  	}
+  	r := strings.NewReader("dados")
+  	data, _ := io.ReadAll(r)
+  	fmt.Println(string(data))
+  }
+recursos:
+  - https://gobyexample.com/reading-files
+  - https://gobyexample.com/writing-files
+  - https://pkg.go.dev/io
+experimentacao:
+  desafio: "Crie um programa que: (1) leia um CSV e imprima em tabela formatada; (2) copie um arquivo usando io.Copy; (3) leia da stdin linha a linha."
+  dicas:
+    - encoding/csv para CSV ou bufio.Scanner para simples
+    - io.Copy(dst, src) copia entre Readers e Writers
+    - os.Stdin é um io.Reader — use bufio.NewScanner(os.Stdin)
+socializacao:
+  discussao: Por que tudo em Go implementa io.Reader/Writer? Qual a vantagem dessa abstração?
+  pontos:
+    - "Código genérico: mesma função lê arquivo, rede, string"
+    - Composição com io.TeeReader, io.MultiWriter
+    - Comparação com try-finally em Java vs defer em Go
+  diasDesafio: Dias 19–28
+  sugestaoBlog: "I/O em Go: Reader, Writer, bufio e o poder das interfaces"
+  hashtagsExtras: '#golang #io #files'
+aplicacao:
+  projeto: "Tail -f em Go: monitore mudanças em um arquivo de log em tempo real."
+  requisitos:
+    - Ler arquivo continuamente
+    - Detectar novas linhas adicionadas
+    - Exibir em tempo real no terminal
+  criterios:
+    - Uso correto de defer
+    - Detect de EOF e retry
+    - Eficiente em memória
+---
+
 Go usa **interfaces** para I/O: `io.Reader` (método `Read(p []byte) (n int, err error)`) e `io.Writer` (`Write(p []byte) (n int, err error)`) são a base de tudo — arquivos, conexões de rede, buffers de memória, tudo implementa essas interfaces. Lógica escrita para `io.Reader` funciona com qualquer fonte de dados.
 
 `io.EOF` é o valor de erro especial retornado quando não há mais dados para ler — trate-o como **condição normal de fim de stream**, não como erro.

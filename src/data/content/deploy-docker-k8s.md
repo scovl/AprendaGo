@@ -1,3 +1,55 @@
+---
+title: Docker, Cross-compilation e Kubernetes
+description: Multistage build, imagens mínimas, cross-comp e Kubernetes manifests.
+estimatedMinutes: 55
+codeExample: |
+  # Dockerfile multistage
+  FROM golang:1.22 AS builder
+  WORKDIR /app
+  COPY go.mod go.sum ./
+  RUN go mod download
+  COPY . .
+  RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /server ./cmd/server
+
+  FROM scratch
+  COPY --from=builder /server /server
+  EXPOSE 8080
+  CMD ["/server"]
+
+  # Cross-compilation:
+  # GOOS=linux GOARCH=amd64 go build -o server-linux
+  # GOOS=darwin GOARCH=arm64 go build -o server-mac
+recursos:
+  - https://docs.docker.com/build/building/multi-stage/
+  - https://kubernetes.io/docs/home/
+experimentacao:
+  desafio: Crie Dockerfile multistage para uma API Go, compare tamanho (golang:alpine vs scratch). Depois, crie manifests K8s com Deployment + Service + Ingress.
+  dicas:
+    - "-ldflags=\"-s -w\" reduz tamanho do binário (~30%)"
+    - "scratch: mínimo absoluto, sem shell nem ferramentas"
+    - "distroless: sem shell mas com certificados TLS"
+    - Kubernetes liveness e readiness probes no /health
+socializacao:
+  discussao: Por que Go é tão popular em cloud-native?
+  pontos:
+    - Binário estático = imagem Docker tiny
+    - Cross-compilation simplifica CI multi-plataforma
+    - "Kubernetes, Docker, Terraform, Prometheus – todos escritos em Go"
+  diasDesafio: Dias 97–100
+  sugestaoBlog: "Deploy Go: Docker multistage, cross-compilation e Kubernetes"
+  hashtagsExtras: '#golang #docker #kubernetes #devops'
+aplicacao:
+  projeto: Deploy completo com Dockerfile otimizado + manifests Kubernetes + health checks.
+  requisitos:
+    - Dockerfile multistage com scratch/distroless
+    - Deployment + Service + Ingress YAML
+    - Health check endpoints (/health, /ready)
+  criterios:
+    - Imagem < 20MB
+    - Deploy funcional
+    - Health checks operacionais
+---
+
 Go compila em **binário estático** — perfeito para containers. A imagem final pode ser minimalista:
 
 ## Multistage build

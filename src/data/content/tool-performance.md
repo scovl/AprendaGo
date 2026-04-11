@@ -1,3 +1,62 @@
+---
+title: Profiling, Runtime e Otimização
+description: pprof, trace, GC tuning, runtime internals (M:P:G) e benchmarks.
+estimatedMinutes: 55
+codeExample: |
+  package main
+
+  import (
+  	"net/http"
+  	_ "net/http/pprof"
+  	"runtime"
+  )
+
+  func main() {
+  	go func() {
+  		http.ListenAndServe(":6060", nil)
+  	}()
+  	println("Goroutines:", runtime.NumGoroutine())
+  	println("CPUs:", runtime.NumCPU())
+  	var m runtime.MemStats
+  	runtime.ReadMemStats(&m)
+  	println("Alloc (MB):", m.Alloc/1024/1024)
+  }
+
+  // Profiling:
+  // go tool pprof http://localhost:6060/debug/pprof/profile?seconds=30
+  // go tool pprof http://localhost:6060/debug/pprof/heap
+recursos:
+  - https://go.dev/doc/gc-guide
+  - https://go.dev/blog/pprof
+  - https://pkg.go.dev/runtime/trace
+experimentacao:
+  desafio: Adicione pprof a um HTTP server, gere CPU e heap profiles, identifique o bottleneck mais caro e otimize.
+  dicas:
+    - import _ "net/http/pprof" – automático no default mux
+    - go tool pprof -http=:8081 profile.pb.gz – web UI
+    - GODEBUG=gctrace=1 mostra atividade do GC
+    - go build -gcflags="-m" mostra escape analysis
+socializacao:
+  discussao: Como o scheduler M:P:G do Go compara com threads do OS?
+  pontos:
+    - "Goroutines: ~2KB stack vs threads: ~1-8MB"
+    - "Go scheduler: cooperative com preemption points"
+    - Work-stealing entre P para balanceamento
+  diasDesafio: Dias 91–96
+  sugestaoBlog: "Go Internals: M:P:G scheduler, GC e profiling com pprof"
+  hashtagsExtras: '#golang #performance #pprof #runtime'
+aplicacao:
+  projeto: Profile e otimize uma aplicação com CPU profile, heap profile, corrija alocações e meça melhoria.
+  requisitos:
+    - pprof ativo com endpoints /debug/pprof
+    - CPU e heap profiles coletados
+    - Bottleneck identificado e otimizado
+  criterios:
+    - Profiling executado
+    - Bottleneck encontrado
+    - Melhoria mensurável (benchmark)
+---
+
 O Go runtime usa o modelo **M:P:G**:
 
 - **M** — OS threads (sistema operacional)

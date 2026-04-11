@@ -1,3 +1,41 @@
+---
+title: Goroutines e Channels
+description: Goroutines, channels buffered/unbuffered, select e padrão produtor/consumidor.
+estimatedMinutes: 50
+recursos:
+  - https://go.dev/tour/concurrency/1
+  - https://gobyexample.com/goroutines
+  - https://gobyexample.com/channels
+  - https://gobyexample.com/select
+experimentacao:
+  desafio: "Implemente o padrão fan-out/fan-in: distribua URLs entre N workers que fazem HTTP GET concorrente e colete resultados em um channel único."
+  dicas:
+    - "Fan-out: um channel de jobs lido por N goroutines"
+    - "Fan-in: N goroutines escrevem em um channel de resultados"
+    - select com default para operação não-bloqueante
+    - Sempre close(ch) quando não há mais dados a enviar
+socializacao:
+  discussao: "Rob Pike: 'Concorrência não é paralelismo.' O que isso significa?"
+  pontos:
+    - "Concorrência: design (lidar com muitas coisas)"
+    - "Paralelismo: execução (fazer muitas coisas ao mesmo tempo)"
+    - GOMAXPROCS controla quantos OS threads usam goroutines
+    - CSP (Communicating Sequential Processes) model
+  diasDesafio: Dias 29–38
+  sugestaoBlog: "Goroutines e Channels: concorrência em Go sem locks"
+  hashtagsExtras: '#golang #goroutines #channels #concurrency'
+aplicacao:
+  projeto: Pipeline de processamento com 3 estágios - gerar, transformar e agregar, usando goroutines e channels.
+  requisitos:
+    - Cada estágio em goroutine separada
+    - Channels conectando estágios
+    - Graceful shutdown com close(ch)
+  criterios:
+    - Pipeline funcional
+    - Goroutines finalizadas
+    - Channels fechados
+---
+
 Goroutines são threads cooperativas gerenciadas pelo runtime Go (modelo **M:N**). Cada goroutine começa com ~2KB de stack, que cresce e encolhe de forma elástica. O scheduler usa `GOMAXPROCS` threads OS (padrão: número de CPUs) para multiplexar goroutines. É viável criar **milhares de goroutines** — o custo marginal é ordens de grandeza menor que threads OS.
 
 ## Estrutura interna dos channels

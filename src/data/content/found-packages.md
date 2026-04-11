@@ -1,4 +1,57 @@
-Packages organizam código — cada diretório é um package. Nomes exportados começam com **maiúscula**; minúscula é privado ao package. Módulos (`go.mod`) gerenciam dependências com semantic versioning.
+---
+title: Packages, Módulos e Dependências
+description: Organização em packages, go mod, exportação por maiúscula, internal/ e dependências.
+estimatedMinutes: 40
+codeExample: |
+  # Estrutura de projeto
+  myapp/
+  ├── go.mod
+  ├── cmd/
+  │   └── server/main.go
+  ├── internal/
+  │   ├── handler/handler.go
+  │   └── service/service.go
+  ├── pkg/
+  │   └── validator/validator.go
+  └── go.sum
+
+  # Comandos essenciais
+  go mod init github.com/user/myapp
+  go get github.com/gin-gonic/gin@latest
+  go mod tidy
+  go mod vendor
+recursos:
+  - https://go.dev/ref/mod
+  - https://go.dev/doc/modules/layout
+experimentacao:
+  desafio: Crie um projeto com 3 packages - cmd/main, internal/service e pkg/utils. Exporte e importe funções. Depois adicione uma dependência externa com go get.
+  dicas:
+    - Cada pasta = um package, mesmo nome do diretório
+    - Apenas nomes com letra maiúscula são exportados
+    - Use go mod init para inicializar
+    - internal/ impede acesso de fora do módulo
+socializacao:
+  discussao: Como a convenção de exportação por maiúscula afeta o design de APIs em Go?
+  pontos:
+    - "Simplicidade: sem public/private/protected keywords"
+    - Encapsulamento visual — visivelmente claro
+    - internal/ para código que não é API pública
+  diasDesafio: Dias 8–18
+  sugestaoBlog: "Packages e módulos em Go: organizando projetos profissionais"
+  hashtagsExtras: '#golang #modules #packages'
+aplicacao:
+  projeto: Crie um projeto Go com cmd/, internal/, pkg/ e publique como módulo em um repositório.
+  requisitos:
+    - Estrutura cmd/ + internal/ + pkg/
+    - go.mod e go.sum configurados
+    - README com instruções de uso e importação
+  criterios:
+    - Estrutura correta
+    - Imports funcionais
+    - Compilação sem erros
+---
+
+Packages organizam código — cada diretório é um package.; minúscula é privado ao package. Módulos (`go.mod`) gerenciam dependências com semantic versioning.
 
 ## Comandos essenciais
 

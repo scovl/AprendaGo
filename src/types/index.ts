@@ -1,5 +1,15 @@
 export type VesaPhase = 'visaoGeral' | 'experimentacao' | 'socializacao' | 'aplicacao';
 
+/** Slim module definition — lives in the .ts module files */
+export interface ModuleMeta {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  color: string;
+  lessons: string[]; // lesson IDs only
+}
+
 export interface VesaContent {
   visaoGeral: {
     explicacao?: string;

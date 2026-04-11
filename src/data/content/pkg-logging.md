@@ -1,3 +1,60 @@
+---
+title: "Logging: slog, Zap e Zerolog"
+description: Logging estruturado com slog (stdlib), Zap (Uber) e Zerolog.
+estimatedMinutes: 35
+codeExample: |
+  package main
+
+  import (
+  	"log/slog"
+  	"os"
+  )
+
+  func main() {
+  	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
+  		Level: slog.LevelDebug,
+  	}))
+  	logger.Info("servidor iniciado",
+  		slog.String("addr", ":8080"),
+  		slog.Int("workers", 4),
+  	)
+  	logger.Error("falha na conexão",
+  		slog.String("host", "db.local"),
+  		slog.Any("error", "connection refused"),
+  	)
+  }
+recursos:
+  - https://pkg.go.dev/log/slog
+  - https://github.com/uber-go/zap
+  - https://github.com/rs/zerolog
+experimentacao:
+  desafio: Configure slog com handler JSON e níveis. Depois, instale zap (go get go.uber.org/zap) e compare a API e performance.
+  dicas:
+    - slog.SetDefault(logger) define logger global
+    - zap.NewProduction() cria logger otimizado
+    - "zerolog: log.Info().Str(key, val).Msg(mensagem)"
+socializacao:
+  discussao: Quando usar slog (stdlib) vs Zap/Zerolog? Logging estruturado vale a complexidade?
+  pontos:
+    - "slog: sem dependência externa, padrão da linguagem"
+    - "Zap: performance superior, production-ready"
+    - "Zerolog: zero-allocation, API fluent"
+    - JSON para produção, texto para desenvolvimento
+  diasDesafio: Dias 19–28
+  sugestaoBlog: "Logging em Go: slog, Zap e Zerolog — qual escolher?"
+  hashtagsExtras: '#golang #logging #slog #observability'
+aplicacao:
+  projeto: Configure logging para um servidor HTTP com slog/níveis, JSON em prod, texto em dev.
+  requisitos:
+    - Handler JSON para produção
+    - Handler texto para desenvolvimento
+    - Log de cada request com método, path e duração
+  criterios:
+    - Níveis corretos
+    - Output estruturado
+    - Fácil de filtrar
+---
+
 O pacote `log` básico é suficiente para scripts. Para produção, use **`log/slog`** (Go 1.21+) que fornece logging estruturado com níveis (`Debug`, `Info`, `Warn`, `Error`), output JSON e handlers customizáveis.
 
 ## log/slog

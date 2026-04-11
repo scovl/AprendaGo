@@ -1,3 +1,42 @@
+---
+title: Sua primeira contribuição
+description: Fork, branch, commit semântico, PR e o ciclo completo de contribuição.
+estimatedMinutes: 40
+recursos:
+  - https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project
+  - https://www.conventionalcommits.org/en/v1.0.0/
+  - https://go.dev/doc/contribute
+  - https://www.youtube.com/watch?v=RGOj5yH7evk
+experimentacao:
+  desafio: "Simule o fluxo completo de contribuição: crie um repositório público próprio no GitHub, abra uma issue, faça um fork, implemente a correção num branch descritivo e abra um PR linkando à issue com Fixes #1."
+  dicas:
+    - git log --oneline para ver o histórico limpo
+    - git rebase -i HEAD~3 para squash de commits antes do PR
+    - gh pr create --fill se usar o GitHub CLI
+    - go test ./... antes de abrir o PR
+socializacao:
+  discussao: "Qual é a parte mais difícil de fazer um PR ser aprovado: o código, a comunicação ou o timing?"
+  pontos:
+    - PRs pequenos e focados têm 3x mais chance de serem aceitos
+    - Comentários em código alheio devem ser perguntas, não críticas
+    - Nunca misture refactoring com feature em um único PR
+    - Responda reviews em até 48h
+  diasDesafio: "Bônus – Semana de Open Source"
+  sugestaoBlog: "Meu primeiro PR aceito em um projeto Go: o que aprendi sobre comunicação técnica"
+  hashtagsExtras: '#golang #opensource #github #pullrequest #commit'
+aplicacao:
+  projeto: Ferramenta de checklist pré-PR que verifica boas práticas antes de submeter contribuição.
+  requisitos:
+    - Verifica se há CONTRIBUTING.md no repositório atual
+    - Roda go test ./... e reporta falhas
+    - Roda go vet ./... e gofmt -l .
+    - Lista arquivos modificados e pede confirmação antes de push
+  criterios:
+    - Checks executam em sequência com output claro
+    - Saída com checkmarks por verificação
+    - Exit code não-zero se algum check falhar
+---
+
 Fazer uma contribuição não é apenas escrever código — é um processo de **comunicação**. Projetos com centenas de contribuidores precisam de padrões para funcionar.
 
 ## O ciclo de uma contribuição

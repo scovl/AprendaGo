@@ -1,3 +1,37 @@
+---
+title: Padrões de Concorrência
+description: Worker pool, fan-out/fan-in, pipeline, semáforo e graceful shutdown.
+estimatedMinutes: 50
+recursos:
+  - https://gobyexample.com/worker-pools
+  - https://go.dev/blog/pipelines
+experimentacao:
+  desafio: "Implemente um download concorrente: pool de N workers baixa uma lista de URLs, com semáforo limitando concorrência e context para timeout global."
+  dicas:
+    - "Semáforo: sem := make(chan struct{}, maxConcurrent)"
+    - context.WithTimeout para timeout global
+    - Fan-in com WaitGroup + goroutine para close(results)
+socializacao:
+  discussao: Como dimensionar o número de workers? E como fazer graceful shutdown?
+  pontos:
+    - "CPU-bound: GOMAXPROCS workers"
+    - "I/O-bound: mais workers (10x a 100x)"
+    - "Graceful shutdown: signal.NotifyContext + context cancellation"
+  diasDesafio: Dias 29–38
+  sugestaoBlog: "Padrões de concorrência em Go: worker pool, pipeline e graceful shutdown"
+  hashtagsExtras: '#golang #patterns #concurrency'
+aplicacao:
+  projeto: Load balancer simples que distribui requests HTTP entre backends com health check.
+  requisitos:
+    - Worker pool com N goroutines
+    - Round-robin ou least-connections
+    - Graceful shutdown com signal + context
+  criterios:
+    - Distribuição equilibrada
+    - Graceful shutdown
+    - Sem goroutine leaks
+---
+
 ## Worker Pool
 
 Resolve o problema de limitar concorrência: crie N goroutines workers que consomem de um channel de jobs.

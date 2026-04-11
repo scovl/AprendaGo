@@ -1,3 +1,38 @@
+---
+title: Constraints Avançadas
+description: constraints.Ordered, union types, ~T, limitações e design patterns.
+estimatedMinutes: 40
+recursos:
+  - https://pkg.go.dev/golang.org/x/exp/constraints
+  - https://go.dev/blog/intro-generics
+experimentacao:
+  desafio: Implemente BinarySearch e MergeSort genéricos usando constraints.Ordered. Compare performance com sort.Slice.
+  dicas:
+    - go get golang.org/x/exp para usar constraints
+    - "Crie sua constraint: type Numeric interface { ~int | ~float64 }"
+    - "~ é essencial para aceitar type aliases"
+socializacao:
+  discussao: Go acertou no design de generics? Quais limitações surpreenderam?
+  pontos:
+    - Métodos não podem ter type params próprios
+    - Sem specialization (tratamento especial por tipo)
+    - Comparado com C++ templates - muito mais simples
+    - "Go priorizou simplicidade — trade-off válido"
+  diasDesafio: Dias 69–76
+  sugestaoBlog: "Constraints em Go: ~T, union types e limitações dos generics"
+  hashtagsExtras: '#golang #generics #constraints'
+aplicacao:
+  projeto: Biblioteca de algoritmos genéricos com BinarySearch, MergeSort e MinHeap.
+  requisitos:
+    - BinarySearch[T constraints.Ordered]
+    - MergeSort[T constraints.Ordered]
+    - MinHeap[T constraints.Ordered] com Push/Pop/Peek
+  criterios:
+    - Corretos
+    - Performance competitiva
+    - Testes com edge cases
+---
+
 Constraints em Go generics são **interfaces** que definem o conjunto de tipos permitidos e as operações disponíveis:
 
 1. Interface com métodos (como `io.Reader`) — habilita apenas esses métodos

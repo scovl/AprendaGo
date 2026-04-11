@@ -1,3 +1,69 @@
+---
+title: HTTP Client e JSON
+description: Chamadas HTTP, encoding/json, struct tags e APIs externas.
+estimatedMinutes: 45
+codeExample: |
+  package main
+
+  import (
+  	"encoding/json"
+  	"fmt"
+  	"net/http"
+  )
+
+  type Post struct {
+  	ID    int    `json:"id"`
+  	Title string `json:"title"`
+  	Body  string `json:"body,omitempty"`
+  }
+
+  func main() {
+  	resp, err := http.Get("https://jsonplaceholder.typicode.com/posts/1")
+  	if err != nil {
+  		fmt.Println("Erro:", err)
+  		return
+  	}
+  	defer resp.Body.Close()
+  	var post Post
+  	if err := json.NewDecoder(resp.Body).Decode(&post); err != nil {
+  		fmt.Println("Erro JSON:", err)
+  		return
+  	}
+  	fmt.Printf("Título: %s\n", post.Title)
+  	data, _ := json.MarshalIndent(post, "", "  ")
+  	fmt.Println(string(data))
+  }
+recursos:
+  - https://gobyexample.com/http-clients
+  - https://gobyexample.com/json
+  - https://pkg.go.dev/encoding/json
+experimentacao:
+  desafio: "Consuma a API ViaCEP (viacep.com.br/ws/{cep}/json/) — busque endereço por CEP informado pelo usuário e exiba formatado."
+  dicas:
+    - "ViaCEP: https://viacep.com.br/ws/01001000/json/"
+    - Struct tags mapeiam campos JSON para Go
+    - Verifique resp.StatusCode antes de decodificar
+socializacao:
+  discussao: Como Go trata erros HTTP comparado com try-catch de outras linguagens?
+  pontos:
+    - err != nil vs exceptions — erro explícito
+    - "StatusCode vs error — são coisas diferentes em Go"
+    - Context para timeout em requests HTTP
+  diasDesafio: Dias 19–28
+  sugestaoBlog: "HTTP e JSON em Go: consumindo APIs sem exceções"
+  hashtagsExtras: '#golang #http #json #api'
+aplicacao:
+  projeto: "Busca CEP: programa CLI que busca endereço por CEP via ViaCEP."
+  requisitos:
+    - Consumir API ViaCEP
+    - Exibir resultado formatado
+    - Tratar CEP inválido e erros de rede
+  criterios:
+    - Tratamento de erros HTTP
+    - JSON parseado corretamente
+    - Código idiomático
+---
+
 `net/http` tem um cliente HTTP completo e configurável. `http.DefaultClient` tem **timeout zero (nunca expira!)** — em produção, sempre use um cliente customizado:
 
 ```go
