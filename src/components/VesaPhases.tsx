@@ -102,13 +102,36 @@ export function VesaPhases({ vesa, lessonId }: Readonly<VesaPhasesProps>) {
   );
 }
 
+function getYouTubeId(url: string): string | null {
+  const m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+
 function VisaoGeralContent({ content }: Readonly<{ content: VesaContent['visaoGeral'] }>) {
+  const paragraphs = content.explicacao.split('\n').filter(Boolean);
+  const youtubeUrls = content.recursos.filter(u => getYouTubeId(u) !== null);
+  const linkUrls = content.recursos.filter(u => getYouTubeId(u) === null);
+
   return (
     <div className="phase-content">
       <div className="explanation-block">
         <h4>Explicação</h4>
-        <p>{content.explicacao}</p>
+        {paragraphs.map((p, i) => <p key={i}>{p}</p>)}
       </div>
+
+      {youtubeUrls.map((url, i) => {
+        const videoId = getYouTubeId(url)!;
+        return (
+          <div key={i} className="youtube-embed">
+            <iframe
+              src={`https://www.youtube.com/embed/${videoId}`}
+              title={`Vídeo ${i + 1}`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        );
+      })}
 
       {content.codeExample && (
         <div className="code-block">
@@ -119,11 +142,11 @@ function VisaoGeralContent({ content }: Readonly<{ content: VesaContent['visaoGe
         </div>
       )}
 
-      {content.recursos.length > 0 && (
+      {linkUrls.length > 0 && (
         <div className="resources-block">
           <h4>Recursos para estudo</h4>
           <ul>
-            {content.recursos.map((url, i) => (
+            {linkUrls.map((url, i) => (
               <li key={i}>
                 <a href={url} target="_blank" rel="noopener noreferrer">
                   {url.replace(/^https?:\/\//, '').split('/').slice(0, 2).join('/')}

@@ -1148,6 +1148,20 @@ body {
 }
 
 /* Resources */
+.youtube-embed {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.youtube-embed iframe {
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: var(--radius-sm, 6px);
+}
+
 .resources-block a {
   color: var(--accent);
   text-decoration: none;
