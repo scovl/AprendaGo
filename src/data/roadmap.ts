@@ -14,6 +14,7 @@ import {
   implementacoesModule,
   toolingModule,
   deployModule,
+  opensourceModule,
 } from './modules';
 
 export const roadmapModules: Module[] = [
@@ -31,4 +32,5 @@ export const roadmapModules: Module[] = [
   implementacoesModule,
   toolingModule,
   deployModule,
+  opensourceModule,
 ];

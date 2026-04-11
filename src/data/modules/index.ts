@@ -12,3 +12,4 @@ export { cleanArchModule } from './clean-arch';
 export { implementacoesModule } from './implementacoes';
 export { toolingModule } from './tooling';
 export { deployModule } from './deploy';
+export { opensourceModule } from './opensource';
