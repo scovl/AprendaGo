@@ -1,38 +1,38 @@
-import { Module } from '../../types';
+﻿import { Module } from '../../types';
 
 export const opensourceModule: Module = {
   id: 'opensource',
   title: 'Colaborando com Open Source',
-  description: 'Encontre projetos Go, faça sua primeira contribuição e construa reputação na comunidade.',
+  description: 'Encontre projetos Go, faÃ§a sua primeira contribuiÃ§Ã£o e construa reputaÃ§Ã£o na comunidade.',
   icon: 'GitMerge',
   color: '#27AE60',
   lessons: [
     {
       id: 'opensource-encontrando-projetos',
       title: 'Encontrando projetos para contribuir',
-      description: 'CodeTriage, GitHub Trending, busca por estrelas e atividade de repositórios.',
+      description: 'CodeTriage, GitHub Trending, busca por estrelas e atividade de repositÃ³rios.',
       estimatedMinutes: 35,
       vesa: {
         visaoGeral: {
-          explicacao: `Contribuir com open source é uma das formas mais eficazes de evoluir como desenvolvedor Go. O desafio inicial é **encontrar o projeto certo** — não muito complexo para começar, mas ativo o suficiente para valer a pena.
+          explicacao: `Contribuir com open source Ã© uma das formas mais eficazes de evoluir como desenvolvedor Go. O desafio inicial Ã© **encontrar o projeto certo** â€” nÃ£o muito complexo para comeÃ§ar, mas ativo o suficiente para valer a pena.
 
 **CodeTriage (codetriage.com)**
-Agrega issues de repositórios no GitHub e envia uma por dia por e-mail. Você se inscreve em projetos Go e recebe issues curadas no ritmo que preferir. Ideal para quem quer começar devagar.
+Agrega issues de repositÃ³rios no GitHub e envia uma por dia por e-mail. VocÃª se inscreve em projetos Go e recebe issues curadas no ritmo que preferir. Ideal para quem quer comeÃ§ar devagar.
 
 **GitHub Trending**  
-Acesse \`github.com/trending/go\` para ver os repositórios Go mais populares da semana/mês. Filtre por linguagem, período e veja quais projetos estão crescendo agora.
+Acesse \`github.com/trending/go\` para ver os repositÃ³rios Go mais populares da semana/mÃªs. Filtre por linguagem, perÃ­odo e veja quais projetos estÃ£o crescendo agora.
 
-**Filtros úteis na busca do GitHub**
-Use a busca avançada para encontrar projetos com o perfil certo:
+**Filtros Ãºteis na busca do GitHub**
+Use a busca avanÃ§ada para encontrar projetos com o perfil certo:
 \`\`\`
 language:Go stars:>500 pushed:>2024-01-01
 \`\`\`
-- \`stars:>500\` — comunidade estabelecida  
-- \`pushed:>2024-01-01\` — repositório ativo recentemente  
-- \`forks:>50\` — muitos colaboradores  
-- \`good-first-issues:>3\` — curadoria de issues para iniciantes`,
-          codeExample: `// Exemplo: usando a API do GitHub para listar repositórios Go populares
-// (útil para criar sua própria ferramenta de busca)
+- \`stars:>500\` â€” comunidade estabelecida  
+- \`pushed:>2024-01-01\` â€” repositÃ³rio ativo recentemente  
+- \`forks:>50\` â€” muitos colaboradores  
+- \`good-first-issues:>3\` â€” curadoria de issues para iniciantes`,
+          codeExample: `// Exemplo: usando a API do GitHub para listar repositÃ³rios Go populares
+// (Ãºtil para criar sua prÃ³pria ferramenta de busca)
 
 package main
 
@@ -85,7 +85,7 @@ func main() {
 		return
 	}
 	for _, r := range repos {
-		fmt.Printf("%-40s ⭐ %d  🍴 %d  🐛 %d\\n",
+		fmt.Printf("%-40s â­ %d  ðŸ´ %d  ðŸ› %d\\n",
 			r.FullName, r.StargazersCount, r.ForksCount, r.OpenIssuesCount)
 	}
 }`,
@@ -98,33 +98,33 @@ func main() {
           ],
         },
         experimentacao: {
-          desafio: 'Use a API do GitHub para criar um buscador de repositórios Go com boas issues para iniciantes. Exiba nome, estrelas, forks e número de issues abertas. Filtre apenas repos com push nos últimos 3 meses.',
+          desafio: 'Use a API do GitHub para criar um buscador de repositÃ³rios Go com boas issues para iniciantes. Exiba nome, estrelas, forks e nÃºmero de issues abertas. Filtre apenas repos com push nos Ãºltimos 3 meses.',
           dicas: [
             'Query: "good-first-issues:>3 language:Go pushed:>2024-01-01"',
             'Header "Accept: application/vnd.github.v3+json" para a API',
-            'Rate limit: 60 req/h sem autenticação; use GITHUB_TOKEN no header para 5000/h',
-            'Campo "open_issues_count" inclui PRs abertos — considere isso',
+            'Rate limit: 60 req/h sem autenticaÃ§Ã£o; use GITHUB_TOKEN no header para 5000/h',
+            'Campo "open_issues_count" inclui PRs abertos â€” considere isso',
           ],
         },
         socializacao: {
-          discussao: 'Qual é o critério mais importante ao escolher um projeto para contribuir? Popularidade, atividade, linguagem ou impacto?',
+          discussao: 'Qual Ã© o critÃ©rio mais importante ao escolher um projeto para contribuir? Popularidade, atividade, linguagem ou impacto?',
           pontos: [
-            'Projetos com > 100 estrelas geralmente têm mais revisores disponíveis',
-            'Atividade recente (último push < 30 dias) indica mantenedores engajados',
-            'Projetos menores aceitam contribuições mais facilmente que os gigantes',
-            'Verifique o CONTRIBUTING.md: indica maturidade do processo de contribuição',
+            'Projetos com > 100 estrelas geralmente tÃªm mais revisores disponÃ­veis',
+            'Atividade recente (Ãºltimo push < 30 dias) indica mantenedores engajados',
+            'Projetos menores aceitam contribuiÃ§Ãµes mais facilmente que os gigantes',
+            'Verifique o CONTRIBUTING.md: indica maturidade do processo de contribuiÃ§Ã£o',
           ],
-          diasDesafio: 'Bônus — Semana de Open Source',
+          diasDesafio: 'BÃ´nus â€” Semana de Open Source',
           sugestaoBlog: 'Como encontrei meu primeiro projeto Go para contribuir (e o que aprendi)',
           hashtagsExtras: '#golang #opensource #github #goodfirstissue',
         },
         aplicacao: {
-          projeto: 'CLI de descoberta de projetos Go open source com filtros configuráveis.',
+          projeto: 'CLI de descoberta de projetos Go open source com filtros configurÃ¡veis.',
           requisitos: [
             'Busca por linguagem Go via GitHub API',
-            'Filtros: mínimo de estrelas, data de último push, issues abertas',
-            'Saída formatada com tabela (nome, ⭐, 🍴, issues)',
-            'Flag --token para autenticação e rate limit maior',
+            'Filtros: mÃ­nimo de estrelas, data de Ãºltimo push, issues abertas',
+            'SaÃ­da formatada com tabela (nome, â­, ðŸ´, issues)',
+            'Flag --token para autenticaÃ§Ã£o e rate limit maior',
           ],
           criterios: [
             'Busca funcional e resultados relevantes',
@@ -143,7 +143,7 @@ import (
 )
 
 func main() {
-	minStars := flag.Int("stars", 100, "mínimo de estrelas")
+	minStars := flag.Int("stars", 100, "mÃ­nimo de estrelas")
 	token := flag.String("token", "", "GitHub personal access token")
 	flag.Parse()
 
@@ -154,7 +154,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Printf("%-45s %6s  %5s  %6s\\n", "REPOSITÓRIO", "⭐", "🍴", "ISSUES")
+	fmt.Printf("%-45s %6s  %5s  %6s\\n", "REPOSITÃ“RIO", "â­", "ðŸ´", "ISSUES")
 	fmt.Println(repeated("-", 70))
 	for _, r := range repos {
 		fmt.Printf("%-45s %6d  %5d  %6d\\n",
@@ -236,7 +236,7 @@ func (c *GitHubClient) SearchGoRepos(minStars int) ([]Repo, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode == http.StatusForbidden {
-		return nil, fmt.Errorf("rate limit atingido — use --token para aumentar o limite")
+		return nil, fmt.Errorf("rate limit atingido â€” use --token para aumentar o limite")
 	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("GitHub API respondeu %d", resp.StatusCode)
@@ -266,7 +266,7 @@ func TestNewGitHubClient(t *testing.T) {
 		t.Errorf("token incorreto: got %q, want %q", c.token, "mytoken")
 	}
 	if c.client == nil {
-		t.Error("http.Client não inicializado")
+		t.Error("http.Client nÃ£o inicializado")
 	}
 }
 
@@ -291,32 +291,32 @@ func TestRepeated(t *testing.T) {
       estimatedMinutes: 30,
       vesa: {
         visaoGeral: {
-          explicacao: `O sistema de labels do GitHub é o mapa de contribuição de um projeto. Saber ler as labels certas economiza horas de busca.
+          explicacao: `O sistema de labels do GitHub Ã© o mapa de contribuiÃ§Ã£o de um projeto. Saber ler as labels certas economiza horas de busca.
 
 **Labels essenciais para contribuidores novos**
 
 | Label | Significado |
 |-------|-------------|
-| \`good first issue\` | Issue explicitamente marcada pelos mantenedores como acessível |
+| \`good first issue\` | Issue explicitamente marcada pelos mantenedores como acessÃ­vel |
 | \`help wanted\` | Mantenedores precisam de ajuda, mas pode exigir contexto |
-| \`bug\` | Comportamento incorreto — geralmente bem descrito |
-| \`documentation\` | Melhorias em docs — ótima entrada sem precisar de domínio do código |
+| \`bug\` | Comportamento incorreto â€” geralmente bem descrito |
+| \`documentation\` | Melhorias em docs â€” Ã³tima entrada sem precisar de domÃ­nio do cÃ³digo |
 | \`beginner friendly\` | Alias de good first issue em muitos projetos |
 
 **Como avaliar uma issue antes de trabalhar nela**
-1. **Está atribuída?** Se sim, alguém já está trabalhando — pergunte antes de duplicar esforço
-2. **Tem contexto suficiente?** Steps to reproduce, versão Go, OS — issues mal descritas rendem PRs errados
-3. **Qual a última atividade?** Issues sem resposta há > 6 meses podem estar abandonadas
-4. **Existe uma PR aberta?** Verifique "Linked pull requests" — não refaça o que já está em revisão
+1. **EstÃ¡ atribuÃ­da?** Se sim, alguÃ©m jÃ¡ estÃ¡ trabalhando â€” pergunte antes de duplicar esforÃ§o
+2. **Tem contexto suficiente?** Steps to reproduce, versÃ£o Go, OS â€” issues mal descritas rendem PRs errados
+3. **Qual a Ãºltima atividade?** Issues sem resposta hÃ¡ > 6 meses podem estar abandonadas
+4. **Existe uma PR aberta?** Verifique "Linked pull requests" â€” nÃ£o refaÃ§a o que jÃ¡ estÃ¡ em revisÃ£o
 
-**Busca avançada de issues no GitHub**
+**Busca avanÃ§ada de issues no GitHub**
 \`\`\`
 is:open is:issue label:"good first issue" language:Go no:assignee
 \`\`\`
-- \`no:assignee\` — sem responsável, disponível para você
-- \`is:open\` — ainda não resolvida
-- \`updated:>2024-01-01\` — ativa recentemente`,
-          codeExample: `// Ferramenta para listar "good first issues" de um repositório
+- \`no:assignee\` â€” sem responsÃ¡vel, disponÃ­vel para vocÃª
+- \`is:open\` â€” ainda nÃ£o resolvida
+- \`updated:>2024-01-01\` â€” ativa recentemente`,
+          codeExample: `// Ferramenta para listar "good first issues" de um repositÃ³rio
 package main
 
 import (
@@ -375,7 +375,7 @@ func main() {
 		for _, issue := range issues {
 			assigned := "livre"
 			if issue.Assignee != nil {
-				assigned = "atribuída"
+				assigned = "atribuÃ­da"
 			}
 			fmt.Printf("  #%d [%s] %s\\n", issue.Number, assigned, issue.Title)
 		}
@@ -389,38 +389,38 @@ func main() {
           ],
         },
         experimentacao: {
-          desafio: 'Escreva um programa que recebe `owner/repo` como argumento e lista todas as issues abertas com label "good first issue" que ainda não estão atribuídas. Para cada issue mostre: número, título, dias sem atualização e link.',
+          desafio: 'Escreva um programa que recebe `owner/repo` como argumento e lista todas as issues abertas com label "good first issue" que ainda nÃ£o estÃ£o atribuÃ­das. Para cada issue mostre: nÃºmero, tÃ­tulo, dias sem atualizaÃ§Ã£o e link.',
           dicas: [
             'Use time.Since(issue.UpdatedAt).Hours()/24 para calcular dias',
-            'issue.Assignee == nil indica que está livre',
-            'Adicione flag --label para tornar a label configurável',
-            'Trate paginação: GitHub retorna máximo 100 por página',
+            'issue.Assignee == nil indica que estÃ¡ livre',
+            'Adicione flag --label para tornar a label configurÃ¡vel',
+            'Trate paginaÃ§Ã£o: GitHub retorna mÃ¡ximo 100 por pÃ¡gina',
           ],
         },
         socializacao: {
-          discussao: 'Você abriria uma issue para reportar um bug mesmo sabendo que pode não ter tempo de corrigi-la? Como a comunidade trata isso?',
+          discussao: 'VocÃª abriria uma issue para reportar um bug mesmo sabendo que pode nÃ£o ter tempo de corrigi-la? Como a comunidade trata isso?',
           pontos: [
-            'Reportar bugs sem PR já é uma contribuição válida',
-            'Issues bem escritas (steps to reproduce + versão + OS) valem ouro',
+            'Reportar bugs sem PR jÃ¡ Ã© uma contribuiÃ§Ã£o vÃ¡lida',
+            'Issues bem escritas (steps to reproduce + versÃ£o + OS) valem ouro',
             'Mantenedores agradecem mais uma issue clara do que um PR mal explicado',
-            'Comentar "Estou trabalhando nisso" antes de abrir um PR é etiqueta básica',
+            'Comentar "Estou trabalhando nisso" antes de abrir um PR Ã© etiqueta bÃ¡sica',
           ],
-          diasDesafio: 'Bônus — Semana de Open Source',
-          sugestaoBlog: 'good first issue: como ler, escolher e não desperdiçar o tempo de ninguém',
+          diasDesafio: 'BÃ´nus â€” Semana de Open Source',
+          sugestaoBlog: 'good first issue: como ler, escolher e nÃ£o desperdiÃ§ar o tempo de ninguÃ©m',
           hashtagsExtras: '#opensource #golang #github #goodfirstissue',
         },
         aplicacao: {
-          projeto: 'Monitor de issues: acompanha múltiplos repositórios e notifica novas good-first-issues.',
+          projeto: 'Monitor de issues: acompanha mÃºltiplos repositÃ³rios e notifica novas good-first-issues.',
           requisitos: [
-            'Lista configurável de repositórios (arquivo JSON ou flags)',
-            'Detecta issues novas desde a última execução (persiste estado em arquivo)',
+            'Lista configurÃ¡vel de repositÃ³rios (arquivo JSON ou flags)',
+            'Detecta issues novas desde a Ãºltima execuÃ§Ã£o (persiste estado em arquivo)',
             'Filtra issues sem assignee',
-            'Exibe resumo: repo, número, título, dias aberta',
+            'Exibe resumo: repo, nÃºmero, tÃ­tulo, dias aberta',
           ],
           criterios: [
-            'Persistência entre execuções funcionando',
+            'PersistÃªncia entre execuÃ§Ãµes funcionando',
             'Sem duplicatas na listagem',
-            'Testes para a lógica de filtragem e deduplicação',
+            'Testes para a lÃ³gica de filtragem e deduplicaÃ§Ã£o',
           ],
           labFiles: [
             {
@@ -485,7 +485,7 @@ func main() {
 			newState.Seen[key] = true
 			if !state.Seen[key] {
 				days := math.Round(time.Since(issue.UpdatedAt).Hours() / 24)
-				fmt.Printf("[NOVA] %s #%d (%.0fd) — %s\\n",
+				fmt.Printf("[NOVA] %s #%d (%.0fd) â€” %s\\n",
 					repo, issue.Number, days, issue.Title)
 				fmt.Printf("       %s\\n\\n", issue.HTMLURL)
 			}
@@ -577,7 +577,7 @@ func TestLoadState_Empty(t *testing.T) {
 	os.Remove(stateFile)
 	s := loadState()
 	if s.Seen == nil {
-		t.Error("Seen deve ser mapa inicializado, não nil")
+		t.Error("Seen deve ser mapa inicializado, nÃ£o nil")
 	}
 	if len(s.Seen) != 0 {
 		t.Errorf("esperado mapa vazio, got %d entradas", len(s.Seen))
@@ -611,21 +611,21 @@ func TestSaveAndLoadState(t *testing.T) {
     },
     {
       id: 'opensource-primeira-contribuicao',
-      title: 'Sua primeira contribuição',
-      description: 'Fork, branch, commit semântico, PR e o ciclo completo de contribuição.',
+      title: 'Sua primeira contribuiÃ§Ã£o',
+      description: 'Fork, branch, commit semÃ¢ntico, PR e o ciclo completo de contribuiÃ§Ã£o.',
       estimatedMinutes: 40,
       vesa: {
         visaoGeral: {
-          explicacao: `Fazer uma contribuição não é apenas escrever código — é um processo de comunicação. Projetos com centenas de contribuidores precisam de padrões para funcionar.
+          explicacao: `Fazer uma contribuiÃ§Ã£o nÃ£o Ã© apenas escrever cÃ³digo â€” Ã© um processo de comunicaÃ§Ã£o. Projetos com centenas de contribuidores precisam de padrÃµes para funcionar.
 
-**O ciclo de uma contribuição**
+**O ciclo de uma contribuiÃ§Ã£o**
 \`\`\`
-1. Fork  →  2. Clone  →  3. Branch  →  4. Código  →  5. Tests  →  6. PR
+1. Fork  â†’  2. Clone  â†’  3. Branch  â†’  4. CÃ³digo  â†’  5. Tests  â†’  6. PR
 \`\`\`
 
 **1. Fork e setup local**
 \`\`\`bash
-# Fork no GitHub (botão Fork na página do repo)
+# Fork no GitHub (botÃ£o Fork na pÃ¡gina do repo)
 git clone https://github.com/SEU_USUARIO/PROJETO.git
 cd PROJETO
 git remote add upstream https://github.com/DONO/PROJETO.git
@@ -635,10 +635,10 @@ git fetch upstream
 **2. Branch descritivo**
 \`\`\`bash
 git checkout -b fix/json-decoder-nil-check
-# Padrões comuns: fix/, feat/, docs/, refactor/, test/
+# PadrÃµes comuns: fix/, feat/, docs/, refactor/, test/
 \`\`\`
 
-**3. Commit semântico**
+**3. Commit semÃ¢ntico**
 \`\`\`
 feat: add timeout to HTTP client
 fix: handle nil pointer in JSON decoder
@@ -658,9 +658,9 @@ git rebase upstream/main
 - [ ] Leu o CONTRIBUTING.md do projeto?
 - [ ] Rodou \`go test ./...\`?
 - [ ] Rodou \`go vet ./...\` e \`gofmt\`?
-- [ ] A descrição do PR explica *por que*, não só *o que*?
-- [ ] Está linkado à issue com "Fixes #123"?`,
-          codeExample: `// Exemplo de um bom script de setup para contribuição
+- [ ] A descriÃ§Ã£o do PR explica *por que*, nÃ£o sÃ³ *o que*?
+- [ ] EstÃ¡ linkado Ã  issue com "Fixes #123"?`,
+          codeExample: `// Exemplo de um bom script de setup para contribuiÃ§Ã£o
 // Salve como setup-contrib.sh e execute: bash setup-contrib.sh owner/repo
 
 package main
@@ -702,7 +702,7 @@ func main() {
 			url := fmt.Sprintf("https://github.com/%s/%s.git", yourUser, repoName)
 			return run("git", "clone", url)
 		}},
-		{"Entrar no diretório", func() error {
+		{"Entrar no diretÃ³rio", func() error {
 			return os.Chdir(repoName)
 		}},
 		{"Adicionar upstream", func() error {
@@ -725,8 +725,8 @@ func main() {
 		}
 	}
 
-	fmt.Println("\\n✓ Pronto para contribuir!")
-	fmt.Println("Próximo passo: git checkout -b fix/sua-correção")
+	fmt.Println("\\nâœ“ Pronto para contribuir!")
+	fmt.Println("PrÃ³ximo passo: git checkout -b fix/sua-correÃ§Ã£o")
 }`,
           recursos: [
             'https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project',
@@ -737,38 +737,38 @@ func main() {
           ],
         },
         experimentacao: {
-          desafio: 'Simule o fluxo completo de contribuição: crie um repositório público próprio no GitHub, abra uma issue, faça um fork (de outro usuário fictício), implemente a correção num branch descritivo e abra um PR linkando à issue com "Fixes #1".',
+          desafio: 'Simule o fluxo completo de contribuiÃ§Ã£o: crie um repositÃ³rio pÃºblico prÃ³prio no GitHub, abra uma issue, faÃ§a um fork (de outro usuÃ¡rio fictÃ­cio), implemente a correÃ§Ã£o num branch descritivo e abra um PR linkando Ã  issue com "Fixes #1".',
           dicas: [
-            'git log --oneline para ver o histórico limpo',
+            'git log --oneline para ver o histÃ³rico limpo',
             'git rebase -i HEAD~3 para squash de commits antes do PR',
             'gh pr create --fill se usar o GitHub CLI',
             'Teste com go test ./... antes de abrir o PR',
           ],
         },
         socializacao: {
-          discussao: 'Qual é a parte mais difícil de fazer um PR ser aprovado: o código, a comunicação ou o timing?',
+          discussao: 'Qual Ã© a parte mais difÃ­cil de fazer um PR ser aprovado: o cÃ³digo, a comunicaÃ§Ã£o ou o timing?',
           pontos: [
-            'PRs pequenos e focados têm 3x mais chance de serem aceitos',
-            'Comentários em código alheio devem ser perguntas, não críticas',
-            'Nunca misture refactoring com feature em um único PR',
-            'Responda reviews em até 48h para não perder momentum',
+            'PRs pequenos e focados tÃªm 3x mais chance de serem aceitos',
+            'ComentÃ¡rios em cÃ³digo alheio devem ser perguntas, nÃ£o crÃ­ticas',
+            'Nunca misture refactoring com feature em um Ãºnico PR',
+            'Responda reviews em atÃ© 48h para nÃ£o perder momentum',
           ],
-          diasDesafio: 'Bônus — Semana de Open Source',
-          sugestaoBlog: 'Meu primeiro PR aceito em um projeto Go: o que aprendi sobre comunicação técnica',
+          diasDesafio: 'BÃ´nus â€” Semana de Open Source',
+          sugestaoBlog: 'Meu primeiro PR aceito em um projeto Go: o que aprendi sobre comunicaÃ§Ã£o tÃ©cnica',
           hashtagsExtras: '#golang #opensource #github #pullrequest #commit',
         },
         aplicacao: {
-          projeto: 'Ferramenta de checklist pré-PR: verifica boas práticas antes de submeter contribuição.',
+          projeto: 'Ferramenta de checklist prÃ©-PR: verifica boas prÃ¡ticas antes de submeter contribuiÃ§Ã£o.',
           requisitos: [
-            'Verifica se há CONTRIBUTING.md no repositório atual',
+            'Verifica se hÃ¡ CONTRIBUTING.md no repositÃ³rio atual',
             'Roda go test ./... e reporta falhas',
             'Roda go vet ./... e gofmt -l .',
-            'Lista arquivos modificados e pede confirmação antes de push',
+            'Lista arquivos modificados e pede confirmaÃ§Ã£o antes de push',
           ],
           criterios: [
-            'Checks executam em sequência com output claro',
-            'Saída com ✓/✗ por verificação',
-            'Exit code não-zero se algum check falhar',
+            'Checks executam em sequÃªncia com output claro',
+            'SaÃ­da com âœ“/âœ— por verificaÃ§Ã£o',
+            'Exit code nÃ£o-zero se algum check falhar',
           ],
           labFiles: [
             {
@@ -799,9 +799,9 @@ func main() {
 			Run: func() (string, error) {
 				_, err := os.Stat(filepath.Join(".", "CONTRIBUTING.md"))
 				if os.IsNotExist(err) {
-					return "não encontrado (não é bloqueante)", nil
+					return "nÃ£o encontrado (nÃ£o Ã© bloqueante)", nil
 				}
-				return "encontrado ✓", err
+				return "encontrado âœ“", err
 			},
 		},
 		{
@@ -815,9 +815,9 @@ func main() {
 			Run: func() (string, error) {
 				out, err := runCmd("gofmt", "-l", ".")
 				if out != "" {
-					return out, fmt.Errorf("arquivos não formatados: %s", out)
+					return out, fmt.Errorf("arquivos nÃ£o formatados: %s", out)
 				}
-				return "todos formatados ✓", err
+				return "todos formatados âœ“", err
 			},
 		},
 		{
@@ -832,11 +832,11 @@ func main() {
 	for _, c := range checks {
 		out, err := c.Run()
 		if err != nil {
-			fmt.Printf("✗  %s\\n   %s\\n", c.Name, out)
+			fmt.Printf("âœ—  %s\\n   %s\\n", c.Name, out)
 			failed++
 		} else {
-			fmt.Printf("✓  %s\\n", c.Name)
-			if out != "" && out != "todos formatados ✓" && out != "encontrado ✓" && out != "não encontrado (não é bloqueante)" {
+			fmt.Printf("âœ“  %s\\n", c.Name)
+			if out != "" && out != "todos formatados âœ“" && out != "encontrado âœ“" && out != "nÃ£o encontrado (nÃ£o Ã© bloqueante)" {
 				fmt.Printf("   %s\\n", out)
 			}
 			passed++
@@ -864,7 +864,7 @@ func TestRunCmd_Success(t *testing.T) {
 		t.Fatalf("go version falhou: %v", err)
 	}
 	if out == "" {
-		t.Error("esperava output não vazio de 'go version'")
+		t.Error("esperava output nÃ£o vazio de 'go version'")
 	}
 }
 
@@ -876,10 +876,10 @@ func TestRunCmd_Failure(t *testing.T) {
 }
 
 func TestContributingMdCheck(t *testing.T) {
-	// Cria CONTRIBUTING.md temporário
+	// Cria CONTRIBUTING.md temporÃ¡rio
 	f, err := os.CreateTemp(".", "CONTRIBUTING-*.md")
 	if err != nil {
-		t.Skip("não foi possível criar arquivo temporário")
+		t.Skip("nÃ£o foi possÃ­vel criar arquivo temporÃ¡rio")
 	}
 	name := f.Name()
 	f.Close()
@@ -901,52 +901,52 @@ func TestContributingMdCheck(t *testing.T) {
     },
     {
       id: 'opensource-comunicacao',
-      title: 'Comunicação e etiqueta em projetos',
-      description: 'Como interagir com mantenedores, responder reviews e construir reputação.',
+      title: 'ComunicaÃ§Ã£o e etiqueta em projetos',
+      description: 'Como interagir com mantenedores, responder reviews e construir reputaÃ§Ã£o.',
       estimatedMinutes: 25,
       vesa: {
         visaoGeral: {
-          explicacao: `Open source é 50% código, 50% comunicação. Mantenedores voluntários têm tempo limitado — respeitar isso é a diferença entre um PR aceito e ignorado.
+          explicacao: `Open source Ã© 50% cÃ³digo, 50% comunicaÃ§Ã£o. Mantenedores voluntÃ¡rios tÃªm tempo limitado â€” respeitar isso Ã© a diferenÃ§a entre um PR aceito e ignorado.
 
 **Antes de abrir uma issue**
-1. Pesquise issues fechadas — o problema pode já ter sido resolvido
+1. Pesquise issues fechadas â€” o problema pode jÃ¡ ter sido resolvido
 2. Leia o CONTRIBUTING.md e o CODE_OF_CONDUCT.md
-3. Reproduza o bug com a versão mais recente do projeto
-4. Inclua: versão Go, OS, steps to reproduce, output esperado vs obtido
+3. Reproduza o bug com a versÃ£o mais recente do projeto
+4. Inclua: versÃ£o Go, OS, steps to reproduce, output esperado vs obtido
 
 **Template de issue bem escrita**
 \`\`\`markdown
-## Descrição
+## DescriÃ§Ã£o
 Ao decodificar JSON com campo nulo, o decoder entra em panic.
 
-## Versão
+## VersÃ£o
 Go 1.22.1 / macOS 14.3 / lib v2.1.0
 
 ## Como reproduzir
 \`\`\`go
-// código mínimo que reproduz o problema
+// cÃ³digo mÃ­nimo que reproduz o problema
 \`\`\`
 
 ## Comportamento esperado
-Retornar error, não panic.
+Retornar error, nÃ£o panic.
 
 ## Comportamento atual
 panic: runtime error: invalid memory address
 \`\`\`
 
 **Respondendo code review**
-- "Faz sentido, vou corrigir" — não discuta each comment como batalha
-- "Não entendi — pode dar um exemplo?" — pedir clareza é profissional
-- Nunca force push após alguém ter comentado — use novo commit e squash depois
-- Marque cada comentário como "resolved" após endereçar
+- "Faz sentido, vou corrigir" â€” nÃ£o discuta each comment como batalha
+- "NÃ£o entendi â€” pode dar um exemplo?" â€” pedir clareza Ã© profissional
+- Nunca force push apÃ³s alguÃ©m ter comentado â€” use novo commit e squash depois
+- Marque cada comentÃ¡rio como "resolved" apÃ³s endereÃ§ar
 
-**Construindo reputação gradualmente**
-1. Primeiro: corrija documentação, typos, exemplos de código
+**Construindo reputaÃ§Ã£o gradualmente**
+1. Primeiro: corrija documentaÃ§Ã£o, typos, exemplos de cÃ³digo
 2. Depois: pequenos bug fixes com testes
-3. Então: features pequenas discutidas antes na issue
+3. EntÃ£o: features pequenas discutidas antes na issue
 4. Por fim: features maiores, refactoring com consensus`,
           codeExample: `// Ferramenta para gerar template de issue automaticamente
-// com informações do ambiente Go
+// com informaÃ§Ãµes do ambiente Go
 
 package main
 
@@ -966,7 +966,7 @@ type IssueInfo struct {
 	GoPath    string
 }
 
-const issueTemplate = \`## Descrição
+const issueTemplate = \`## DescriÃ§Ã£o
 <!-- Explique o problema em 1-2 frases -->
 
 ## Ambiente
@@ -975,7 +975,7 @@ const issueTemplate = \`## Descrição
 
 ## Como reproduzir
 \\\`\\\`\\\`go
-// Código mínimo que reproduz o problema
+// CÃ³digo mÃ­nimo que reproduz o problema
 package main
 
 func main() {
@@ -990,7 +990,7 @@ func main() {
 <!-- O que acontece de fato, incluindo mensagens de erro -->
 
 ## Contexto adicional
-<!-- Versão do pacote, links relevantes, etc -->
+<!-- VersÃ£o do pacote, links relevantes, etc -->
 \`
 
 func goVersion() string {
@@ -1022,38 +1022,38 @@ func main() {
           ],
         },
         experimentacao: {
-          desafio: 'Escreva um gerador de template de issue que lê o arquivo ISSUE_TEMPLATE do repositório (se existir) ou usa um template padrão, e preenche automaticamente versão do Go, OS e GOARCH do ambiente atual.',
+          desafio: 'Escreva um gerador de template de issue que lÃª o arquivo ISSUE_TEMPLATE do repositÃ³rio (se existir) ou usa um template padrÃ£o, e preenche automaticamente versÃ£o do Go, OS e GOARCH do ambiente atual.',
           dicas: [
-            'exec.Command("go", "version").Output() retorna a versão completa',
-            'runtime.GOOS e runtime.GOARCH têm o sistema operacional e arquitetura',
+            'exec.Command("go", "version").Output() retorna a versÃ£o completa',
+            'runtime.GOOS e runtime.GOARCH tÃªm o sistema operacional e arquitetura',
             'text/template aceita qualquer struct como dado',
-            'Busque .github/ISSUE_TEMPLATE/ no diretório atual',
+            'Busque .github/ISSUE_TEMPLATE/ no diretÃ³rio atual',
           ],
         },
         socializacao: {
-          discussao: 'Você já recusaria contribuir com um projeto por achar o processo de review muito rígido? Ou isso te forçaria a melhorar?',
+          discussao: 'VocÃª jÃ¡ recusaria contribuir com um projeto por achar o processo de review muito rÃ­gido? Ou isso te forÃ§aria a melhorar?',
           pontos: [
-            'Projetos grandes (K8s, Go stdlib) têm processos rígidos — é necessário, não elitismo',
-            'Um mantenedor que rejeita PRs com explicação clara é mais valioso que um que ignora',
-            'Contribuições de documentação são frequentemente mais impactantes que código',
-            'Reputação open source é um ativo de carreira real — apareça no Google',
+            'Projetos grandes (K8s, Go stdlib) tÃªm processos rÃ­gidos â€” Ã© necessÃ¡rio, nÃ£o elitismo',
+            'Um mantenedor que rejeita PRs com explicaÃ§Ã£o clara Ã© mais valioso que um que ignora',
+            'ContribuiÃ§Ãµes de documentaÃ§Ã£o sÃ£o frequentemente mais impactantes que cÃ³digo',
+            'ReputaÃ§Ã£o open source Ã© um ativo de carreira real â€” apareÃ§a no Google',
           ],
-          diasDesafio: 'Bônus — Semana de Open Source',
-          sugestaoBlog: 'O que aprendi sobre comunicação técnica contribuindo para projetos Go',
+          diasDesafio: 'BÃ´nus â€” Semana de Open Source',
+          sugestaoBlog: 'O que aprendi sobre comunicaÃ§Ã£o tÃ©cnica contribuindo para projetos Go',
           hashtagsExtras: '#opensource #golang #developer #community',
         },
         aplicacao: {
-          projeto: 'Gerador de templates para contribuição: issue, PR e CONTRIBUTING.md personalizados.',
+          projeto: 'Gerador de templates para contribuiÃ§Ã£o: issue, PR e CONTRIBUTING.md personalizados.',
           requisitos: [
             'Subcomando "issue" gera template com ambiente preenchido',
             'Subcomando "pr" gera template de Pull Request com checklist',
-            'Subcomando "contributing" gera CONTRIBUTING.md básico para o projeto atual',
+            'Subcomando "contributing" gera CONTRIBUTING.md bÃ¡sico para o projeto atual',
             'Flags para nome do projeto e linguagem',
           ],
           criterios: [
-            'Três subcomandos funcionais',
-            'Templates com variáveis corretamente substituídas',
-            'Saída para stdout ou arquivo via flag --output',
+            'TrÃªs subcomandos funcionais',
+            'Templates com variÃ¡veis corretamente substituÃ­das',
+            'SaÃ­da para stdout ou arquivo via flag --output',
           ],
           labFiles: [
             {
@@ -1073,12 +1073,12 @@ import (
 const prTemplate = \`## O que muda
 <!-- Descreva o que este PR faz em 1-3 frases -->
 
-Fixes #<!-- número da issue -->
+Fixes #<!-- nÃºmero da issue -->
 
-## Tipo de mudança
+## Tipo de mudanÃ§a
 - [ ] Bug fix
 - [ ] Nova feature
-- [ ] Documentação
+- [ ] DocumentaÃ§Ã£o
 - [ ] Refactoring
 
 ## Checklist
@@ -1088,7 +1088,7 @@ Fixes #<!-- número da issue -->
 - [ ] CONTRIBUTING.md consultado
 \`
 
-const issueTemplate = \`## Descrição
+const issueTemplate = \`## DescriÃ§Ã£o
 <!-- Explique o problema -->
 
 ## Ambiente
@@ -1097,7 +1097,7 @@ const issueTemplate = \`## Descrição
 
 ## Como reproduzir
 \\\`\\\`\\\`go
-// código mínimo
+// cÃ³digo mÃ­nimo
 \\\`\\\`\\\`
 
 ## Esperado vs Atual
@@ -1122,7 +1122,7 @@ func currentEnv() Env {
 
 func main() {
 	cmd := ""
-	output := flag.String("output", "", "arquivo de saída (padrão: stdout)")
+	output := flag.String("output", "", "arquivo de saÃ­da (padrÃ£o: stdout)")
 	flag.Parse()
 	if flag.NArg() > 0 {
 		cmd = flag.Arg(0)
@@ -1162,13 +1162,13 @@ import (
 func TestCurrentEnv(t *testing.T) {
 	env := currentEnv()
 	if env.GOOS == "" {
-		t.Error("GOOS não deve ser vazio")
+		t.Error("GOOS nÃ£o deve ser vazio")
 	}
 	if env.GOARCH == "" {
-		t.Error("GOARCH não deve ser vazio")
+		t.Error("GOARCH nÃ£o deve ser vazio")
 	}
 	if env.GoVersion == "" {
-		t.Error("GoVersion não deve ser vazio")
+		t.Error("GoVersion nÃ£o deve ser vazio")
 	}
 }
 
@@ -1187,7 +1187,7 @@ func TestPRTemplateHasChecklist(t *testing.T) {
 		t.Error("PR template deve mencionar go test")
 	}
 	if !strings.Contains(prTemplate, "Fixes #") {
-		t.Error("PR template deve ter campo para número da issue")
+		t.Error("PR template deve ter campo para nÃºmero da issue")
 	}
 }`,
             },

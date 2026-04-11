@@ -1,20 +1,19 @@
-import { Module } from '../../types';
+﻿import { Module } from '../../types';
 
 export const deployModule: Module = {
   id: 'deploy',
   title: 'Deploy',
-  description: 'Docker multistage, cross-compilation, Kubernetes e deploy em produção.',
+  description: 'Docker multistage, cross-compilation, Kubernetes e deploy em produÃ§Ã£o.',
   icon: 'Cloud',
   color: '#3498DB',
   lessons: [
     {
       id: 'deploy-docker-k8s',
       title: 'Docker, Cross-compilation e Kubernetes',
-      description: 'Multistage build, imagens mínimas, cross-comp e Kubernetes manifests.',
+      description: 'Multistage build, imagens mÃ­nimas, cross-comp e Kubernetes manifests.',
       estimatedMinutes: 55,
       vesa: {
         visaoGeral: {
-          explicacao: 'Go compila em binário estático — perfeito para containers. Multistage build: estágio 1 compila com golang:, estágio 2 usa scratch ou distroless (imagem < 20MB). `CGO_ENABLED=0` garante binário estático. Cross-compilation: `GOOS=linux GOARCH=amd64 go build`. Kubernetes orquestra com deployments, services e ingress. Health checks via /health endpoint.',
           codeExample: '# Dockerfile multistage\nFROM golang:1.22 AS builder\nWORKDIR /app\nCOPY go.mod go.sum ./\nRUN go mod download\nCOPY . .\nRUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /server ./cmd/server\n\nFROM scratch\nCOPY --from=builder /server /server\nEXPOSE 8080\nCMD ["/server"]\n\n# Resultado: imagem < 15MB\n\n# Cross-compilation local:\n# GOOS=linux GOARCH=amd64 go build -o server-linux\n# GOOS=darwin GOARCH=arm64 go build -o server-mac\n# GOOS=windows GOARCH=amd64 go build -o server.exe',
           recursos: [
             'https://docs.docker.com/build/building/multi-stage/',
@@ -24,20 +23,20 @@ export const deployModule: Module = {
         experimentacao: {
           desafio: 'Crie Dockerfile multistage para uma API Go, compare tamanho (golang:alpine vs scratch). Depois, crie manifests K8s: Deployment + Service + Ingress.',
           dicas: [
-            '-ldflags="-s -w" reduz tamanho do binário (~30%)',
-            'scratch: mínimo absoluto, sem shell nem ferramentas',
+            '-ldflags="-s -w" reduz tamanho do binÃ¡rio (~30%)',
+            'scratch: mÃ­nimo absoluto, sem shell nem ferramentas',
             'distroless: sem shell mas com certificados TLS',
             'Kubernetes: liveness e readiness probes no /health',
           ],
         },
         socializacao: {
-          discussao: 'Por que Go é tão popular em cloud-native?',
+          discussao: 'Por que Go Ã© tÃ£o popular em cloud-native?',
           pontos: [
-            'Binário estático = imagem Docker tiny',
+            'BinÃ¡rio estÃ¡tico = imagem Docker tiny',
             'Cross-compilation simplifica CI multi-plataforma',
-            'Kubernetes, Docker, Terraform, Prometheus — todos escritos em Go',
+            'Kubernetes, Docker, Terraform, Prometheus â€” todos escritos em Go',
           ],
-          diasDesafio: 'Dias 97–100',
+          diasDesafio: 'Dias 97â€“100',
           sugestaoBlog: 'Deploy Go: Docker multistage, cross-compilation e Kubernetes',
           hashtagsExtras: '#golang #docker #kubernetes #devops',
         },

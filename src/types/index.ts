@@ -2,7 +2,7 @@ export type VesaPhase = 'visaoGeral' | 'experimentacao' | 'socializacao' | 'apli
 
 export interface VesaContent {
   visaoGeral: {
-    explicacao: string;
+    explicacao?: string;
     codeExample?: string;
     recursos: string[];
   };

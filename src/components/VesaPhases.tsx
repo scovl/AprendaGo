@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { VesaPhase, VesaContent, VESA_LABELS } from '../types';
 import { useProgress } from '../context/ProgressContext';
 import { LabEditor, LabEditorFile } from './LabEditor';
+import { getLessonContent } from '../data/content';
 
 interface VesaPhasesProps {
   vesa: VesaContent;
@@ -65,7 +67,7 @@ export function VesaPhases({ vesa, lessonId }: Readonly<VesaPhasesProps>) {
         </div>
 
         {activePhase === 'visaoGeral' && (
-          <VisaoGeralContent content={vesa.visaoGeral} />
+          <VisaoGeralContent content={vesa.visaoGeral} lessonId={lessonId} />
         )}
         {activePhase === 'experimentacao' && (
           <ExperimentacaoContent content={vesa.experimentacao} lessonId={lessonId} />
@@ -107,8 +109,8 @@ function getYouTubeId(url: string): string | null {
   return m ? m[1] : null;
 }
 
-function VisaoGeralContent({ content }: Readonly<{ content: VesaContent['visaoGeral'] }>) {
-  const paragraphs = content.explicacao.split('\n').filter(Boolean);
+function VisaoGeralContent({ content, lessonId }: Readonly<{ content: VesaContent['visaoGeral']; lessonId: string }>) {
+  const markdownContent = getLessonContent(lessonId);
   const youtubeUrls = content.recursos.filter(u => getYouTubeId(u) !== null);
   const linkUrls = content.recursos.filter(u => getYouTubeId(u) === null);
 
@@ -116,7 +118,13 @@ function VisaoGeralContent({ content }: Readonly<{ content: VesaContent['visaoGe
     <div className="phase-content">
       <div className="explanation-block">
         <h4>Explicação</h4>
-        {paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+        {markdownContent ? (
+          <div className="markdown-content">
+            <ReactMarkdown>{markdownContent}</ReactMarkdown>
+          </div>
+        ) : content.explicacao ? (
+          content.explicacao.split('\n').filter(Boolean).map((p, i) => <p key={i}>{p}</p>)
+        ) : null}
       </div>
 
       {youtubeUrls.map((url, i) => {
