@@ -21,6 +21,8 @@ jobs:
           cache: false
       - name: Create sandbox dir
         run: sudo mkdir -p /sandbox && sudo chmod 777 /sandbox
+      - name: Run go vet
+        run: go vet ./...
       - name: Run tests
         env:
           SANDBOX_BASE: /sandbox
