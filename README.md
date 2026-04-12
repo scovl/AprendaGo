@@ -15,6 +15,7 @@ O aprendizado não é passivo: cada lição exige que você escreva e execute c�
 
 - **Playground interativo (Experimentação)** — editor single-file com execução imediata via `/api/run`
 - **Lab multi-arquivo (Aplicação)** — workspace com abas de arquivos, alternância entre `go run` e `go test`, download de arquivos individuais e suporte a TDD
+- **Terminal interativo** — terminal xterm.js embarcado para módulos práticos (ferramentas, deploy, gRPC etc.), conectado via WebSocket a um container Go com projetos pré-configurados por lição
 - **Roadmap visual** — sidebar com progresso por módulo e desbloqueio progressivo de lições
 - **Execução segura** — código roda em sandbox Docker isolado com timeout, limite de memória e controle de concorrência
 - **Progresso persistido** — estado salvo em localStorage, continue de onde parou
@@ -67,19 +68,25 @@ AprendaGo/
 │   │   ├── modules/          # 14 módulos independentes (intro, fundamentos, concorrência…)
 │   │   └── roadmap.ts        # Barrel que exporta todos os módulos como roadmap unificado
 │   ├── components/
-│   │   ├── GoCodeEditor.tsx  # Editor single-file — usado na fase Experimentação
-│   │   ├── LabEditor.tsx     # Workspace multi-arquivo — usado na fase Aplicação
-│   │   ├── VesaPhases.tsx    # Renderiza as 4 fases VESA por lição
-│   │   ├── Sidebar.tsx       # Navegação e progresso por módulo
-│   │   └── RoadmapTree.tsx   # Árvore de lições com desbloqueio progressivo
+│   │   ├── GoCodeEditor.tsx        # Editor single-file — usado na fase Experimentação
+│   │   ├── LabEditor.tsx           # Workspace multi-arquivo — usado na fase Aplicação
+│   │   ├── InteractiveTerminal.tsx # Terminal xterm.js — módulos práticos sem playground
+│   │   ├── VesaPhases.tsx          # Renderiza as 4 fases VESA por lição
+│   │   ├── Sidebar.tsx             # Navegação e progresso por módulo
+│   │   └── RoadmapTree.tsx         # Árvore de lições com desbloqueio progressivo
 │   ├── context/              # Estado global: progresso e acessibilidade
 │   └── types/index.ts        # Interfaces TypeScript (VesaContent, LabEditorFile…)
 ├── runner/
 │   ├── main.go               # HTTP API: POST /run (single-file), POST /lab (multi-file)
 │   └── main_test.go          # 22 testes unitários e de integração
+├── terminal/
+│   ├── main.go               # WebSocket↔PTY relay: conecta xterm.js a bash com Go instalado
+│   ├── setup-workspace.sh    # Cria projetos pré-configurados por lição em ~/workspace/
+│   ├── bashrc                # Configura PATH e cd automático para o diretório da lição
+│   └── Dockerfile            # golang:1.23-alpine com ferramentas Go instaladas (golangci-lint, staticcheck…)
 ├── Dockerfile                # Build multi-stage do frontend (nginx)
 ├── runner/Dockerfile         # Build 3 estágios: testes → compilação → runtime
-└── docker-compose.yml        # 4 serviços: runner, aprenda-go, dev, runner-test
+└── docker-compose.yml        # 5 serviços: runner, terminal, aprenda-go, dev, runner-test
 ```
 
 ### Endpoints do runner
@@ -89,6 +96,7 @@ AprendaGo/
 | `POST /run` | — | Executa um único arquivo Go |
 | `POST /lab` | — | Executa projeto multi-arquivo; suporta `mode: "run"` ou `mode: "test"` |
 | `GET /health` | — | Health check |
+| `GET /api/terminal/ws?lesson=<id>` | WebSocket | Abre sessão PTY com bash+Go; `lesson` define o diretório inicial |
 
 O serviço `runner` executa código do usuário em processo isolado com:
 - Timeout de 10 segundos por execução

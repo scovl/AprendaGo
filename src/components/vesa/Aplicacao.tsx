@@ -1,6 +1,8 @@
 import type { VesaContent } from '../../types';
 import { useProgress } from '../../context/ProgressContext';
 import { LabEditor, type LabEditorFile } from '../LabEditor';
+import { InteractiveTerminal } from './InteractiveTerminal';
+import { TERMINAL_LESSONS } from '../../config/terminalLessons';
 
 // ---------------------------------------------------------------------------
 // Default starter code per lesson (used when no starterCode in frontmatter)
@@ -834,6 +836,8 @@ export function AplicacaoContent({ content, lessonId }: Readonly<{ content: Vesa
   const completed = isLessonCompleted(lessonId);
   const repoSlug = lessonId.replace(/[^a-z0-9]+/g, '-');
 
+  const isTerminal = TERMINAL_LESSONS.has(lessonId);
+
   const starterBody = content.starterCode ?? STARTER_CODES[lessonId] ?? `package main\n\nimport "fmt"\n\nfunc main() {\n\tfmt.Println("Hello, Go!")\n}`;
   const initialFiles: LabEditorFile[] = content.labFiles && content.labFiles.length > 0
     ? content.labFiles
@@ -864,7 +868,11 @@ export function AplicacaoContent({ content, lessonId }: Readonly<{ content: Vesa
         </ul>
       </div>
 
-      <LabEditor initialFiles={initialFiles} projectSlug={repoSlug} />
+      {isTerminal ? (
+        <InteractiveTerminal lessonId={lessonId} />
+      ) : (
+        <LabEditor initialFiles={initialFiles} projectSlug={repoSlug} />
+      )}
 
       {/* GitHub section */}
       <div className="github-section">

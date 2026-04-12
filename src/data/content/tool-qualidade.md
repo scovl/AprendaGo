@@ -7,80 +7,80 @@ recursos:
   - https://golangci-lint.run/
   - https://pkg.go.dev/golang.org/x/vuln/cmd/govulncheck
 experimentacao:
-  desafio: Instale golangci-lint, configure um .golangci.yml e execute em um projeto real. Corrija todos os findings. Execute govulncheck para verificar vulnerabilidades.
+  desafio: O código abaixo está pré-carregado no terminal em ~/workspace/tool-qualidade. Execute golangci-lint run ./... e leia o log — quantos problemas foram encontrados? Qual linter detectou cada um?
   dicas:
-    - "golangci-lint: go install github.com/golangci-lint/golangci-lint/cmd/golangci-lint@latest"
-    - "govulncheck: go install golang.org/x/vuln/cmd/govulncheck@latest"
-    - staticcheck detecta código morto e anti-patterns
+    - "Boa notícia: golangci-lint e staticcheck já estão instalados neste terminal — não precisa instalar nada!"
+    - "Passo 1 → cd ~/workspace/tool-qualidade"
+    - "Passo 2 → golangci-lint run ./...   (atenção: o subcomando é 'run', não esqueça!)"
+    - "Leia o log com atenção: cada linha mostra arquivo:linha:coluna, o nome do linter entre parênteses e a descrição do problema"
+    - "Exemplo de saída: main.go:12:5: S1039: unnecessary use of fmt.Sprintf (staticcheck) — significa: linha 12, problema detectado pelo staticcheck"
+    - "govulncheck precisa de internet para buscar o banco de CVEs — não funciona neste terminal isolado. Em projetos reais, rode no seu computador ou no CI."
   codeTemplate: |
     package main
 
     import (
     	"fmt"
-    	"os/exec"
     	"strings"
     )
 
-    // Makefile de qualidade para projetos Go
-    // Este código demonstra o que cada ferramenta faz
+    // palavras conta as ocorrências de cada palavra numa frase
+    func palavras(s string) map[string]int {
+    	m := make(map[string]int)
+    	for _, w := range strings.Fields(s) {
+    		m[strings.ToLower(w)]++
+    	}
+    	return m
+    }
 
-    func runCmd(name string, args ...string) (string, error) {
-    	out, err := exec.Command(name, args...).CombinedOutput()
-    	return strings.TrimSpace(string(out)), err
+    // soma retorna a soma de uma slice de inteiros
+    func soma(nums []int) int {
+    	var total int
+    	for _, n := range nums {
+    		total = total + n // será que há uma forma mais idiomática?
+    	}
+    	return total
+    }
+
+    // duplicatas retorna o dobro de x se positivo
+    func duplicatas(x int) int {
+    	if x > 0 {
+    		return x * 2
+    	} else { // esse else é necessário aqui?
+    		return 0
+    	}
     }
 
     func main() {
-    	// 1. Formatação — padrão único, zero discussão de estilo
-    	fmt.Println("=== gofmt ===")
-    	out, _ := runCmd("gofmt", "-l", ".")
-    	if out != "" {
-    		fmt.Println("Arquivos não formatados:", out)
-    	} else {
-    		fmt.Println("✓ Tudo formatado")
-    	}
-
-    	// 2. go vet — bugs sutis: printf errado, mutex copiado
-    	fmt.Println("\n=== go vet ===")
-    	out, err := runCmd("go", "vet", "./...")
-    	if err != nil {
-    		fmt.Println("Problemas:", out)
-    	} else {
-    		fmt.Println("✓ Sem problemas")
-    	}
-
-    	// 3. staticcheck — análise avançada
-    	fmt.Println("\n=== staticcheck ===")
-    	out, _ = runCmd("staticcheck", "./...")
-    	if out != "" {
-    		fmt.Println(out)
-    	} else {
-    		fmt.Println("✓ Código limpo")
-    	}
-
-    	// 4. go test com race detector
-    	fmt.Println("\n=== testes + race ===")
-    	out, err = runCmd("go", "test", "-race", "-count=1", "./...")
-    	fmt.Println(out)
-
-    	// 5. govulncheck — vulnerabilidades
-    	fmt.Println("\n=== govulncheck ===")
-    	out, _ = runCmd("govulncheck", "./...")
-    	fmt.Println(out)
+    	fmt.Println(palavras("go é incrível go é rápido"))
+    	fmt.Println(soma([]int{1, 2, 3, 4, 5}))
+    	fmt.Println(duplicatas(10))
     }
   notaPos: |
-    #### O que aconteceu nesse código?
+    #### O que o golangci-lint encontrou nesse código?
 
-    **`gofmt`** — formata código com o padrão único do Go. Sem opções de estilo, sem debates. `gofmt -w .` formata in-place. `goimports` faz o mesmo + organiza imports (remove não usados, adiciona faltantes). **Use `goimports` sempre** — ele inclui `gofmt`.
+    O código compila e roda sem erros — mas o golangci-lint encontra dois problemas:
 
-    **`go vet`** — análise estática builtin. Detecta: printf com args errados (`%d` com string), struct tags inválidas, mutex copiado (race condition silenciosa), unreachable code, erros em `//go:build` tags. É rápido e **zero falso positivos** — sempre confie no `vet`.
+    **Problema 1 — `gocritic`:**
+    ```
+    main.go:21:3: assignment can be simplified to `total += n` (gocritic)
+    ```
+    `total = total + n` pode ser `total += n`. Não é bug — é estilo não idiomático. Em Go, o padrão é usar os operadores compostos (`+=`, `-=`, etc.).
 
-    **`golangci-lint`** — meta-linter que roda 100+ linters em paralelo. Configure `.golangci.yml` para escolher quais ativar. Linters mais úteis: `staticcheck` (bugs), `errcheck` (errors ignorados), `gosec` (segurança), `revive` (style). **Padrão de mercado** para CI.
+    **Problema 2 — `staticcheck`:**
+    ```
+    main.go:29:2: this if-else branch is unnecessary (staticcheck)
+    ```
+    O `else { return 0 }` é desnecessário: como o `if` já tem `return`, o `else` nunca muda o comportamento — só adiciona ruído visual.
 
-    **`go test -race`** — ativa o race detector. Detecta data races em runtime (acesso concorrente sem sincronização). Aumenta uso de memória ~5-10x e CPU ~2-20x — use apenas em CI/dev, não em produção. Rode com `-count=1` para evitar cache.
+    **Como ler o log:**
+    ```
+    main.go:21:3: assignment can be simplified (gocritic)
+    ^^^^^^^  ^^  ^                              ^^^^^^^^^^
+    arquivo  linha:coluna  mensagem              linter responsável
+    ```
+    Cada linha diz **onde** está o problema, **o que** é, e **qual linter** detectou.
 
-    **`govulncheck`** — verifica vulnerabilidades **nas funções que seu código efetivamente chama** (não apenas no `go.mod`). Mais preciso que `go list -m all` com banco de vulnerabilidades. Integre no CI para bloquear deploy com CVEs conhecidas.
-
-    **Escape analysis** — `go build -gcflags="-m" ./...` mostra quais variáveis escapam para o heap. Útil para otimizar hot paths — variáveis que escapam geram alocações e pressão no GC.
+    **Conclusão:** código que funciona e código idiomático são coisas diferentes. O golangci-lint encontra a diferença antes que o revisor de PR encontre.
 socializacao:
   discussao: Qual o conjunto mínimo de ferramentas que todo projeto Go deveria ter no CI?
   pontos:
@@ -91,69 +91,38 @@ socializacao:
   sugestaoBlog: "Tooling Go: do gofmt ao golangci-lint – qualidade de código automatizada"
   hashtagsExtras: '#golang #tooling #lint #security'
 aplicacao:
-  projeto: Configure pipeline de qualidade com Makefile + golangci-lint + govulncheck + testes com race detector.
+  projeto: O projeto ~/workspace/tool-qualidade já existe com código real, bugs intencionais e um .golangci.yml configurado. Execute o pipeline de qualidade completo rodando cada ferramenta diretamente no terminal.
   requisitos:
-    - Makefile com targets lint, test, vet
-    - .golangci.yml configurado
-    - govulncheck no pipeline
+    - Rodar go vet ./... e confirmar que passa sem erros
+    - Rodar golangci-lint run ./... e identificar todos os findings
+    - Rodar go test -race -count=1 ./... e confirmar PASS
+    - Ler o .golangci.yml e entender quais linters estão ativos
   criterios:
-    - Zero warnings em vet/lint
-    - Zero vulnerabilidades conhecidas
-    - Testes sem race
+    - go vet passa sem erros
+    - golangci-lint mostra os 2 warnings esperados (o código tem bugs intencionais)
+    - go test passa com PASS
+    - Consegue explicar o que cada linter encontrou e por quê
   starterCode: |
-    # Makefile para qualidade de código Go
-    # Salve como Makefile na raiz do projeto
+    # Pipeline de qualidade — rode cada comando no terminal
+    # cd ~/workspace/tool-qualidade
 
-    .PHONY: all fmt vet lint test vuln build clean
+    # 1. Veja o código com os problemas
+    cat main.go
 
-    # Binário de saída
-    BINARY := myapp
+    # 2. Veja a configuração dos linters
+    cat .golangci.yml
 
-    # Target padrão
-    all: fmt vet lint test build
+    # 3. Análise estática builtin (bugs reais, zero falsos positivos)
+    go vet ./...
 
-    # Formatação com goimports
-    fmt:
-    	@echo "=== Formatação ==="
-    	goimports -w .
-    	@echo "✓ Formatado"
+    # 4. Linting completo (estilo + idiomas)
+    golangci-lint run ./...
 
-    # Análise estática builtin
-    vet:
-    	@echo "=== go vet ==="
-    	go vet ./...
+    # 5. Testes com race detector
+    go test -race -count=1 ./...
 
-    # Linting completo
-    lint:
-    	@echo "=== golangci-lint ==="
-    	golangci-lint run ./...
-
-    # Testes com race detector e cobertura
-    test:
-    	@echo "=== Testes ==="
-    	go test -race -cover -count=1 ./...
-
-    # Verificação de vulnerabilidades
-    vuln:
-    	@echo "=== govulncheck ==="
-    	govulncheck ./...
-
-    # Build para produção
-    build:
-    	@echo "=== Build ==="
-    	CGO_ENABLED=0 go build -ldflags="-s -w" -o $(BINARY) ./cmd/server
-
-    # TODO: adicione target 'ci' que roda fmt + vet + lint + test + vuln
-    # TODO: adicione target 'cover-html' que gera relatório de cobertura
-    #       go test -coverprofile=cover.out ./...
-    #       go tool cover -html=cover.out -o cover.html
-    # TODO: adicione target 'bench' que roda benchmarks
-    #       go test -bench=. -benchmem -count=5 ./...
-    # TODO: crie .golangci.yml com linters:
-    #       staticcheck, errcheck, gosec, revive, gocritic
-
-    clean:
-    	rm -f $(BINARY) cover.out cover.html
+    # 6. Liste todos os linters disponíveis nesta versão
+    golangci-lint linters
 
 ---
 

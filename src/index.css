@@ -1386,6 +1386,57 @@ body {
   box-shadow: 0 0 0 3px var(--accent-light);
 }
 
+/* Terminal Guide — header dots (reused by InteractiveTerminal) */
+.terminal-guide-dots {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.terminal-guide-dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.terminal-guide-dots .dot.red { background: #ff5f57; }
+.terminal-guide-dots .dot.yellow { background: #febc2e; }
+.terminal-guide-dots .dot.green { background: #28c840; }
+
+.terminal-guide-title {
+  flex: 1;
+  font-size: 0.78rem;
+  color: #7a7c9e;
+  text-align: center;
+}
+
+/* Interactive Terminal (xterm.js) */
+.interactive-terminal {
+  border-radius: var(--radius-md);
+  border: 1px solid #2a2b3d;
+  overflow: hidden;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.interactive-terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #24253a;
+  border-bottom: 1px solid #2a2b3d;
+}
+
+.interactive-terminal-view {
+  background: #282a36;
+  padding: 4px;
+  min-height: 420px;
+}
+
+.interactive-terminal-view .xterm {
+  padding: 4px;
+}
+
 /* Completion block */
 .completion-block {
   margin-top: 1.5rem;

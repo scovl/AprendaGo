@@ -15,6 +15,20 @@ services:
     networks:
       - backend
 
+  terminal:
+    build:
+      context: ./terminal
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    container_name: aprenda-go-terminal
+    mem_limit: 512m
+    cpus: '1.0'
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 256
+    networks:
+      - backend
+
   # Run Go tests: docker compose --profile test run --rm runner-test
   runner-test:
     build:
@@ -37,6 +51,7 @@ services:
     container_name: aprenda-go
     depends_on:
       - runner
+      - terminal
     networks:
       - default
       - backend

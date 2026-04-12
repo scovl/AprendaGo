@@ -1,9 +1,13 @@
 import ReactMarkdown from 'react-markdown';
 import type { VesaContent } from '../../types';
 import { GoCodeEditor } from './GoCodeEditor';
+import { InteractiveTerminal } from './InteractiveTerminal';
 import { mdComponents } from './mdComponents';
+import { TERMINAL_LESSONS } from '../../config/terminalLessons';
 
 export function ExperimentacaoContent({ content, lessonId }: Readonly<{ content: VesaContent['experimentacao']; lessonId: string }>) {
+  const isTerminal = TERMINAL_LESSONS.has(lessonId);
+
   return (
     <div className="phase-content">
       <div className="challenge-block">
@@ -20,13 +24,17 @@ export function ExperimentacaoContent({ content, lessonId }: Readonly<{ content:
         </ul>
       </div>
 
-      <GoCodeEditor
-        referenceCode={content.codeTemplate}
-        referenceLabel="Template — ponto de partida"
-        lessonId={lessonId}
-        downloadName={`${lessonId}-exercicio`}
-        notaPos={content.notaPos}
-      />
+      {isTerminal ? (
+        <InteractiveTerminal lessonId={lessonId} />
+      ) : (
+        <GoCodeEditor
+          referenceCode={content.codeTemplate}
+          referenceLabel="Template — ponto de partida"
+          lessonId={lessonId}
+          downloadName={`${lessonId}-exercicio`}
+          notaPos={content.notaPos}
+        />
+      )}
     </div>
   );
 }
