@@ -314,17 +314,6 @@ body {
   font-weight: 600;
 }
 
-.sidebar-footer {
-  margin-top: auto;
-  padding: 1rem;
-  border-top: 1px solid var(--border-color);
-}
-
-.sidebar-hint {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  text-align: center;
-}
 
 @media (max-width: 768px) {
   .sidebar {
@@ -2504,40 +2493,321 @@ body {
   color: var(--accent, #0ea5e9);
 }
 
+/* ===================== Selection Toolbar & Highlights ===================== */
+
+.selection-toolbar-container {
+  position: relative;
+}
+
+.sel-toolbar {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  display: flex;
+  gap: 2px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  padding: 0.2rem;
+  z-index: 100;
+  white-space: nowrap;
+}
+
+.sel-toolbar-btn {
+  background: none;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s, color 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.sel-toolbar-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Highlight mark */
+.hl-mark {
+  background: rgba(255, 235, 59, 0.45);
+  border-radius: 2px;
+  padding: 0 1px;
+  cursor: default;
+}
+
+.hl-mark--has-note {
+  background: rgba(255, 235, 59, 0.6);
+  border-bottom: 2px solid #f9a825;
+}
+
+[data-theme="dark"] .hl-mark {
+  background: rgba(255, 235, 59, 0.25);
+}
+
+[data-theme="dark"] .hl-mark--has-note {
+  background: rgba(255, 235, 59, 0.38);
+  border-bottom-color: #f9a825;
+}
+
+/* ===================== Sticky Note (Post-it) ===================== */
+
+.sticky-note {
+  position: fixed;
+  width: 300px;
+  background: #fef9c3;
+  border: 1px solid #e5d88c;
+  border-radius: 4px;
+  box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.18);
+  z-index: 200;
+  font-size: 0.85rem;
+  cursor: grab;
+  user-select: none;
+}
+
+.sticky-note:active {
+  cursor: grabbing;
+}
+
+.sticky-note-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid #e5d88c;
+  background: #fdf4a0;
+  border-radius: 4px 4px 0 0;
+}
+
+.sticky-note-title {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #78700a;
+}
+
+.sticky-note-actions {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.sticky-note-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 0.15rem 0.3rem;
+  border-radius: 3px;
+  color: #78700a;
+  transition: background 0.15s;
+}
+
+.sticky-note-btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.sticky-note-quote {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: #6b6410;
+  border-bottom: 1px dashed #e5d88c;
+  user-select: text;
+}
+
+.sticky-note-textarea {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0.5rem 0.6rem;
+  font-size: 0.82rem;
+  font-family: inherit;
+  color: #3d3800;
+  resize: vertical;
+  min-height: 60px;
+  outline: none;
+  cursor: text;
+  user-select: text;
+}
+
+.sticky-note-textarea::placeholder {
+  color: #a09840;
+}
+
+[data-theme="dark"] .sticky-note {
+  background: #3a3520;
+  border-color: #5a5230;
+}
+
+[data-theme="dark"] .sticky-note-header {
+  background: #4a4228;
+  border-color: #5a5230;
+}
+
+[data-theme="dark"] .sticky-note-title,
+[data-theme="dark"] .sticky-note-btn {
+  color: #d4c86a;
+}
+
+[data-theme="dark"] .sticky-note-quote {
+  color: #c4b85a;
+  border-color: #5a5230;
+}
+
+[data-theme="dark"] .sticky-note-textarea {
+  color: #e8dfa0;
+}
+
+[data-theme="dark"] .sticky-note-textarea::placeholder {
+  color: #8a8030;
+}
+
+/* ===================== Note Shelf ===================== */
+
+.note-shelf {
+  margin: 0.75rem 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 0.5rem;
+}
+
+.note-shelf-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+  padding: 0.3rem 0.25rem;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+.note-shelf-toggle:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.note-shelf-chevron {
+  margin-left: auto;
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+.note-shelf-list {
+  list-style: none;
+  margin: 0.3rem 0 0;
+  padding: 0;
+  max-height: 180px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.note-shelf-item {
+  display: flex;
+  align-items: stretch;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  transition: background 0.15s;
+}
+
+.note-shelf-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.note-shelf-item-open {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.35rem 0.5rem;
+  text-align: left;
+  min-width: 0;
+}
+
+.note-shelf-item-text {
+  font-size: 0.78rem;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #ffe066;
+}
+
+.note-shelf-item-lesson {
+  font-size: 0.65rem;
+  opacity: 0.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.note-shelf-item-remove {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0 0.4rem;
+  opacity: 0;
+  font-size: 0.7rem;
+  transition: opacity 0.15s;
+}
+
+.note-shelf-item:hover .note-shelf-item-remove {
+  opacity: 0.6;
+}
+
+.note-shelf-item-remove:hover {
+  opacity: 1 !important;
+  color: #ff6b6b;
+}
+
+
 /* ===================== Pomodoro Timer ===================== */
 
 .pomodoro {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   padding: 0.75rem 0.5rem;
   border-top: 1px solid var(--border-color);
 }
 
 .pomodoro-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  letter-spacing: 0.03em;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
 }
 
 .pomodoro-modes {
   display: flex;
-  gap: 0.25rem;
+  gap: 0.3rem;
   width: 100%;
 }
 
 .pomodoro-mode-btn {
   flex: 1;
-  background: none;
+  background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  padding: 0.2rem 0.15rem;
-  font-size: 0.65rem;
+  border-radius: 20px;
+  padding: 0.3rem 0.2rem;
+  font-size: 0.68rem;
+  font-weight: 600;
   color: var(--text-muted);
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
   white-space: nowrap;
 }
 
@@ -2550,12 +2820,14 @@ body {
   background: var(--accent);
   color: #fff;
   border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(0, 173, 216, 0.3);
 }
 
+/* Timer ring area */
 .pomodoro-ring-wrapper {
   position: relative;
-  width: 84px;
-  height: 84px;
+  width: 140px;
+  height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2568,15 +2840,27 @@ body {
   height: 100%;
 }
 
+/* Tick marks */
+.pomodoro-tick {
+  stroke: var(--text-muted);
+  stroke-width: 1;
+  opacity: 0.3;
+}
+
+.pomodoro-tick--major {
+  stroke-width: 2;
+  opacity: 0.5;
+}
+
 .pomodoro-ring-bg {
   fill: none;
   stroke: var(--border-color);
-  stroke-width: 4;
+  stroke-width: 6;
 }
 
 .pomodoro-ring-progress {
   fill: none;
-  stroke-width: 4;
+  stroke-width: 6;
   stroke-linecap: round;
   transition: stroke-dashoffset 0.5s ease;
 }
@@ -2585,43 +2869,64 @@ body {
 .pomodoro-ring--short-break { stroke: #4caf50; }
 .pomodoro-ring--long-break { stroke: #ff9800; }
 
+/* Gopher inside ring */
+.pomodoro-gopher {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.85;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+}
+
 .pomodoro-time {
-  font-size: 1.25rem;
-  font-weight: 700;
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.1rem;
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
   color: var(--text-primary);
-  z-index: 1;
+  z-index: 2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .pomodoro-controls {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
 .pomodoro-btn {
-  background: none;
-  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border-color);
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
 .pomodoro-btn:hover {
   background: var(--bg-tertiary);
   color: var(--text-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .pomodoro-btn--toggle.running {
   background: var(--accent);
   color: #fff;
   border-color: var(--accent);
+  box-shadow: 0 2px 10px rgba(0, 173, 216, 0.35);
 }
 
 .pomodoro-sessions {

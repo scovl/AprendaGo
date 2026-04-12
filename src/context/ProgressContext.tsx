@@ -14,7 +14,8 @@ interface ProgressContextType {
   totalLessons: number;
 }
 
-const STORAGE_KEY = 'aprenda-go-progress';
+const STORAGE_KEY = 'gopherlab-progress';
+const LEGACY_KEY = 'aprenda-go-progress';
 
 const defaultProgress: UserProgress = {
   completedLessons: [],
@@ -27,7 +28,15 @@ const defaultProgress: UserProgress = {
 
 function loadProgress(): UserProgress {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    let stored = localStorage.getItem(STORAGE_KEY);
+    if (!stored) {
+      // Migrate from legacy key
+      stored = localStorage.getItem(LEGACY_KEY);
+      if (stored) {
+        localStorage.setItem(STORAGE_KEY, stored);
+        localStorage.removeItem(LEGACY_KEY);
+      }
+    }
     if (stored) {
       return JSON.parse(stored);
     }
