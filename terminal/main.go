@@ -38,6 +38,79 @@ type resizeMsg struct {
 	Rows uint16 `json:"rows"`
 }
 
+// runTimeoutWatcher ticks every 30s and triggers cleanup on inactivity.
+func runTimeoutWatcher(done <-chan struct{}, lastActivity *atomic.Value, signalDone, release func()) {
+	ticker := time.NewTicker(30 * time.Second)
+	defer ticker.Stop()
+	for {
+		select {
+		case <-ticker.C:
+			if time.Since(lastActivity.Load().(time.Time)) > sessionTimeout {
+				log.Println("session timeout")
+				signalDone()
+				release()
+				return
+			}
+		case <-done:
+			return
+		}
+	}
+}
+
+// runPingSender sends periodic WebSocket pings to keep the connection alive.
+func runPingSender(ws *websocket.Conn, done <-chan struct{}, signalDone, release func()) {
+	ticker := time.NewTicker(pingPeriod)
+	defer ticker.Stop()
+	for {
+		select {
+		case <-ticker.C:
+			if err := ws.WriteControl(websocket.PingMessage, nil, time.Now().Add(writeWait)); err != nil {
+				signalDone()
+				release()
+				return
+			}
+		case <-done:
+			return
+		}
+	}
+}
+
+// applyResize parses msg as a resize command and applies it to the PTY.
+// Returns true if the message was consumed.
+func applyResize(ptmx *os.File, msg []byte) bool {
+	var rm resizeMsg
+	if json.Unmarshal(msg, &rm) == nil && rm.Type == "resize" &&
+		rm.Cols > 0 && rm.Cols <= 300 && rm.Rows > 0 && rm.Rows <= 100 {
+		pty.Setsize(ptmx, &pty.Winsize{Cols: rm.Cols, Rows: rm.Rows})
+		return true
+	}
+	return false
+}
+
+// runWSReader reads from the WebSocket and forwards data to the PTY.
+func runWSReader(ws *websocket.Conn, ptmx *os.File, lastActivity *atomic.Value, signalDone, release func()) {
+	defer func() { signalDone(); release() }()
+	ws.SetReadLimit(maxMsgSize)
+	ws.SetReadDeadline(time.Now().Add(pongWait))
+	ws.SetPongHandler(func(string) error {
+		ws.SetReadDeadline(time.Now().Add(pongWait))
+		return nil
+	})
+	for {
+		msgType, msg, err := ws.ReadMessage()
+		if err != nil {
+			return
+		}
+		lastActivity.Store(time.Now())
+		if msgType == websocket.TextMessage && applyResize(ptmx, msg) {
+			continue
+		}
+		if _, err := ptmx.Write(msg); err != nil {
+			return
+		}
+	}
+}
+
 func handleWS(w http.ResponseWriter, r *http.Request) {
 	if atomic.LoadInt64(&activeSessions) >= maxSessions {
 		http.Error(w, `{"error":"too many active sessions"}`, http.StatusServiceUnavailable)
@@ -88,83 +161,16 @@ func handleWS(w http.ResponseWriter, r *http.Request) {
 	})
 	defer release()
 
-	// Activity tracker for session timeout
 	var lastActivity atomic.Value
 	lastActivity.Store(time.Now())
 
-	// done channel signals all goroutines to stop
 	done := make(chan struct{})
 	var closeOnce sync.Once
 	signalDone := func() { closeOnce.Do(func() { close(done) }) }
 
-	// Session timeout watcher
-	go func() {
-		ticker := time.NewTicker(30 * time.Second)
-		defer ticker.Stop()
-		for {
-			select {
-			case <-ticker.C:
-				if time.Since(lastActivity.Load().(time.Time)) > sessionTimeout {
-					log.Println("session timeout")
-					signalDone()
-					release()
-					return
-				}
-			case <-done:
-				return
-			}
-		}
-	}()
-
-	// Ping to keep WebSocket alive
-	go func() {
-		ticker := time.NewTicker(pingPeriod)
-		defer ticker.Stop()
-		for {
-			select {
-			case <-ticker.C:
-				if err := ws.WriteControl(websocket.PingMessage, nil, time.Now().Add(writeWait)); err != nil {
-					signalDone()
-					release()
-					return
-				}
-			case <-done:
-				return
-			}
-		}
-	}()
-
-	// WS → PTY
-	go func() {
-		defer func() { signalDone(); release() }()
-		ws.SetReadLimit(maxMsgSize)
-		ws.SetReadDeadline(time.Now().Add(pongWait))
-		ws.SetPongHandler(func(string) error {
-			ws.SetReadDeadline(time.Now().Add(pongWait))
-			return nil
-		})
-		for {
-			msgType, msg, err := ws.ReadMessage()
-			if err != nil {
-				return
-			}
-			lastActivity.Store(time.Now())
-
-			// Text messages may be resize commands
-			if msgType == websocket.TextMessage {
-				var rm resizeMsg
-				if json.Unmarshal(msg, &rm) == nil && rm.Type == "resize" &&
-					rm.Cols > 0 && rm.Cols <= 300 && rm.Rows > 0 && rm.Rows <= 100 {
-					pty.Setsize(ptmx, &pty.Winsize{Cols: rm.Cols, Rows: rm.Rows})
-					continue
-				}
-			}
-
-			if _, err := ptmx.Write(msg); err != nil {
-				return
-			}
-		}
-	}()
+	go runTimeoutWatcher(done, &lastActivity, signalDone, release)
+	go runPingSender(ws, done, signalDone, release)
+	go runWSReader(ws, ptmx, &lastActivity, signalDone, release)
 
 	// PTY → WS (blocks until pty closes or error)
 	buf := make([]byte, 4096)

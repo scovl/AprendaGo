@@ -1,0 +1,537 @@
+﻿/* --- RoadmapTree HTML/CSS Component --- */
+.rt-wrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 1rem 0.75rem;
+  user-select: none;
+}
+
+.rt-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.rt-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+}
+
+.rt-count {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Track: contains the spine line + nodes */
+.rt-track {
+  position: relative;
+  padding-left: 28px;
+}
+
+/* Vertical spine line */
+.rt-spine {
+  position: absolute;
+  left: 11px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent) 0%, var(--border-color) 100%);
+  border-radius: 2px;
+}
+
+/* Individual node row */
+.rt-node {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 6px;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  transition: transform var(--transition-speed);
+}
+
+.rt-node:last-child {
+  margin-bottom: 0;
+}
+
+.rt-node:focus {
+  outline: none;
+}
+
+.rt-node:focus .rt-balloon {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Dot on the spine */
+.rt-dot {
+  position: absolute;
+  left: -24px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.rt-check {
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.rt-dot-inner {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+}
+
+/* Pulse ring for active node */
+.rt-pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: block;
+  animation: rt-pulse-anim 1.6s ease-in-out infinite;
+}
+
+@keyframes rt-pulse-anim {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 173, 216, 0.5); }
+  50%       { box-shadow: 0 0 0 6px rgba(0, 173, 216, 0); }
+}
+
+/* Balloon pill */
+.rt-balloon {
+  flex: 1;
+  min-width: 0;
+  border-radius: 10px;
+  padding: 6px 10px 5px;
+  border: 1.5px solid var(--border-color);
+  background: var(--bg-card);
+  transition: background var(--transition-speed), border-color var(--transition-speed),
+    opacity var(--transition-speed), transform var(--transition-speed);
+}
+
+.rt-balloon-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.rt-balloon-lessons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-top: 4px;
+}
+
+.rt-lesson-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--border-color);
+  transition: background var(--transition-speed);
+}
+
+.rt-lesson-dot--done {
+  background: currentColor;
+}
+
+/* Progress bar inside balloon */
+.rt-balloon-progress {
+  margin-top: 5px;
+  height: 3px;
+  background: var(--bg-tertiary);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.rt-balloon-bar {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* ---- STATE MODIFIERS ---- */
+
+/* Completed */
+.rt-node--completed .rt-dot {
+  background: var(--success);
+  border: 2px solid var(--success);
+}
+
+.rt-node--completed .rt-balloon {
+  background: var(--success-light, #eafaf1);
+  border-color: var(--success);
+}
+
+.rt-node--completed .rt-balloon-title {
+  color: var(--success);
+}
+
+.rt-node--completed .rt-lesson-dot--done {
+  color: var(--success);
+}
+
+/* Active / in-progress */
+.rt-node--active .rt-dot {
+  background: var(--accent-light);
+  border: 2px solid var(--accent);
+}
+
+.rt-node--active .rt-balloon {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+.rt-node--active .rt-balloon-title {
+  color: var(--accent-dark, var(--accent));
+}
+
+.rt-node--active .rt-lesson-dot--done {
+  color: var(--accent);
+}
+
+/* Next (unlocked but not started) */
+.rt-node--next .rt-dot {
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-color);
+}
+
+.rt-node--next .rt-balloon {
+  opacity: 0.85;
+}
+
+/* Locked */
+.rt-node--locked .rt-dot {
+  background: var(--bg-tertiary);
+  border: 2px dashed var(--border-color);
+}
+
+.rt-node--locked,
+.rt-node:disabled {
+  cursor: default;
+}
+
+.rt-node--locked .rt-balloon {
+  opacity: 0.35;
+  transform: scale(0.97);
+  filter: grayscale(0.4);
+}
+
+.rt-node--locked .rt-balloon-title {
+  color: var(--text-muted);
+}
+
+/* Hover states (non-locked) */
+.rt-node--completed:hover .rt-balloon,
+.rt-node--active:hover .rt-balloon,
+.rt-node--next:hover .rt-balloon {
+  transform: translateX(2px);
+}
+
+/* --- Roadmap View --- */
+.roadmap-header {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.roadmap-gopher {
+  position: absolute;
+  right: 0;
+  top: -10px;
+  width: 300px;
+  height: auto;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .roadmap-gopher {
+    display: none;
+  }
+}
+
+.roadmap-header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.roadmap-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+
+.roadmap-stats {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 90px;
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-card.highlighted {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --- VESA Explainer --- */
+.vesa-explainer {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.vesa-explainer h2 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.vesa-explainer > p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.vesa-phases-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.vesa-phase-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  text-align: center;
+}
+
+.vesa-phase-card .phase-icon {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.vesa-phase-card h3 {
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+}
+
+.vesa-phase-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* --- Modules List --- */
+.modules-list h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+/* --- Module Card --- */
+.module-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  margin-bottom: 1rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--module-color, var(--accent));
+}
+
+.module-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text-primary);
+  transition: background var(--transition-speed);
+}
+
+.module-header:hover {
+  background: var(--bg-tertiary);
+}
+
+.module-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.module-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.module-info {
+  min-width: 0;
+}
+
+.module-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+.module-description {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 500px;
+}
+
+.module-chevron {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  transition: transform var(--transition-speed);
+  flex-shrink: 0;
+}
+
+.module-chevron.expanded {
+  transform: rotate(180deg);
+}
+
+.module-card > .progress-bar-container {
+  padding: 0 1.25rem 0.5rem;
+}
+
+/* --- Module Lessons --- */
+.module-lessons {
+  list-style: none;
+  padding: 0 0.75rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.lesson-item {
+  margin: 0;
+}
+
+.lesson-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid transparent;
+  background: var(--bg-primary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  text-align: left;
+  color: var(--text-primary);
+  transition: background var(--transition-speed), border-color var(--transition-speed);
+}
+
+.lesson-button:hover {
+  border-color: var(--border-color);
+  background: var(--bg-tertiary);
+}
+
+.lesson-button.completed {
+  background: var(--success-light);
+}
+
+.lesson-button.completed .lesson-status {
+  background: var(--success);
+  color: #fff;
+}
+
+.lesson-status {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.lesson-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.lesson-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.lesson-meta {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+

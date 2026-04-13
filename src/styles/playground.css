@@ -1,0 +1,668 @@
+﻿/* --- Playground Section --- */
+.playground-section {
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+
+/* Default: columns stacked vertically */
+.playground-columns {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Split mode: side by side when template > 30 lines */
+.playground-section--split .playground-columns {
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.playground-pane {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.playground-section--split .playground-pane--ref {
+  flex: none;
+  overflow-x: hidden;
+}
+
+.playground-section--split .playground-pane--editor {
+  flex: none;
+  overflow: hidden;
+}
+
+/* Drag-to-resize divider */
+.playground-divider {
+  flex: none;
+  width: 12px;
+  background: var(--border-color);
+  cursor: col-resize;
+  transition: background 0.15s;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playground-divider::after {
+  content: '\22EE';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--text-secondary);
+  pointer-events: none;
+  user-select: none;
+}
+
+.playground-divider:hover,
+.playground-divider:active {
+  background: var(--accent);
+}
+
+/* In split mode the ref-code border-bottom becomes redundant (border-right separates) */
+.playground-section--split .playground-ref-code {
+  border-bottom: none;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.playground-section--split .playground-pane--editor .playground-editor-wrapper {
+  flex: 1;
+}
+
+/* Reference code header */
+.playground-ref-header {
+  padding: 0.6rem 1rem;
+  background: #fff8e1;
+  border-bottom: 1px solid #ffe082;
+  font-size: 0.85rem;
+  color: #5d4037;
+}
+
+[data-theme="dark"] .playground-ref-header {
+  background: rgba(255, 224, 130, 0.1);
+  border-color: rgba(255, 224, 130, 0.3);
+  color: #ffe082;
+}
+
+/* Reference code â€” intentionally NOT selectable */
+.playground-ref-code {
+  border-bottom: 2px dashed var(--border-color);
+  overflow-x: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none;
+}
+
+/* Override SyntaxHighlighter border-radius inside ref block */
+.playground-ref-code pre {
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+.playground-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.playground-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.playground-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.btn-play {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.9rem;
+  background: #00AD5F;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-speed);
+}
+
+.btn-play:hover:not(:disabled) {
+  background: #009952;
+}
+
+.btn-play:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-play:focus-visible {
+  outline: 3px solid #00AD5F;
+  outline-offset: 2px;
+}
+
+.btn-tool {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.75rem;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 0.83rem;
+  cursor: pointer;
+  transition: border-color var(--transition-speed), background var(--transition-speed);
+}
+
+.btn-tool:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+.btn-tool:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-tool-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.btn-tool:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* react-simple-code-editor outer wrapper */
+.playground-editor-wrapper {
+  background: var(--bg-primary) !important;
+  caret-color: var(--text-primary);
+}
+
+/* Textarea layer (invisible text, visible caret) */
+.playground-editor-input {
+  color: transparent !important;
+  caret-color: var(--text-primary) !important;
+  background: transparent !important;
+  outline: none !important;
+  tab-size: 4;
+}
+
+.playground-editor-wrapper:focus-within {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+/* Output panel */
+.playground-output {
+  border-top: 1px solid var(--border-color);
+}
+
+.playground-output-label {
+  padding: 0.35rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.playground-output-ok .playground-output-label {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.playground-output-error .playground-output-label {
+  background: #ffebee;
+  color: #c62828;
+}
+
+[data-theme="dark"] .playground-output-ok .playground-output-label {
+  background: rgba(46, 125, 50, 0.2);
+  color: #81c784;
+}
+
+[data-theme="dark"] .playground-output-error .playground-output-label {
+  background: rgba(198, 40, 40, 0.2);
+  color: #ef9a9a;
+}
+
+.playground-output-text {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.83rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+}
+
+/* â”€â”€ Nota pÃ³s-execuÃ§Ã£o â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.nota-pos {
+  margin-top: 1.25rem;
+  border: 1px solid #c8e6c9;
+  border-left: 4px solid #43a047;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f9fef9;
+  animation: nota-fade-in 0.35s ease;
+}
+
+@keyframes nota-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.nota-pos-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: #e8f5e9;
+  border-bottom: 1px solid #c8e6c9;
+}
+
+.nota-pos-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.nota-pos-titulo {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #2e7d32;
+  letter-spacing: 0.01em;
+}
+
+.nota-pos-body {
+  padding: 1rem 1.25rem;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+.nota-pos-body p { margin: 0 0 0.75rem; }
+.nota-pos-body p:last-child { margin-bottom: 0; }
+.nota-pos-body ul { margin: 0.25rem 0 0.75rem 1.25rem; padding: 0; }
+.nota-pos-body li { margin-bottom: 0.25rem; }
+.nota-pos-body code {
+  background: #e8f5e9;
+  color: #1b5e20;
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.85em;
+}
+.nota-pos-body h4 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  color: #2e7d32;
+}
+.nota-pos-body strong { color: var(--text-primary); }
+
+[data-theme="dark"] .nota-pos {
+  background: rgba(67, 160, 71, 0.06);
+  border-color: rgba(67, 160, 71, 0.3);
+  border-left-color: #66bb6a;
+}
+[data-theme="dark"] .nota-pos-header {
+  background: rgba(67, 160, 71, 0.12);
+  border-bottom-color: rgba(67, 160, 71, 0.2);
+}
+[data-theme="dark"] .nota-pos-titulo { color: #81c784; }
+[data-theme="dark"] .nota-pos-body code {
+  background: rgba(67, 160, 71, 0.15);
+  color: #a5d6a7;
+}
+
+/* --- GitHub Section --- */
+.github-section {
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+
+.github-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.85rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.github-steps {
+  margin: 0;
+  padding: 1rem 1.1rem 1rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+
+.github-steps li {
+  padding-left: 0.25rem;
+}
+
+.github-code-snippet {
+  margin: 0.4rem 0 0;
+  padding: 0.6rem 0.85rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* ===================== LabEditor ===================== */
+
+.lab-editor {
+  margin: 1.5rem 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  overflow: hidden;
+}
+
+.lab-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  gap: 0.75rem;
+}
+
+.lab-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.lab-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lab-mode-toggle {
+  display: flex;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.lab-mode-btn {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.lab-mode-btn:hover:not(:disabled) {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.lab-mode-btn.active {
+  background: var(--accent-primary);
+  color: #fff;
+}
+
+.lab-mode-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.lab-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.4rem 0.75rem;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  overflow-x: auto;
+}
+
+.lab-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.lab-tab:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.lab-tab.active {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.lab-tab-test {
+  color: var(--accent-warning, #f59e0b);
+}
+
+.lab-tab-close {
+  margin-left: 0.1rem;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0 0.1rem;
+  line-height: 1;
+}
+
+.lab-tab-close:hover {
+  color: var(--accent-danger, #ef4444);
+}
+
+.lab-tab-add {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.lab-tab-add:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+}
+
+.lab-new-file-input {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  background: var(--bg-primary);
+  border: 1px solid var(--accent-primary);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  width: 12rem;
+  outline: none;
+}
+
+.lab-editor-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.lab-code-editor-wrapper {
+  width: 100%;
+  background: var(--bg-primary) !important;
+  caret-color: var(--text-primary);
+  box-sizing: border-box;
+}
+
+.lab-code-editor-input {
+  color: transparent !important;
+  caret-color: var(--text-primary) !important;
+  background: transparent !important;
+  outline: none !important;
+  tab-size: 4;
+}
+
+.lab-output {
+  padding: 0.75rem 1rem;
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.82rem;
+  min-height: 3.5rem;
+  background: var(--bg-primary);
+}
+
+.lab-output-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
+  color: var(--text-muted);
+}
+
+.lab-output-text {
+  white-space: pre-wrap;
+  margin: 0;
+  line-height: 1.55;
+}
+
+.lab-output-error .lab-output-label {
+  color: var(--accent-danger, #ef4444);
+}
+
+.lab-output-ok .lab-output-label {
+  color: var(--accent-success, #22c55e);
+}
+
+.lab-output-error .lab-output-text {
+  color: var(--accent-danger, #ef4444);
+}
+
+.lab-tip {
+  padding: 0.5rem 1rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  line-height: 1.5;
+}
+
+.lab-tip code {
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  padding: 0 0.3em;
+  font-size: 0.85em;
+}
+
+.github-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.85rem 1.1rem;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+}
+
+.btn-github {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  background: #24292f;
+  color: #fff;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background var(--transition-speed);
+}
+
+.btn-github:hover {
+  background: #1a1f24;
+}
+
+.btn-github-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.btn-github-secondary:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--accent);
+}
+
+.btn-github:focus-visible,
+.btn-github-secondary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+[data-theme="dark"] .btn-github:not(.btn-github-secondary) {
+  background: #3d444d;
+}
+
+[data-theme="dark"] .btn-github:not(.btn-github-secondary):hover {
+  background: #444c56;
+}
+

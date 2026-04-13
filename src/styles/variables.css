@@ -1,0 +1,117 @@
+﻿/* ============================================================
+   GopherLab â€” Styles with Accessibility Focus
+   Designed for neurodivergent users (autism-friendly):
+   - Predictable, consistent layouts
+   - Calm, low-saturation color palette
+   - Clear typography (sans-serif, good spacing)
+   - Reduced visual clutter
+   - Minimal unexpected animations
+   - Strong focus indicators
+   - High contrast mode
+   ============================================================ */
+
+/* --- CSS Variables / Theming --- */
+:root {
+  /* Light Theme (default) */
+  --bg-primary: #f8f9fa;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e9ecef;
+  --bg-card: #ffffff;
+  --text-primary: #212529;
+  --text-secondary: #495057;
+  --text-muted: #6c757d;
+  --border-color: #dee2e6;
+  --border-focus: #00ADD8;
+  --accent: #00ADD8;
+  --accent-light: #e6f7fa;
+  --accent-dark: #0089ad;
+  --success: #2ecc71;
+  --success-light: #eafaf1;
+  --warning: #f39c12;
+  --error: #e74c3c;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --font-base: 16px;
+  --line-height: 1.6;
+  --sidebar-width: 260px;
+  --roadmap-sidebar-width: 260px;
+  --transition-speed: 0.2s;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #1a1a2e;
+  --bg-secondary: #16213e;
+  --bg-tertiary: #0f3460;
+  --bg-card: #1e2a4a;
+  --text-primary: #e8e8e8;
+  --text-secondary: #b0b0b0;
+  --text-muted: #808080;
+  --border-color: #2a3a5c;
+  --border-focus: #5DC9E2;
+  --accent: #5DC9E2;
+  --accent-light: #1a2f3e;
+  --accent-dark: #8de0f0;
+  --success: #2ecc71;
+  --success-light: #1a3a2a;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="sepia"] {
+  --bg-primary: #f5f0e8;
+  --bg-secondary: #faf6ee;
+  --bg-tertiary: #e8e0d0;
+  --bg-card: #faf6ee;
+  --text-primary: #3e3529;
+  --text-secondary: #5c5244;
+  --text-muted: #7a7060;
+  --border-color: #d4c9b5;
+  --border-focus: #8b6914;
+  --accent: #8b6914;
+  --accent-light: #f5edd5;
+  --accent-dark: #6b5010;
+  --success: #4a7c4a;
+  --success-light: #e8f0e8;
+}
+
+/* Font size scaling */
+[data-font-size="normal"] { --font-base: 18px; }
+[data-font-size="large"] { --font-base: 20px; }
+[data-font-size="extra-large"] { --font-base: 22px; }
+
+/* Line spacing */
+[data-line-spacing="normal"] { --line-height: 1.6; }
+[data-line-spacing="relaxed"] { --line-height: 1.8; }
+[data-line-spacing="spacious"] { --line-height: 2.0; }
+
+/* High contrast overrides */
+.high-contrast {
+  --text-primary: #000000;
+  --text-secondary: #1a1a1a;
+  --border-color: #000000;
+  --shadow-sm: 0 0 0 2px var(--border-color);
+}
+
+[data-theme="dark"].high-contrast {
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --border-color: #ffffff;
+}
+
+/* Reduced motion */
+.reduced-motion,
+.reduced-motion * {
+  transition-duration: 0s !important;
+  animation-duration: 0s !important;
+}
+
+/* Focus highlight */
+.focus-highlight *:focus-visible {
+  outline: 3px solid var(--border-focus) !important;
+  outline-offset: 2px !important;
+  border-radius: 3px;
+}
+

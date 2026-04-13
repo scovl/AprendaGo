@@ -1,0 +1,68 @@
+﻿/* --- Responsive --- */
+@media (max-width: 900px) {
+  .playground-section--split .playground-columns {
+    flex-direction: column;
+  }
+  .playground-section--split .playground-pane--ref,
+  .playground-section--split .playground-pane--editor {
+    width: 100% !important;
+  }
+  .playground-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .roadmap-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .vesa-tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .vesa-tab {
+    min-width: 80px;
+    padding: 0.6rem 0.5rem;
+  }
+
+  .vesa-tab-label {
+    font-size: 0.75rem;
+  }
+
+  .lesson-pagination {
+    flex-direction: column;
+  }
+
+  .module-description {
+    display: none;
+  }
+
+  .vesa-phases-overview {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* --- Print styles --- */
+@media print {
+  .sidebar,
+  .vesa-tabs,
+  .vesa-nav,
+  .lesson-breadcrumb,
+  .skip-link {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .code-block pre {
+    border: 1px solid #ccc;
+    background: #f5f5f5 !important;
+    color: #333 !important;
+  }
+}
+
