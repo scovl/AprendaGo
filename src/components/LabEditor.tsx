@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { solveChallenge } from '../utils/pow';
+import Editor from 'react-simple-code-editor';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-go';
+import 'prismjs/themes/prism.css';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -235,13 +239,23 @@ export function LabEditor({ initialFiles, projectSlug }: Readonly<LabEditorProps
 
       {/* ── Editor ── */}
       <div className="lab-editor-body" role="tabpanel" aria-label={`Editando ${currentFile?.name}`}>
-        <textarea
-          className="lab-code-editor"
+        <Editor
           value={currentFile?.body ?? ''}
-          onChange={e => updateBody(e.target.value)}
-          spellCheck={false}
+          onValueChange={updateBody}
+          highlight={src => Prism.highlight(src, Prism.languages.go, 'go')}
+          insertSpaces={false}
+          tabSize={4}
+          padding={16}
+          className="lab-code-editor-wrapper"
+          textareaClassName="lab-code-editor-input"
+          style={{
+            fontFamily: "'Cascadia Code', 'Fira Code', 'Consolas', monospace",
+            fontSize: '0.85rem',
+            lineHeight: '1.6',
+            minHeight: `${Math.max(16, (currentFile?.body ?? '').split('\n').length + 2) * 1.6 * 0.85 + 2}rem`,
+            borderBottom: '1px solid var(--border-color)',
+          }}
           aria-label={`Código de ${currentFile?.name}`}
-          rows={Math.max(16, (currentFile?.body ?? '').split('\n').length + 2)}
         />
       </div>
 

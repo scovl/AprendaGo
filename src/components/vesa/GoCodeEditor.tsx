@@ -2,6 +2,12 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { mdComponents } from './mdComponents';
 import { solveChallenge } from '../../utils/pow';
+import Editor from 'react-simple-code-editor';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-go';
+import 'prismjs/themes/prism.css';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 export interface GoCodeEditorProps {
   referenceCode?: string;
@@ -65,14 +71,25 @@ export function GoCodeEditor({ referenceCode, referenceLabel, lessonId: _lessonI
           <div className="playground-ref-header">
             <span>📖 {referenceLabel} — leia e <strong>digite</strong> no editor abaixo</span>
           </div>
-          <pre
+          <div
             className="playground-ref-code"
             aria-label="Código de referência — não copiável"
             onCopy={e => e.preventDefault()}
             onCut={e => e.preventDefault()}
           >
-            <code>{referenceCode}</code>
-          </pre>
+            <SyntaxHighlighter
+              language="go"
+              style={oneLight}
+              customStyle={{
+                margin: 0,
+                borderRadius: 0,
+                fontSize: '0.85rem',
+                lineHeight: '1.6',
+              }}
+            >
+              {referenceCode}
+            </SyntaxHighlighter>
+          </div>
         </>
       )}
 
@@ -107,29 +124,23 @@ export function GoCodeEditor({ referenceCode, referenceLabel, lessonId: _lessonI
         </div>
       </div>
 
-      <textarea
-        className="playground-editor"
+      <Editor
         value={code}
-        onChange={e => setCode(e.target.value)}
-        onKeyDown={e => {
-          if (e.key === 'Tab') {
-            e.preventDefault();
-            const el = e.currentTarget;
-            const start = el.selectionStart;
-            const end = el.selectionEnd;
-            const next = code.slice(0, start) + '\t' + code.slice(end);
-            setCode(next);
-            // restore cursor after React re-render
-            requestAnimationFrame(() => {
-              el.selectionStart = start + 1;
-              el.selectionEnd = start + 1;
-            });
-          }
+        onValueChange={setCode}
+        highlight={src => Prism.highlight(src, Prism.languages.go, 'go')}
+        insertSpaces={false}
+        tabSize={4}
+        padding={16}
+        className="playground-editor-wrapper"
+        textareaClassName="playground-editor-input"
+        style={{
+          fontFamily: "'Cascadia Code', 'Fira Code', 'Consolas', monospace",
+          fontSize: '0.85rem',
+          lineHeight: '1.6',
+          minHeight: `${Math.max(12, code.split('\n').length + 2) * 1.6 * 0.85 + 2}rem`,
         }}
-        spellCheck={false}
-        aria-label="Editor de código Go"
         placeholder={'// Digite seu código aqui\npackage main\n\nimport "fmt"\n\nfunc main() {\n\t\n}'}
-        rows={Math.max(12, code.split('\n').length + 2)}
+        aria-label="Editor de código Go"
       />
 
       {output && (
