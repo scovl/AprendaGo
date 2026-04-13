@@ -15,6 +15,7 @@
     "@xterm/xterm": "^6.0.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.441.0",
+    "mermaid": "^11.14.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^10.1.0",

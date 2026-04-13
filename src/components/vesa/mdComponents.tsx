@@ -1,6 +1,7 @@
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { MermaidDiagram } from '../MermaidDiagram';
 
 export const mdComponents = {
   a: ({ href, children }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
@@ -9,6 +10,10 @@ export const mdComponents = {
   code: ({ className, children, ...props }: React.HTMLAttributes<HTMLElement> & { inline?: boolean }) => {
     const match = /language-(\w+)/.exec(className || '');
     const codeString = String(children).replace(/\n$/, '');
+
+    if (match?.[1] === 'mermaid') {
+      return <MermaidDiagram chart={codeString} />;
+    }
 
     if (match) {
       return (
