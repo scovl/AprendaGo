@@ -6,6 +6,9 @@ recursos:
   - https://go.dev/tour/flowcontrol/1
   - https://gobyexample.com/for
   - https://gobyexample.com/switch
+  - https://youtu.be/zdVQQdujFYM?si=e-0Ly3Wsp5hbCRKU
+  - https://youtu.be/DZNLckEvI5s?si=LlArInM8VUWWxeox
+  - https://youtu.be/PjiWvbR3spg?si=226CKJgqTvifO43W
 experimentacao:
   desafio: Implemente FizzBuzz (1–100) usando switch sem expressão. Depois, crie um programa que busca um valor em matriz 2D usando labeled break.
   dicas:
@@ -296,4 +299,6 @@ procura:
 // saída: (0,0) (0,1) (0,2) (1,0)
 ```
 
-> **Sobre `goto`:** Go tem `goto`, mas é quase nunca usado. Se você está pensando em usar `goto`, provavelmente existe uma forma melhor. Labels com `break`/`continue` resolvem 99% dos casos.
+**Sobre `goto`:** Go tem `goto`, mas é quase nunca usado. Se você está pensando em usar `goto`, provavelmente existe uma forma melhor. Labels com `break`/`continue` resolvem 99% dos casos.
+
+> Abaixo três vídeos do **[Teo Calvo](https://www.youtube.com/@teomewhy)** que introduzem bem o controle de fluxo em Go, incluindo o uso de `for`, `switch` e `type switch`.

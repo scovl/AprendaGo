@@ -26,19 +26,36 @@ export function VisaoGeralContent({ content, lessonId }: Readonly<{ content: Ves
         ) : null}
       </div>
 
-      {youtubeUrls.map((url, i) => {
-        const videoId = getYouTubeId(url)!;
-        return (
-          <div key={videoId} className="youtube-embed">
+      {youtubeUrls.length === 1 && (
+        <div className="youtube-single">
+          <div className="youtube-embed">
             <iframe
-              src={`https://www.youtube.com/embed/${videoId}`}
-              title={`Vídeo ${i + 1}`}
+              src={`https://www.youtube.com/embed/${getYouTubeId(youtubeUrls[0])!}`}
+              title="Vídeo"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
           </div>
-        );
-      })}
+        </div>
+      )}
+
+      {youtubeUrls.length > 1 && (
+        <div className="youtube-grid">
+          {youtubeUrls.map((url, i) => {
+            const videoId = getYouTubeId(url)!;
+            return (
+              <div key={videoId} className="youtube-embed">
+                <iframe
+                  src={`https://www.youtube.com/embed/${videoId}`}
+                  title={`Vídeo ${i + 1}`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       {content.codeExample && (
         <div className="code-block">

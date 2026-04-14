@@ -1,38 +1,40 @@
 ---
 title: Issues, labels e good first issue
-description: Entenda o sistema de labels, como ler issues e como interpretar good-first-issue.
+description: Entenda o sistema de labels, como ler issues e como escrever uma boa issue do zero.
 estimatedMinutes: 30
 recursos:
   - https://github.com/search?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22+language%3AGo+no%3Aassignee&type=issues
   - https://goodfirstissue.dev/language/go
   - https://www.codetriage.com/?language=Go
 experimentacao:
-  desafio: Escreva um programa que recebe owner/repo como argumento e lista todas as issues abertas com label good first issue que ainda não estão atribuídas.
+  desafio: "Use o checklist da lição para avaliar 3 issues da tabela do GopherLab (escolha você quais). Para cada uma, responda: ela tem contexto suficiente para você começar a trabalhar agora? O que está faltando, se algo estiver? Qual das 3 você escolheria — e por quê?"
   dicas:
-    - Use time.Since(issue.UpdatedAt).Hours()/24 para calcular dias
-    - issue.Assignee == nil indica que está livre
-    - "Adicione flag --label para tornar a label configurável"
-    - "Trate paginação: GitHub retorna máximo 100 por página"
+    - "Abra cada issue no GitHub e leia o corpo inteiro — não só o título"
+    - "Verifique se tem assignee (campo à direita na página da issue) — se tiver, já está sendo trabalhada"
+    - "Aplique os 4 critérios do checklist um por um: atribuição, contexto, atividade recente, PR vinculado"
+    - "Sua resposta não precisa ser perfeita — o objetivo é praticar o olhar crítico, não acertar tudo"
 socializacao:
-  discussao: Você abriria uma issue para reportar um bug mesmo sabendo que pode não ter tempo de corrigi-la? Como a comunidade trata isso?
+  discussao: "Você abriria uma issue reportando um bug mesmo sabendo que talvez não tenha tempo de corrigi-la? Por quê?"
   pontos:
-    - Reportar bugs sem PR já é uma contribuição válida
-    - Issues bem escritas valem ouro
-    - "Comentar Estou trabalhando nisso antes de abrir um PR é etiqueta básica"
-  diasDesafio: "Bônus – Semana de Open Source"
+    - Reportar um bug sem abrir PR já é uma contribuição válida e útil — reprodução documentada economiza horas de debug dos mantenedores
+    - Uma issue mal escrita cria trabalho extra — mantenedores precisam voltar para pedir contexto, o que atrasa todos
+    - Issues de documentação são frequentemente as mais impactantes e as mais ignoradas ao mesmo tempo
+    - "Comentar 'Estou trabalhando nisso' antes de abrir PR é etiqueta básica — evita dois contribuidores fazendo a mesma coisa"
+    - A qualidade das suas issues é um cartão de visitas tão importante quanto o código que você escreve
+  diasDesafio: "Bônus – Semana Open Source"
   sugestaoBlog: "good first issue: como ler, escolher e não desperdiçar o tempo de ninguém"
   hashtagsExtras: '#opensource #golang #github #goodfirstissue'
 aplicacao:
-  projeto: Monitor de issues que acompanha múltiplos repositórios e notifica novas good-first-issues.
+  projeto: "Escreva e publique 1 issue real em um projeto Go que você usa — seguindo os 5 elementos de uma issue bem escrita da lição."
   requisitos:
-    - Lista configurável de repositórios
-    - Detecta issues novas desde a última execução
-    - Filtra issues sem assignee
-    - Exibe resumo com repo, número, título, dias aberta
+    - "Escolha um projeto Go que você usa ou conhece: pode ser um bug que já encontrou, uma dúvida sobre documentação, ou uma melhoria pequena"
+    - "Antes de publicar: pesquise se já existe issue aberta ou fechada sobre o mesmo problema (use a busca do GitHub)"
+    - "A issue deve ter: título semântico, descrição clara do problema, ambiente (versão Go, OS), comportamento esperado vs atual"
+    - "Aplique ao menos 1 label relevante — se o projeto não permitir aplicar labels, mencione qual você usaria no corpo"
   criterios:
-    - Persistência entre execuções funcionando
-    - Sem duplicatas na listagem
-    - Testes para a lógica de filtragem
+    - "A issue não duplica um problema já reportado (evidência: você buscou antes de publicar)"
+    - "Contexto suficiente para outra pessoa entender e trabalhar sem precisar perguntar nada"
+    - "Tom objetivo — foco no problema, não em julgamentos sobre o código ou os mantenedores"
 ---
 
 O sistema de labels do GitHub é o **mapa de contribuição** de um projeto. Saber ler as labels certas economiza horas de busca.
@@ -47,7 +49,7 @@ O sistema de labels do GitHub é o **mapa de contribuição** de um projeto. Sab
 | `documentation` | Melhorias em docs — ótima entrada sem precisar de domínio do código |
 | `beginner friendly` | Alias de `good first issue` em muitos projetos |
 
-## Como avaliar uma issue antes de trabalhar nela
+## Checklist: como avaliar uma issue antes de trabalhar nela
 
 1. **Está atribuída?** Se sim, alguém já está trabalhando — pergunte antes de duplicar esforço
 2. **Tem contexto suficiente?** Steps to reproduce, versão Go, OS — issues mal descritas rendem PRs errados
@@ -66,7 +68,7 @@ is:open is:issue label:"good first issue" language:Go no:assignee
 
 ## Exemplo real: good first issues do GopherLab
 
-O próprio GopherLab tem um conjunto de issues abertas com `good first issue` que foram criadas a partir de uma auditoria real do código. Observe os padrões:
+O próprio GopherLab tem um conjunto de issues abertas com `good first issue` criadas a partir de uma auditoria real do código. Use-as como modelo de como uma boa issue se parece:
 
 | # | Tipo | Área | Título |
 |---|------|------|--------|
@@ -81,12 +83,14 @@ O próprio GopherLab tem um conjunto de issues abertas com `good first issue` qu
 | [#22](https://github.com/scovl/GopherLab/issues/22) | `fix` | TypeScript | Adicionar `Readonly<Props>` ao `ProgressBar` |
 | [#23](https://github.com/scovl/GopherLab/issues/23) | `fix` | React | Não usar índice de array como `key` no `PomodoroTimer` |
 
-Note o que cada issue bem escrita contém:
+## Os 5 elementos de uma issue bem escrita
 
-- **Título semântico** com prefixo `fix:` / `feat:` / `perf:` — igual à convenção de commits
-- **Arquivo exato** e número de linha quando possível — sem ambiguidade sobre onde mexer
-- **Passos para reproduzir** (nas de bug) — o contribuidor consegue confirmar antes de codar
-- **Solução proposta** (nas de feat/perf) — reduz a ida-e-volta de "está no caminho certo?"
-- **Labels consistentes** — `good first issue` + categoria (`accessibility`, `performance`, etc.)
+Toda issue bem escrita — seja bug report ou feature request — tem estes elementos:
 
-> **Exercício:** Escolha uma das issues acima, faça o fork do GopherLab, implemente a correção e abra um PR seguindo o template em `.github/PULL_REQUEST_TEMPLATE.md`. É uma contribuição real num projeto real.
+1. **Título semântico** com prefixo `fix:` / `feat:` / `perf:` / `docs:` — igual à convenção de commits
+2. **Arquivo e localização** quando possível (ex: `src/components/Foo.tsx:42`) — sem ambiguidade sobre onde mexer
+3. **Passos para reproduzir** (nas de bug) — o contribuidor confirma o problema antes de codar
+4. **Solução proposta** (nas de feat/perf) — reduz a ida-e-volta de "estou no caminho certo?"
+5. **Labels consistentes** — `good first issue` + categoria (`accessibility`, `performance`, etc.)
+
+> Na próxima lição você vai fazer o ciclo completo de contribuição: fork → branch → implementação → PR. A issue que você abriu aqui — ou uma das issues da tabela do GopherLab que analisou na experimentação — pode ser exatamente o seu ponto de partida.

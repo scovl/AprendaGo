@@ -7,6 +7,8 @@ recursos:
   - https://gobyexample.com/closures
   - https://gobyexample.com/defer
   - https://go.dev/blog/defer-panic-and-recover
+  - https://youtu.be/9jwLK5R_xgU?si=mm1lS7Pn6Uokoopp
+  - https://youtu.be/8uEyCO0Ydyk?si=xIwkemvBtPh5muhD
 experimentacao:
   desafio: "Crie: (1) uma função variádica que calcule média; (2) um acumulador com closure que mantém estado; (3) um leitor de arquivo que use defer para garantir Close()."
   dicas:
@@ -310,3 +312,5 @@ fmt.Println(err)  // "recuperado: ops!" — programa continua rodando
 ```
 
 > **Regra prática:** use `panic` quase nunca. Use `error` para erros esperados (arquivo não encontrado, input inválido). Reserve `panic` para situações realmente impossíveis (bug no código, estado corrompido). Se você está em dúvida, retorne `error`.
+
+> Abaixo um vídeo do **[Teo Calvo](https://www.youtube.com/@teomewhy)** que introduz bem funções em Golang, incluindo múltiplos retornos, variádicos, closures e defer:

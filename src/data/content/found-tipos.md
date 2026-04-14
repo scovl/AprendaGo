@@ -6,6 +6,10 @@ recursos:
   - https://go.dev/tour/basics/8
   - https://gobyexample.com/variables
   - https://gobyexample.com/constants
+  - https://github.com/TeoMeWhy/curso-go-ds
+  - https://youtu.be/aiN4-ow1-yU?si=FfgnwX83g7LqwOHc
+  - https://youtu.be/2VAHVYi1Obk?si=APz2db9HeZ26rC87
+  - https://youtu.be/mcyWxNAC3jw?si=74XC6IP2DqLsR37n
 experimentacao:
   desafio: "Crie uma enumeração com iota para estados de um pedido (Pendente, Pago, Enviado, Entregue). Experimente int8, int32 e int64 para ver diferença de range. Teste as três formas de converter int para string: string(), strconv.Itoa() e fmt.Sprintf()."
   dicas:
@@ -224,3 +228,5 @@ fmt.Println(x) // 10 — surpresa?
 ```
 
 Isso se chama *shadowing*. Quando quiser **modificar** a variável de fora, use `=` em vez de `:=`.
+
+> Abaixo temos uma série de três vídeos do **[Teo Calvo](https://www.youtube.com/@teomewhy)** que introduzem bem o sistema de tipos do Go:

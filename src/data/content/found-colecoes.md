@@ -6,6 +6,9 @@ recursos:
   - https://go.dev/tour/moretypes/6
   - https://gobyexample.com/slices
   - https://gobyexample.com/maps
+  - https://youtu.be/skRjOj8lEhc?si=D-90KKWoyZQKxhlD
+  - https://youtu.be/hOpB47oUZPM?si=AH7HL-ZcbsvSkSNt
+  - https://youtu.be/fXVtnJphAXk?si=9heIyiGlGUsLCEL3
 experimentacao:
   desafio: Crie um todo list em memória com um slice de structs para tarefas e um map para categorias. Implemente adicionar, listar, marcar como feita e filtrar por categoria.
   dicas:
@@ -269,3 +272,5 @@ m["chave"] = 1  // 💥 panic: assignment to entry in nil map
 m = make(map[string]int)
 m["chave"] = 1  // agora sim
 ```
+
+> Abaixo temos uma série de três vídeos do **[Teo Calvo](https://www.youtube.com/@teomewhy)** que introduzem bem arrays, slices e maps em Go:

@@ -4,6 +4,7 @@ services:
       context: ./runner
       dockerfile: Dockerfile
     restart: unless-stopped
+    stop_grace_period: 5s
     container_name: gopherlab-runner
     mem_limit: 512m
     cpus: '1.0'
@@ -20,6 +21,7 @@ services:
       context: ./terminal
       dockerfile: Dockerfile
     restart: unless-stopped
+    stop_grace_period: 5s
     container_name: gopherlab-terminal
     mem_limit: 512m
     cpus: '1.0'

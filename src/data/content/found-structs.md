@@ -6,6 +6,7 @@ recursos:
   - https://go.dev/tour/moretypes/2
   - https://gobyexample.com/structs
   - https://gobyexample.com/struct-embedding
+  - https://youtu.be/SFNYr3dT16o?si=eG-0tg3z441HNu8J
 experimentacao:
   desafio: Modele um sistema de veículos com composição - struct base Veiculo, structs Carro e Moto que embeddam Veiculo. Adicione struct tags JSON e serialize/deserialize.
   dicas:
@@ -245,3 +246,5 @@ type Carro struct {
 `Carro` não "é" um `Motor` — `Carro` **tem** um motor e **tem** um GPS. Essa abordagem é mais flexível e evita os problemas clássicos de hierarquias rígidas.
 
 > **Resumo:** struct = ficha de dados, métodos = comportamento, embedding = composição, struct tags = metadados para bibliotecas. Go troca herança por combinação de peças simples.
+
+> Abaixo um vídeo do **[Teo Calvo](https://www.youtube.com/@teomewhy)** que introduz bem structs em Go:

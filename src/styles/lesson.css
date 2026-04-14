@@ -441,6 +441,56 @@
   border-radius: var(--radius-sm, 6px);
 }
 
+/* Single YouTube video — blue-purple gradient border */
+.youtube-single {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #3b82f6 100%);
+  border-radius: 14px;
+  padding: 3px;
+  margin: 1.5rem 0;
+  box-shadow: 0 0 32px rgba(139, 92, 246, 0.35), 0 4px 20px rgba(99, 102, 241, 0.2);
+}
+
+.youtube-single .youtube-embed {
+  margin: 0;
+  border-radius: 11px;
+  overflow: hidden;
+  background: #000;
+}
+
+.youtube-single .youtube-embed iframe {
+  max-width: 100%;
+  border-radius: 0;
+  display: block;
+}
+
+/* Multiple YouTube videos — responsive grid */
+.youtube-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.youtube-grid .youtube-embed {
+  margin: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: #000;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.youtube-grid .youtube-embed:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.youtube-grid .youtube-embed iframe {
+  max-width: 100%;
+  display: block;
+  border-radius: 0;
+}
+
 .resources-block a {
   color: var(--accent);
   text-decoration: none;

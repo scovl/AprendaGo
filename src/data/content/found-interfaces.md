@@ -6,6 +6,7 @@ recursos:
   - https://go.dev/tour/methods/9
   - https://gobyexample.com/interfaces
   - https://jordanorelli.com/post/32665860244/how-to-use-interfaces-in-go
+  - https://youtu.be/rck0DOd4Nc0?si=_xPVrBtEv3loFvIJ
 experimentacao:
   desafio: Crie uma interface Stringer com String() string e implemente para 3 tipos diferentes. Depois, crie uma interface Writer e use type assertion para verificar se um valor também implementa Stringer.
   dicas:
@@ -279,3 +280,5 @@ A interface `Reader` da biblioteca padrão tem **um único método**. Mesmo assi
 Uma dica importante: em Go, interfaces são definidas por **quem usa**, não por quem implementa. 
 
 Em Java, o autor da classe decide quais interfaces ela implementa. Em Go, **você** decide: se precisa de algo que tenha `Read()`, cria uma interface `Reader` no seu package e aceita qualquer tipo que tenha esse método. O autor do tipo nem precisa saber que sua interface existe.
+
+> Abaixo um vídeo do **[Teo Calvo](https://www.youtube.com/@teomewhy)** que introduz bem interfaces em Go:

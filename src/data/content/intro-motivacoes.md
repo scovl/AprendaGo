@@ -6,8 +6,6 @@ recursos:
   - https://go.dev/solutions/
   - https://go.dev/doc/faq
   - https://githut.info/
-  - https://survey.stackoverflow.co/2024/technology#most-popular-technologies-language
-  - https://youtu.be/jXA0O5b-F1g?si=zo86JYln97tQ-Hju
 experimentacao:
   desafio: "Execute o programa abaixo — ele imprime alguns fatos sobre Go usando variáveis. Depois adicione mais uma linha com um fato que você achou interessante sobre a linguagem."
   dicas:

@@ -5,7 +5,7 @@ estimatedMinutes: 30
 recursos:
   - https://go.dev/doc/
   - https://go.dev/blog/go-brand
-  - https://youtu.be/WiGU_ZB-u0w?si=XjTuIuFwODaclfBE
+  - https://youtu.be/EarYUT9N88U?si=2II5cAnaKa3sozqS
 experimentacao:
   desafio: "Execute o programa abaixo — é o Hello, World! tradicional de Go. Depois troque a mensagem para se apresentar: imprima seu nome e por que você está aprendendo Go."
   dicas:
@@ -116,3 +116,6 @@ Go é a linguagem por trás de muitas ferramentas que você provavelmente já us
 - **[Prometheus](https://prometheus.io/)** — monitoramento e alertas
 
 Empresas como [Google](https://www.google.com/), [Uber](https://www.uber.com/), [Twitch](https://www.twitch.tv/), [Dropbox](https://www.dropbox.com/) e [Mercado Livre](https://www.mercadolivre.com/), [Itaú-unibanco](https://www.itau.com.br/) usam Go em produção. A linguagem é especialmente popular para **APIs, microsserviços e ferramentas de DevOps**.
+
+
+> O video abaixo produzido pelo **[Teo Calvo](https://www.youtube.com/@teomewhy)**, introduz o "Olá, Mundo!" em Go, que você poderá executar na aba de experimentação.

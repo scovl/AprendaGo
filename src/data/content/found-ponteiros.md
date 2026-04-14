@@ -5,6 +5,7 @@ estimatedMinutes: 40
 recursos:
   - https://go.dev/tour/moretypes/1
   - https://gobyexample.com/pointers
+  - https://youtu.be/L4Mg4RE2bo8?si=-JBvKz4UiHfYdqWX
 experimentacao:
   desafio: Crie uma struct Config e funções com value receiver (leitura) e pointer receiver (modificação). Compare tamanho em memória com unsafe.Sizeof. Monte uma linked list com ponteiros.
   dicas:
@@ -257,3 +258,7 @@ func tentarAppend(s []int) {
 ```
 
 Por isso: modificar **elementos** de um slice dentro de uma função funciona, mas `append` pode não ser visível. Se precisar fazer `append` dentro de uma função, retorne o novo slice ou passe `*[]int`.
+
+> Abaixo um vídeo do **[Teo Calvo](https://www.youtube.com/@teomewhy)** que introduz bem ponteiros em Go:
+
+

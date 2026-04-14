@@ -12,10 +12,10 @@ up: ## Sobe os containers em produção (porta 3000)
 	docker compose up -d --build
 
 down: ## Derruba os containers
-	docker compose down
+	docker compose down -t 5
 
 restart: ## Reinicia os containers (rebuild + up)
-	docker compose down
+	docker compose down -t 5
 	docker compose up -d --build
 
 dev: ## Sobe o ambiente de desenvolvimento com hot reload (porta 3001)

@@ -6,7 +6,7 @@ recursos:
   - https://go.dev/tour/basics/8
   - https://go.dev/doc/effective_go#variables
   - https://go.dev/ref/spec#Types
-  - https://youtu.be/Qf2645sTqH0?si=REgYs1_hwjTTuPuO
+  - https://github.com/TeoMeWhy/curso-go-ds
 experimentacao:
   desafio: "Execute o programa abaixo — ele declara variáveis de tipos diferentes e imprime seus valores. Depois adicione uma variável `bool` chamada `aprendendo` com o valor `true` e imprima ela usando `fmt.Println`."
   dicas:

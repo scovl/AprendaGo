@@ -7,6 +7,10 @@ recursos:
   - https://gobyexample.com/goroutines
   - https://gobyexample.com/channels
   - https://gobyexample.com/select
+  - https://youtu.be/Xuiq5Qr4PeA?si=59pzDKwpjuEk_Qtr
+  - https://youtu.be/DW_O80zhMB0?si=03ZcZlH5y4zYANkL
+  - https://youtu.be/sWT3T5IXMoA?si=9l9pF0Fq5cNtcovV
+  - https://youtu.be/N_WEcmNk15w?si=3ypFnAI7dxWpcUAJ
 experimentacao:
   desafio: "Implemente o padrão fan-out/fan-in: distribua URLs entre N workers que fazem HTTP GET concorrente e colete resultados em um channel único."
   dicas:
@@ -501,3 +505,5 @@ close(ch)            → "acabou" (quem envia fecha)
 for v := range ch    → lê até fechar
 select { case... }   → espera vários canais
 ```
+
+> Abaixo temos quatro incríveis vídeos do **[Teo Calvo](https://www.youtube.com/@teomewhy)** que introduzem bem concorrência, goroutines e channels em Go:
