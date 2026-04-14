@@ -3,10 +3,11 @@ import type { VesaContent } from '../../types';
 import { GoCodeEditor } from './GoCodeEditor';
 import { InteractiveTerminal } from './InteractiveTerminal';
 import { mdComponents } from './mdComponents';
-import { TERMINAL_LESSONS } from '../../config/terminalLessons';
+import { TERMINAL_LESSONS, NO_EDITOR_LESSONS } from '../../config/terminalLessons';
 
 export function ExperimentacaoContent({ content, lessonId }: Readonly<{ content: VesaContent['experimentacao']; lessonId: string }>) {
   const isTerminal = TERMINAL_LESSONS.has(lessonId);
+  const hasEditor = !NO_EDITOR_LESSONS.has(lessonId);
 
   return (
     <div className="phase-content">
@@ -24,16 +25,18 @@ export function ExperimentacaoContent({ content, lessonId }: Readonly<{ content:
         </ul>
       </div>
 
-      {isTerminal ? (
-        <InteractiveTerminal lessonId={lessonId} />
-      ) : (
-        <GoCodeEditor
-          referenceCode={content.codeTemplate}
-          referenceLabel="Template — ponto de partida"
-          lessonId={lessonId}
-          downloadName={`${lessonId}-exercicio`}
-          notaPos={content.notaPos}
-        />
+      {hasEditor && (
+        isTerminal ? (
+          <InteractiveTerminal lessonId={lessonId} />
+        ) : (
+          <GoCodeEditor
+            referenceCode={content.codeTemplate}
+            referenceLabel="Template — ponto de partida"
+            lessonId={lessonId}
+            downloadName={`${lessonId}-exercicio`}
+            notaPos={content.notaPos}
+          />
+        )
       )}
     </div>
   );

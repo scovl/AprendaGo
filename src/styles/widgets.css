@@ -339,8 +339,8 @@
 .hl-mark {
   background: rgba(255, 235, 59, 0.45);
   border-radius: 2px;
-  padding: 0 1px;
-  cursor: default;
+  padding: 0;
+  cursor: pointer;
 }
 
 .hl-mark--has-note {

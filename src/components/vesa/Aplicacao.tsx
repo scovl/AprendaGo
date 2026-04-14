@@ -2,7 +2,7 @@ import type { VesaContent } from '../../types';
 import { useProgress } from '../../context/ProgressContext';
 import { LabEditor, type LabEditorFile } from '../LabEditor';
 import { InteractiveTerminal } from './InteractiveTerminal';
-import { TERMINAL_LESSONS } from '../../config/terminalLessons';
+import { TERMINAL_LESSONS, NO_EDITOR_LESSONS } from '../../config/terminalLessons';
 
 // ---------------------------------------------------------------------------
 // Default starter code per lesson (used when no starterCode in frontmatter)
@@ -837,6 +837,7 @@ export function AplicacaoContent({ content, lessonId }: Readonly<{ content: Vesa
   const repoSlug = lessonId.replace(/[^a-z0-9]+/g, '-');
 
   const isTerminal = TERMINAL_LESSONS.has(lessonId);
+  const hasEditor = !NO_EDITOR_LESSONS.has(lessonId);
 
   const starterBody = content.starterCode ?? STARTER_CODES[lessonId] ?? `package main\n\nimport "fmt"\n\nfunc main() {\n\tfmt.Println("Hello, Go!")\n}`;
   const initialFiles: LabEditorFile[] = content.labFiles && content.labFiles.length > 0
@@ -868,14 +869,14 @@ export function AplicacaoContent({ content, lessonId }: Readonly<{ content: Vesa
         </ul>
       </div>
 
-      {isTerminal ? (
+      {hasEditor && (isTerminal ? (
         <InteractiveTerminal lessonId={lessonId} />
       ) : (
         <LabEditor initialFiles={initialFiles} projectSlug={repoSlug} />
-      )}
+      ))}
 
-      {/* GitHub section */}
-      <div className="github-section">
+      {/* GitHub section — only for lessons with a Go coding project */}
+      {hasEditor && (<div className="github-section">
         <h4 className="github-section-title">
           <span aria-hidden="true">📦</span> Versione seu aprendizado no GitHub
         </h4>
@@ -917,6 +918,7 @@ git push -u origin main`}</pre>
           </a>
         </div>
       </div>
+      )}
 
       <div className="completion-block">
         <button

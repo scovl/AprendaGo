@@ -10,6 +10,13 @@ export const TERMINAL_LESSONS = new Set([
   'impl-cli',
   'impl-grpc',
   'impl-graphql',
+]);
+
+/**
+ * Lessons that have no code component — neither terminal nor editor
+ * should be shown in the Experimentação phase.
+ */
+export const NO_EDITOR_LESSONS = new Set([
   'opensource-primeira-contribuicao',
   'opensource-encontrando-projetos',
   'opensource-issues-e-labels',
