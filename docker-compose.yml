@@ -13,6 +13,12 @@ services:
     cap_drop:
       - ALL
     pids_limit: 256
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8081/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
     networks:
       - backend
 
@@ -28,6 +34,12 @@ services:
     security_opt:
       - no-new-privileges:true
     pids_limit: 256
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8082/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
     networks:
       - backend
 
@@ -52,8 +64,10 @@ services:
     restart: unless-stopped
     container_name: gopherlab
     depends_on:
-      - runner
-      - terminal
+      runner:
+        condition: service_healthy
+      terminal:
+        condition: service_healthy
     networks:
       - default
       - backend
