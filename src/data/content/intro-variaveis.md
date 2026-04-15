@@ -10,9 +10,9 @@ recursos:
 experimentacao:
   desafio: "Execute o programa abaixo — ele declara variáveis de tipos diferentes e imprime seus valores. Depois adicione uma variável `bool` chamada `aprendendo` com o valor `true` e imprima ela usando `fmt.Println`."
   dicas:
-    - "`var nome string = \"valor\"` e `nome := \"valor\"` fazem a mesma coisa — o segundo é mais comum dentro de funções."
-    - "O valor zero de `int` é `0`, de `string` é `\"\"` (vazio), de `bool` é `false`."
-    - "Use `fmt.Printf(\"%T\\n\", variavel)` para ver o tipo de qualquer variável."
+    - "O verbo correto para imprimir `bool` no `fmt.Printf` é `%t`: `fmt.Printf(\"Aprendendo: %t\\n\", aprendendo)`. Se não lembrar o verbo certo, `%v` funciona para qualquer tipo — Go escolhe o formato adequado."
+    - "Experimente declarar `var aprendendo bool` **sem atribuir valor** e imprima ela. Você vai ver `false` — o valor zero de `bool`. Nenhuma variável em Go fica indefinida ou com lixo de memória."
+    - "Depois de adicionar `aprendendo`, tente fazer `aprendendo = 1`. O compilador vai rejeitar: em Go, `1` não é `true` — diferente de Python e JavaScript onde valores numéricos são usados como booleanos."
   codeTemplate: |
     package main
 

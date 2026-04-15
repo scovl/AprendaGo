@@ -7,11 +7,11 @@ recursos:
   - https://go.dev/blog/go-brand
   - https://youtu.be/EarYUT9N88U?si=2II5cAnaKa3sozqS
 experimentacao:
-  desafio: "Execute o programa abaixo — é o Hello, World! tradicional de Go. Depois troque a mensagem para se apresentar: imprima seu nome e por que você está aprendendo Go."
+  desafio: "Execute o programa abaixo — é o Hello, World! tradicional de Go. Depois personalize: use `fmt.Println` para imprimir seu nome, de onde você é, e um fato da história do Go que te chamou atenção."
   dicas:
-    - "Use `fmt.Println(\"Texto aqui\")` para imprimir qualquer texto."
-    - "Você pode chamar `fmt.Println` mais de uma vez para imprimir várias linhas."
-    - "Strings em Go usam aspas duplas `\"`, nunca aspas simples."
+    - "`fmt.Println` aceita vários argumentos separados por vírgula: `fmt.Println(\"Olá,\", \"mundo!\")` — Go insere um espaço entre eles automaticamente."
+    - "Tente remover o `import \"fmt\"` e rodar o código. Go recusa compilar se você importar um pacote e não usar nada dele — nada de código morto."
+    - "Strings em Go usam aspas duplas `\"texto\"`. Aspas simples `'a'` têm um significado diferente: representam um único caractere Unicode (rune), não uma string."
   codeTemplate: |
     package main
 

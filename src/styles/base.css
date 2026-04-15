@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  font-family: 'Rokkitt', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
+  font-family: var(--font-family-ui, 'Rokkitt', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif);
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: var(--line-height);

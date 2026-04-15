@@ -72,6 +72,7 @@ export interface AccessibilitySettings {
   focusHighlight: boolean;
   lineSpacing: 'normal' | 'relaxed' | 'spacious';
   sidebarCollapsed: boolean;
+  fontFamily: 'default' | 'dyslexic' | 'hyperlegible' | 'monospace';
 }
 
 export const VESA_LABELS: Record<VesaPhase, { label: string; description: string; icon: string }> = {

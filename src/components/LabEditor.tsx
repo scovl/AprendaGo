@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { solveChallenge } from '../utils/pow';
+import { makeAutoIndentHandler } from '../utils/autoIndent';
 import Editor from 'react-simple-code-editor';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-go';
@@ -242,6 +243,7 @@ export function LabEditor({ initialFiles, projectSlug }: Readonly<LabEditorProps
         <Editor
           value={currentFile?.body ?? ''}
           onValueChange={updateBody}
+          onKeyDown={makeAutoIndentHandler(updateBody)}
           highlight={src => Prism.highlight(src, Prism.languages.go, 'go')}
           insertSpaces={false}
           tabSize={4}

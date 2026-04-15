@@ -82,6 +82,22 @@
 [data-font-size="large"] { --font-base: 20px; }
 [data-font-size="extra-large"] { --font-base: 22px; }
 
+/* Font family */
+[data-font-family="default"] {
+  --font-family-ui: 'Rokkitt', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+[data-font-family="dyslexic"] {
+  --font-family-ui: 'OpenDyslexic', sans-serif;
+  letter-spacing: 0.05em;
+  word-spacing: 0.1em;
+}
+[data-font-family="hyperlegible"] {
+  --font-family-ui: 'Atkinson Hyperlegible', sans-serif;
+}
+[data-font-family="monospace"] {
+  --font-family-ui: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+}
+
 /* Line spacing */
 [data-line-spacing="normal"] { --line-height: 1.6; }
 [data-line-spacing="relaxed"] { --line-height: 1.8; }

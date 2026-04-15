@@ -40,6 +40,21 @@ export function AccessibilityPanel() {
       </div>
 
       <div className="setting-group">
+        <label htmlFor="font-family-select">Tipo de fonte</label>
+        <select
+          id="font-family-select"
+          value={settings.fontFamily}
+          onChange={e => updateSetting('fontFamily', e.target.value as 'default' | 'dyslexic' | 'hyperlegible' | 'monospace')}
+        >
+          <option value="default">Padrão (Rokkitt)</option>
+          <option value="dyslexic">OpenDyslexic — para dislexia</option>
+          <option value="hyperlegible">Atkinson Hyperlegible — baixa visão</option>
+          <option value="monospace">Monospace — estilo terminal</option>
+        </select>
+        <p className="setting-hint">Fontes projetadas para melhorar a leitura em diferentes condições visuais.</p>
+      </div>
+
+      <div className="setting-group">
         <label htmlFor="line-spacing-select">Espaçamento entre linhas</label>
         <select
           id="line-spacing-select"

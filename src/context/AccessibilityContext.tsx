@@ -17,6 +17,7 @@ const defaultSettings: AccessibilitySettings = {
   focusHighlight: true,
   lineSpacing: 'normal',
   sidebarCollapsed: false,
+  fontFamily: 'default',
 };
 
 function loadSettings(): AccessibilitySettings {
@@ -51,6 +52,7 @@ export function AccessibilityProvider({ children }: Readonly<{ children: React.R
     root.dataset.theme = settings.theme;
     root.dataset.fontSize = settings.fontSize;
     root.dataset.lineSpacing = settings.lineSpacing;
+    root.dataset.fontFamily = settings.fontFamily;
     root.classList.toggle('high-contrast', settings.highContrast);
     root.classList.toggle('reduced-motion', settings.reducedMotion);
     root.classList.toggle('focus-highlight', settings.focusHighlight);

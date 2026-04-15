@@ -9,9 +9,9 @@ recursos:
 experimentacao:
   desafio: "Execute o programa abaixo — ele imprime alguns fatos sobre Go usando variáveis. Depois adicione mais uma linha com um fato que você achou interessante sobre a linguagem."
   dicas:
-    - "`:=` é a declaração curta de variável em Go: declara e atribui ao mesmo tempo."
-    - "Você pode usar `fmt.Println` com múltiplos argumentos separados por vírgula."
-    - "Consulte [go.dev/doc/faq](https://go.dev/doc/faq) para descobrir mais fatos sobre Go."
+    - "Para adicionar uma linha de texto, declare uma variável string com `:=` e imprima com `fmt.Printf(\"Fato: %s\\n\", suaVariavel)`. O `%s` é o marcador para strings — se não lembrar qual usar, `%v` funciona para qualquer tipo."
+    - "Declare uma variável com `:=` mas não a use em nenhum `Println` ou `Printf` — tente executar assim. Go vai recusar com `declared and not used`. Útil para perceber que o compilador não deixa variável largada à toa."
+    - "Quer mais números para brincar? Consulte [go.dev/doc/faq](https://go.dev/doc/faq), pegue algum número interessante sobre Go, guarde numa variável `int` e imprima com `%d`."
   codeTemplate: |
     package main
 

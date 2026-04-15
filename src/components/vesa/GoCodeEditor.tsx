@@ -2,6 +2,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { mdComponents } from './mdComponents';
 import { solveChallenge } from '../../utils/pow';
+import { makeAutoIndentHandler } from '../../utils/autoIndent';
 import Editor from 'react-simple-code-editor';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-go';
@@ -169,6 +170,7 @@ export function GoCodeEditor({ referenceCode, referenceLabel, lessonId: _lessonI
           <Editor
             value={code}
             onValueChange={setCode}
+            onKeyDown={makeAutoIndentHandler(setCode)}
             highlight={src => Prism.highlight(src, Prism.languages.go, 'go')}
             insertSpaces={false}
             tabSize={4}
