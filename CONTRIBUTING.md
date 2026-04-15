@@ -23,6 +23,7 @@ make test          # roda todos os testes (Go + TypeScript)
 make test-go       # testes Go via Docker (com race detector)
 make test-go-local # testes Go sem Docker
 make test-ts       # verifica tipos TypeScript
+make test-e2e      # teste E2E do runner via nginx (containers devem estar rodando)
 
 make lint          # go vet + tsc --noEmit
 make fmt           # gofmt + goimports no runner/
@@ -173,6 +174,50 @@ Inclua na issue: tela/URL, passos para reproduzir, comportamento esperado vs. at
 
 ---
 
+## Teste E2E do Runner
+
+O arquivo `e2e-runner.mjs` simula o fluxo completo que o frontend executa ao rodar código Go:
+
+1. **GET /api/challenge** — obtém nonce e dificuldade do sistema Proof-of-Work
+2. **Resolve o PoW** — calcula SHA-256 até encontrar o número de zeros exigido
+3. **POST /api/run** ou **POST /api/lab** — envia código Go via nginx com headers de PoW
+4. **Valida a resposta** — verifica se o output contém o resultado esperado
+
+### Por que existe
+
+Os testes unitários em `runner/main_test.go` testam os handlers diretamente, sem passar pelo nginx. O teste E2E valida a cadeia completa: **frontend → nginx proxy → runner → compilação Go → resposta**. Isso cobre problemas de configuração do nginx (rewrite, timeouts, headers de PoW) que os testes unitários não conseguem detectar.
+
+### Como usar
+
+```bash
+# Os containers devem estar rodando
+make up
+
+# Rodar o teste E2E
+make test-e2e
+
+# Ou diretamente
+node e2e-runner.mjs
+
+# Apontar para outro host
+BASE_URL=http://meu-servidor:3000 node e2e-runner.mjs
+```
+
+### O que testa
+
+| # | Cenário | Endpoint | Esperado |
+|---|---------|----------|----------|
+| 1 | Hello World | `/api/run` | Output contém `hello test` |
+| 2 | Função com retorno | `/api/run` | Output contém `5` |
+| 3 | Erro de compilação | `/api/run` | Campo `errors` preenchido |
+| 4 | Lab single file | `/api/lab` | Output contém `lab ok` |
+| 5 | Lab multi-file | `/api/lab` | Output contém `Hello, Go!` |
+| 6 | Lab go test | `/api/lab` | Output contém `PASS` |
+
+Requer Node.js 18+ (usa `fetch` e `crypto.subtle` nativos).
+
+---
+
 ## Checklist do PR
 
 - [ ] `make lint` sem erros
@@ -197,5 +242,6 @@ Este projeto adota um ambiente de respeito, diversidade e inclusão. Antes de co
 - [src/data/roadmap.ts](src/data/roadmap.ts) — Estrutura de conteúdo
 - [src/types/index.ts](src/types/index.ts) — Tipos do projeto
 - [runner/main.go](runner/main.go) — API de execução de código
+- [e2e-runner.mjs](e2e-runner.mjs) — Teste E2E do runner (fluxo completo via nginx)
 - [go.dev/doc](https://go.dev/doc/) — Documentação oficial do Go
 

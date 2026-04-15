@@ -1,4 +1,4 @@
-.PHONY: help dev up down restart logs build test test-go test-ts lint fmt
+.PHONY: help dev up down restart logs build test test-go test-ts test-e2e lint fmt
 
 RUNNER_DIR := runner
 
@@ -41,6 +41,9 @@ test-go-local: ## Roda os testes Go localmente (sem Docker)
 
 test-ts: ## Verifica tipos TypeScript
 	npx tsc --noEmit
+
+test-e2e: ## Teste E2E do runner via nginx (requer containers rodando)
+	node e2e-runner.mjs
 
 # ─── Lint & Format ───────────────────────────────────────────────────────────
 
