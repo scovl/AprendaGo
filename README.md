@@ -1,3 +1,13 @@
+## Sponsor
+
+O GopherLab é um projeto open source mantido voluntariamente. Se ele te ajudou a aprender Go ou você quer apoiar o desenvolvimento de novos módulos e funcionalidades, considere patrocinar:
+
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/scovl?style=flat&logo=github&label=Sponsor&color=ea4aaa)](https://github.com/sponsors/scovl)
+
+Qualquer contribuição ajuda a manter a infraestrutura, dedicar mais tempo ao conteúdo e expandir a plataforma.
+
+---
+
 ![GopherLab](assets/imgs/front-presentation.jpg)
 
 **GopherLab** é uma plataforma web para aprender a linguagem Go do zero ao avançado, com execução de código diretamente no navegador e uma metodologia estruturada que vai além de tutoriais comuns. Ele combina conteúdo técnico progressivo com um ciclo de aprendizado ativo chamado **VESA** — sigla criada para esta plataforma que organiza cada lição em quatro fases:
@@ -125,13 +135,3 @@ A fase Aplicação vai além do playground: você trabalha com um projeto real d
 
 **4. Roadmap com desbloqueio progressivo**
 O conteúdo tem dependências explícitas. Generics ficam bloqueados até você passar por fundamentos. O roadmap visual deixa claro onde você está e o que está por vir, sem a ansiedade de um curso com centenas de vídeos desordenados.
-
----
-
-## Sponsor
-
-O GopherLab é um projeto open source mantido voluntariamente. Se ele te ajudou a aprender Go ou você quer apoiar o desenvolvimento de novos módulos e funcionalidades, considere patrocinar:
-
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/scovl?style=flat&logo=github&label=Sponsor&color=ea4aaa)](https://github.com/sponsors/scovl)
-
-Qualquer contribuição ajuda a manter a infraestrutura, dedicar mais tempo ao conteúdo e expandir a plataforma.
